@@ -1,0 +1,11 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/js/dashbord.js": "/js/dashbord.js",
+    "/css/register.css": "/css/register.css",
+    "/css/login.css": "/css/login.css",
+    "/css/dashbord.css": "/css/dashbord.css",
+    "/css/reservation.css": "/css/reservation.css",
+    "/css/app.css": "/css/app.css",
+    "/css/paiement.css": "/css/paiement.css",
+    "/css/detailfilm.css": "/css/detailfilm.css"
+}

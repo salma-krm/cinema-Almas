@@ -1,0 +1,52 @@
+
+.bg-cinema-dark {
+    position: relative;
+    background-color: #121212;
+}
+
+.bg-cinema-dark::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/p10892939_v_h8_aa.jpg-ft3kbtHiFUqaFeKIzip7SpVt06xgxP.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+.bg-cinema-dark > * {
+    position: relative;
+    z-index: 1;
+}
+
+.payment-card {
+    background: rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.payment-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.movie-card {
+    background: rgba(18, 18, 18, 0.8);
+    -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+input:focus, select:focus {
+    border-color: #F5C518;
+    outline: none;
+}
+
+
+

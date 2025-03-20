@@ -1,0 +1,65 @@
+
+.bg-cinema-dark {
+  position: relative;
+  background-color: #121212;
+}
+
+.bg-cinema-dark::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.bg-cinema-dark > * {
+  position: relative;
+  z-index: 1;
+}
+
+.movie-card {
+  background: rgba(255, 255, 255, 0.05);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.movie-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-5px);
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 500px;
+}
+
+.date-button {
+  transition: all 0.3s ease;
+}
+
+.date-button.active {
+  background-color: #F5C518;
+  color: #121212;
+}
+
+.date-button:hover:not(.active) {
+  background-color: rgba(245, 197, 24, 0.2);
+}
+
