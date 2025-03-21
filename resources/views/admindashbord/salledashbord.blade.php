@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CinéMax - Gestion des Salles</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
   <style>
     .sidebar-link:hover {
       background-color: rgba(255, 255, 255, 0.1);

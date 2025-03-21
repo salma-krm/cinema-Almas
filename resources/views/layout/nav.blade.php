@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-    </nav>
+</nav>
       <!-- Product Section -->
    <section id="cinema" class="cinema-alma">
         @yield('content')

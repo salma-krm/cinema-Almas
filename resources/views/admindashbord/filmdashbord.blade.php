@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CinéMax - Gestion des Films</title>
   <script src="https://cdn.tailwindcss.com"></script>
- 
-  <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-cinema-dark text-cinema-light">
   <div class="flex h-screen">
@@ -70,7 +68,6 @@
         </svg>
       </button>
     </div>
-
     <!-- Mobile menu -->
     <div id="mobile-menu" class="fixed inset-0 bg-[#1a1c1e] z-20 transform -translate-x-full transition-transform duration-300 md:hidden">
       <div class="p-6">
@@ -111,7 +108,6 @@
         </nav>
       </div>
     </div>
-
     <!-- Main Content -->
     <main class="flex-1 overflow-auto md:pt-0 pt-16">
       <div class="p-4 md:p-8">

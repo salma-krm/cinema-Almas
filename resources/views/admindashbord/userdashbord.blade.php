@@ -31,6 +31,7 @@
 <body class="bg-cinema-dark text-cinema-light">
   <div class="flex h-screen">
     <!-- Sidebar -->
+    
     <aside class="w-64 bg-[#1a1c1e] p-6">
       <div class="mb-8">
         <h1 class="text-2xl font-bold text-cinema-gold">CinéMax Admin</h1>
@@ -74,7 +75,6 @@
         </a>
       </nav>
     </aside>
-
     <!-- Main Content -->
     <main class="flex-1 overflow-auto">
       <div class="p-8">
