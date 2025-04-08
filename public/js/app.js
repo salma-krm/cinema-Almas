@@ -19588,6 +19588,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/css/dashbordreservation.css":
+/*!***********************************************!*\
+  !*** ./resources/css/dashbordreservation.css ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./resources/css/detailfilm.css":
 /*!**************************************!*\
   !*** ./resources/css/detailfilm.css ***!
@@ -19826,6 +19839,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /******/ 			"css/dashbord": 0,
 /******/ 			"css/reservation": 0,
 /******/ 			"css/app": 0,
+/******/ 			"css/dashbordreservation": 0,
 /******/ 			"css/paiement": 0,
 /******/ 			"css/detailfilm": 0
 /******/ 		};
@@ -19877,14 +19891,15 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/register","css/login","css/dashbord","css/reservation","css/app","css/paiement","css/detailfilm"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/register","css/login","css/dashbord","css/reservation","css/app","css/paiement","css/detailfilm"], () => (__webpack_require__("./resources/css/app.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/register","css/login","css/dashbord","css/reservation","css/app","css/paiement","css/detailfilm"], () => (__webpack_require__("./resources/css/reservation.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/register","css/login","css/dashbord","css/reservation","css/app","css/paiement","css/detailfilm"], () => (__webpack_require__("./resources/css/dashbord.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/register","css/login","css/dashbord","css/reservation","css/app","css/paiement","css/detailfilm"], () => (__webpack_require__("./resources/css/login.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/register","css/login","css/dashbord","css/reservation","css/app","css/paiement","css/detailfilm"], () => (__webpack_require__("./resources/css/register.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/register","css/login","css/dashbord","css/reservation","css/app","css/paiement","css/detailfilm"], () => (__webpack_require__("./resources/css/detailfilm.css")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/register","css/login","css/dashbord","css/reservation","css/app","css/paiement","css/detailfilm"], () => (__webpack_require__("./resources/css/paiement.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/register","css/login","css/dashbord","css/reservation","css/app","css/dashbordreservation","css/paiement","css/detailfilm"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/register","css/login","css/dashbord","css/reservation","css/app","css/dashbordreservation","css/paiement","css/detailfilm"], () => (__webpack_require__("./resources/css/app.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/register","css/login","css/dashbord","css/reservation","css/app","css/dashbordreservation","css/paiement","css/detailfilm"], () => (__webpack_require__("./resources/css/reservation.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/register","css/login","css/dashbord","css/reservation","css/app","css/dashbordreservation","css/paiement","css/detailfilm"], () => (__webpack_require__("./resources/css/dashbord.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/register","css/login","css/dashbord","css/reservation","css/app","css/dashbordreservation","css/paiement","css/detailfilm"], () => (__webpack_require__("./resources/css/login.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/register","css/login","css/dashbord","css/reservation","css/app","css/dashbordreservation","css/paiement","css/detailfilm"], () => (__webpack_require__("./resources/css/register.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/register","css/login","css/dashbord","css/reservation","css/app","css/dashbordreservation","css/paiement","css/detailfilm"], () => (__webpack_require__("./resources/css/detailfilm.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/register","css/login","css/dashbord","css/reservation","css/app","css/dashbordreservation","css/paiement","css/detailfilm"], () => (__webpack_require__("./resources/css/paiement.css")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/register","css/login","css/dashbord","css/reservation","css/app","css/dashbordreservation","css/paiement","css/detailfilm"], () => (__webpack_require__("./resources/css/dashbordreservation.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

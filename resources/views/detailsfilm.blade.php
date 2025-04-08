@@ -1,14 +1,8 @@
 @extends('layout.nav')
 @section('content')
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CinéMax - Détails du Film</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="{{asset('css/detailfilm.css')}}">
-</head>
+@section(('contentcss'))
+{{-- link css --}}
+<link rel="stylesheet" href="{{asset('css/detailfilm.css')}}"> 
 <body class="bg-cinema-dark text-cinema-white min-h-screen">
   <!-- Navigation -->
   <!-- Movie Hero Section -->
@@ -118,7 +112,6 @@
       </div>
     </div>
   </section>
-
   <!-- Synopsis Section -->
   <section class="py-12 bg-cinema-dark">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -136,7 +129,6 @@
       </div>
     </div>
   </section>
-
   <!-- Cast Section -->
   <section class="py-12 bg-cinema-dark">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -222,7 +214,6 @@
       </div>
     </div>
   </section>
-
   <!-- Reviews Section -->
   <section class="py-12 bg-cinema-dark">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

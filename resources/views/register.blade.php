@@ -1,18 +1,10 @@
-@extends('layout.nav')
+@extends('layout.layout')
 @section('content')
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CinéMax - Inscription</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="{{asset('css/register.css')}}">
- 
-</head>
+
+{{-- link css --}}
+<link rel="stylesheet" href="{{asset('css/register.css')}}"> 
 <body class="bg-cinema-dark text-cinema-white min-h-screen">
   <!-- Navigation -->
-  
   <!-- Registration Form -->
   <div class="pt-20 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8 bg-gray-900/50 p-8 rounded-xl shadow-lg backdrop-blur-sm border border-gray-800">
@@ -27,70 +19,56 @@
           </a>
         </p>
       </div>
-      <form class="mt-8 space-y-6" action="#" method="POST">
-        <div class="rounded-md shadow-sm space-y-4">
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label for="first-name" class="block text-sm font-medium text-gray-300">
-                Prénom
-              </label>
-              <input id="first-name" name="first-name" type="text" required
-                class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
-                placeholder="Votre prénom"/>
-            </div>
-            <div>
-              <label for="last-name" class="block text-sm font-medium text-gray-300">
-                Nom
-              </label>
-              <input id="last-name" name="last-name" type="text" required
-                class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
-                placeholder="Votre nom"/>
-            </div>
-          </div>
-          <div>
-            <label for="email" class="block text-sm font-medium text-gray-300">
-              Adresse email
-            </label>
-            <input id="email" name="email" type="email" required
-              class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
-              placeholder="Votre email"/>
-          </div>
-          <div>
-            <label for="password" class="block text-sm font-medium text-gray-300">
-              Mot de passe
-            </label>
-            <input id="password" name="password" type="password" required
-              class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
-              placeholder="Créer un mot de passe"/>
-          </div>
-          <div>
-            <label for="confirm-password" class="block text-sm font-medium text-gray-300">
-              Confirmer le mot de passe
-            </label>
-            <input id="confirm-password" name="confirm-password" type="password" required
-              class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
-              placeholder="Confirmer votre mot de passe"/>
-          </div>
-        </div>
-
-        <div class="flex items-center">
-          <input id="terms" name="terms" type="checkbox" required
-            class="h-4 w-4 text-cinema-gold focus:ring-cinema-gold border-gray-700 rounded"/>
-          <label for="terms" class="ml-2 block text-sm text-gray-300">
-            J'accepte les
-            <a href="#" class="text-cinema-gold hover:text-yellow-400">Conditions d'utilisation</a>
-            et la
-            <a href="#" class="text-cinema-gold hover:text-yellow-400">Politique de confidentialité</a>
-          </label>
-        </div>
-
+      <form id="user-form">
+        <!-- Prénom -->
         <div>
-          <button type="submit"
-            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-full text-cinema-dark bg-cinema-gold hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cinema-gold">
-            Créer un compte
-          </button>
+          <label for="first-name" class="block text-sm font-medium text-gray-300">Prénom</label>
+          <input id="first-name" name="first-name" type="text" required
+            class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
+            placeholder="Votre prénom"/>
+          <p id="first-name-error" class="text-sm text-red-500 mt-1"></p> <!-- Error message -->
         </div>
+      
+        <!-- Nom -->
+        <div>
+          <label for="last-name" class="block text-sm font-medium text-gray-300">Nom</label>
+          <input id="last-name" name="last-name" type="text" required
+            class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
+            placeholder="Votre nom"/>
+          <p id="last-name-error" class="text-sm text-red-500 mt-1"></p> <!-- Error message -->
+        </div>
+      
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-300">Adresse email</label>
+          <input id="email" name="email" type="email" required
+            class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
+            placeholder="Votre email"/>
+          <p id="email-error" class="text-sm text-red-500 mt-1"></p> <!-- Error message -->
+        </div>
+      
+        <!-- Mot de passe -->
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-300">Mot de passe</label>
+          <input id="password" name="password" type="password" required
+            class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
+            placeholder="Créer un mot de passe"/>
+          <p id="password-error" class="text-sm text-red-500 mt-1"></p> <!-- Error message -->
+        </div>
+      
+        <!-- Confirmer mot de passe -->
+        <div>
+          <label for="confirm-password" class="block text-sm font-medium text-gray-300">Confirmer le mot de passe</label>
+          <input id="confirm-password" name="confirm-password" type="password" required
+            class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
+            placeholder="Confirmer votre mot de passe"/>
+          <p id="confirm-password-error" class="text-sm text-red-500 mt-1"></p> <!-- Error message -->
+        </div>
+      
+        <button type="submit" class="mt-4 p-2 bg-cinema-gold text-white rounded-lg">Submit</button>
       </form>
+    
+      
 
       <div class="mt-6">
         <div class="relative">
@@ -108,7 +86,7 @@
             <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z"/>
             </svg>
-            Google
+            Google 
           </button>
           <button type="button"
             class="w-full inline-flex justify-center py-2 px-4 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-sm font-medium text-white hover:bg-gray-700">
@@ -123,6 +101,7 @@
   </div>
   <!-- Footer -->
      <script src= "{{asset('js/app.js')}}"></script> 
+     {{-- <script src= "{{asset('js/register.js')}}"></script>  --}}
 </body>
 </html>
 @endsection

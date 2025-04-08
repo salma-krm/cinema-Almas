@@ -1,4 +1,4 @@
-@extends('layout.nav')
+@extends('layouts.layout')
 @section(('contentcss'))
 @section('content')
 {{-- link css --}}
@@ -585,7 +585,5 @@
   <script src= "{{asset('js/app.js')}}"></script>
 
 </body>
-
 </html>
-
 @endsection

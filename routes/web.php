@@ -13,10 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/home', function () {
     return view('home');
 });
 Route::get('/detailsfilm', function () {
@@ -47,6 +45,9 @@ Route::get('/Admin/salle', function () {
     return view('admindashbord.salledashbord');
 });
 Route::get('/Admin/users', function () {
+    return view('admindashbord.userdashbord');
+});
+Route::get('/logout', function () {
     return view('admindashbord.userdashbord');
 });
 
