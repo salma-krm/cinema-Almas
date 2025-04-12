@@ -13,23 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('acteurs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->enum('role',['client','admin'])->default('client');
+            $table->string('description');
             $table->string('photo')->default('images/default-user.png');
-            $table->string('password');
-            $table->foreignId('role_id')->constrained();
-            $table->rememberToken();
             $table->timestamps();
         });
     }
 
-    
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('acteurs');
     }
 };
