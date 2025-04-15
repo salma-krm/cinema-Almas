@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,7 @@ Route::get('/detailsfilm', function () {
 Route::get('/register', function () {
     return view('register');
 });
+
 Route::get('/login', function () {
     return view('login');
 });
@@ -51,4 +53,7 @@ Route::get('/logout', function () {
     return view('admindashbord.userdashbord');
 });
 
+Route::post('/createuser', [AuthController::class, 'register']);
+Route::post('/loginUser', [AuthController::class, 'login']);
+// ->name('loginUser');
 

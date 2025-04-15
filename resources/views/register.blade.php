@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('layouts.layout')
 @section('content')
 
 {{-- link css --}}
@@ -19,55 +19,53 @@
           </a>
         </p>
       </div>
-      <form id="user-form">
-        <!-- Prénom -->
-        <div>
-          <label for="first-name" class="block text-sm font-medium text-gray-300">Prénom</label>
-          <input id="first-name" name="first-name" type="text" required
-            class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
-            placeholder="Votre prénom"/>
-          <p id="first-name-error" class="text-sm text-red-500 mt-1"></p> <!-- Error message -->
-        </div>
+      
+      <form method="POST" action="/createuser">
+        @csrf
       
         <!-- Nom -->
         <div>
           <label for="last-name" class="block text-sm font-medium text-gray-300">Nom</label>
-          <input id="last-name" name="last-name" type="text" required
+          <input id="last-name" name="name" type="text" required
             class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
-            placeholder="Votre nom"/>
-          <p id="last-name-error" class="text-sm text-red-500 mt-1"></p> <!-- Error message -->
+            placeholder="Votre nom">
+          <p id="last-name-error" class="text-sm text-red-500 mt-1"></p>
         </div>
       
         <!-- Email -->
-        <div>
+        <div class="mt-4">
+          
           <label for="email" class="block text-sm font-medium text-gray-300">Adresse email</label>
           <input id="email" name="email" type="email" required
             class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
-            placeholder="Votre email"/>
-          <p id="email-error" class="text-sm text-red-500 mt-1"></p> <!-- Error message -->
+            placeholder="Votre email">
+            @error('email')
+            <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+          @enderror
+          
         </div>
       
         <!-- Mot de passe -->
-        <div>
+        <div class="mt-4">
           <label for="password" class="block text-sm font-medium text-gray-300">Mot de passe</label>
           <input id="password" name="password" type="password" required
             class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
-            placeholder="Créer un mot de passe"/>
-          <p id="password-error" class="text-sm text-red-500 mt-1"></p> <!-- Error message -->
+            placeholder="Créer un mot de passe">
+          <p id="password-error" class="text-sm text-red-500 mt-1"></p>
         </div>
       
         <!-- Confirmer mot de passe -->
-        <div>
+        <div class="mt-4">
           <label for="confirm-password" class="block text-sm font-medium text-gray-300">Confirmer le mot de passe</label>
-          <input id="confirm-password" name="confirm-password" type="password" required
+          <input id="confirm-password" name="password_confirmation" type="password" required
             class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
-            placeholder="Confirmer votre mot de passe"/>
-          <p id="confirm-password-error" class="text-sm text-red-500 mt-1"></p> <!-- Error message -->
+            placeholder="Confirmer votre mot de passe">
+          <p id="confirm-password-error" class="text-sm text-red-500 mt-1"></p>
         </div>
       
-        <button type="submit" class="mt-4 p-2 bg-cinema-gold text-white rounded-lg">Submit</button>
+        <!-- Bouton d'envoi -->
+        <button type="submit" class="mt-6 p-2 w-full bg-cinema-gold text-white rounded-lg">S'inscrire</button>
       </form>
-    
       
 
       <div class="mt-6">
@@ -100,8 +98,7 @@
     </div>
   </div>
   <!-- Footer -->
-     <script src= "{{asset('js/app.js')}}"></script> 
-     {{-- <script src= "{{asset('js/register.js')}}"></script>  --}}
+     <script src= "{{asset('js/register.js')}}"></script> 
 </body>
 </html>
 @endsection

@@ -1,4 +1,4 @@
-@extends('layout.nav')
+@extends('layouts.layout')
 @section('content')
 
 <link rel="stylesheet" href="{{asset('css/login.css')}}"> 
@@ -18,49 +18,60 @@
           </a>
         </p>
       </div>
-      <form class="mt-8 space-y-6" action="#" method="POST">
+      <form method="POST" action="/loginUser">
+        @csrf
+    @method('POST')
         <div class="rounded-md shadow-sm space-y-4">
-          <div>
-            <label for="email" class="block text-sm font-medium text-gray-300">
-              Adresse email
-            </label>
-            <input id="email" name="email" type="email" required
-              class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
-              placeholder="Votre email"/>
-          </div>
-          <div>
-            <label for="password" class="block text-sm font-medium text-gray-300">
-              Mot de passe
-            </label>
-            <input id="password" name="password" type="password" required
-              class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
-              placeholder="Votre mot de passe"/>
-          </div>
+            <!-- Email Field -->
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-300">
+                    Adresse email
+                </label>
+                <input id="email" name="email" type="email" required
+                    class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
+                    placeholder="Votre email" />
+            </div>
+    
+            <!-- Password Field -->
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-300">
+                    Mot de passe
+                </label>
+                <input id="password" name="password" type="password" required
+                    class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
+                    placeholder="Votre mot de passe" />
+            </div>
         </div>
-
+    
+        <!-- Remember Me + Forgot Password -->
         <div class="flex items-center justify-between">
-          <div class="flex items-center">
-            <input id="remember-me" name="remember-me" type="checkbox"
-              class="h-4 w-4 text-cinema-gold focus:ring-cinema-gold border-gray-700 rounded"/>
-            <label for="remember-me" class="ml-2 block text-sm text-gray-300">
-              Se souvenir de moi
-            </label>
-          </div>
-
-          <div class="text-sm">
-            <a href="#" class="font-medium text-cinema-gold hover:text-yellow-400">
-              Mot de passe oublié?
-            </a>
-          </div>
+            <div class="flex items-center">
+                <input id="remember" name="remember" type="checkbox"
+                    class="h-4 w-4 text-cinema-gold focus:ring-cinema-gold border-gray-700 rounded" />
+                <label for="remember" class="ml-2 block text-sm text-gray-300">
+                    Se souvenir de moi
+                </label>
+            </div>
+    
+            <div class="text-sm">
+                <a href="/forgot-password" class="font-medium text-cinema-gold hover:text-yellow-400">
+                    Mot de passe oublié ?
+                </a>
+            </div>
         </div>
-
+    
+        <!-- Submit Button -->
         <div>
-          <button type="submit"
-            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-full text-cinema-dark bg-cinema-gold hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cinema-gold">
-            Se connecter
-          </button>
+            <button type="submit"
+                class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-full text-cinema-dark bg-cinema-gold hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cinema-gold"
+                aria-label="Se connecter">
+                Se connecter
+            </button>
         </div>
-      </form>
+    </form>
+    
+    
+      
 
       <div class="mt-6">
         <div class="relative">
