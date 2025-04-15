@@ -23,7 +23,7 @@ class AuthController extends Controller
         
     }
     public function login(loginRequest $request){
-        dd($request);
+        
         $validData = $request->validated();
         $this->user->login($validData);
 

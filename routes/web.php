@@ -54,4 +54,6 @@ Route::get('/logout', function () {
 });
 
 Route::post('/createuser', [AuthController::class, 'register']);
-Route::post('/userlogin', [AuthController::class, 'login']);
+Route::post('/loginUser', [AuthController::class, 'login']);
+// ->name('loginUser');
+

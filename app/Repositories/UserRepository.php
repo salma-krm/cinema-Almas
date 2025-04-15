@@ -38,12 +38,12 @@ class UserRepository implements IUser
         return User::where('email', $email)->first();
     }
 
-    
+
 
     public function login(array $data){
         $user = User::where('email', $data['email'])->first();
         if (!$user || !Hash::check($data['password'], $user->password)){
-            return redirect('/')->with('message');
+            return redirect('/login')->with('message');
 
         }else{
             return redirect('/')->with('message','connecte reussite');

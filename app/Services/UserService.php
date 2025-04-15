@@ -25,5 +25,18 @@ class UserService implements IUserService
     public function login(array $data){
         return $this->userRepository->login($data);
     }
+    public function findByEmail($email){
+
+    }
+    public function delete($id){
+
+    }
+    public function update(array $data, $id){
+
+    }
+    public function findByName($name)
+    {
+
+    }
         
 }
