@@ -1,0 +1,150 @@
+
+  
+.bg-cinema-dark {
+position: relative;
+background-color: #121212;
+}
+
+.bg-cinema-dark::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/p10892939_v_h8_aa.jpg-ft3kbtHiFUqaFeKIzip7SpVt06xgxP.jpeg');
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+opacity: 0.15;
+pointer-events: none;
+}
+
+.bg-cinema-dark > * {
+position: relative;
+z-index: 1;
+}
+
+/* Update hero section styles */
+.hero-section {
+position: relative;
+background-color: transparent;
+}
+
+.hero-background {
+background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/p10892939_v_h8_aa.jpg-ft3kbtHiFUqaFeKIzip7SpVt06xgxP.jpeg');
+opacity: 0.2;
+}
+.seat {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.375rem 0.375rem 0 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  background-color: #4b5563;
+}
+
+.seat:hover {
+  filter: brightness(1.2);
+}
+
+.seat.selected {
+  background-color: #F5C518;
+}
+
+.seat.reserved {
+  background-color: #121212;
+  cursor: not-allowed;
+}
+
+.row-label {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #9ca3af;
+}
+
+.screen-perspective {
+  transform-style: preserve-3d;
+  perspective: 500px;
+}
+
+.screen-line {
+  transform: rotateX(60deg);
+}
+
+.video-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  aspect-ratio: 16/9;
+}
+
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://durian.blender.org/wp-content/uploads/2010/04/sintel_trailer_1080.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(18, 18, 18, 0.5);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+.play-button {
+  width: 80px;
+  height: 80px;
+  background-color: rgba(245, 197, 24, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.play-button:hover {
+  transform: scale(1.1);
+  background-color: rgba(245, 197, 24, 1);
+}
+
+.play-button-icon {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15px 0 15px 25px;
+  border-color: transparent transparent transparent #121212;
+  margin-left: 5px;
+}
+
+.video-player {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+

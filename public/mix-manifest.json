@@ -1,0 +1,16 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/js/filmdashbord.js": "/js/filmdashbord.js",
+    "/js/dashbordreservation.js": "/js/dashbordreservation.js",
+    "/js/dashbordsalle.js": "/js/dashbordsalle.js",
+    "/js/dashborduser.js": "/js/dashborduser.js",
+    "/js/register.js": "/js/register.js",
+    "/css/register.css": "/css/register.css",
+    "/css/login.css": "/css/login.css",
+    "/css/dashbord.css": "/css/dashbord.css",
+    "/css/reservation.css": "/css/reservation.css",
+    "/css/app.css": "/css/app.css",
+    "/css/dashbordreservation.css": "/css/dashbordreservation.css",
+    "/css/paiement.css": "/css/paiement.css",
+    "/css/detailfilm.css": "/css/detailfilm.css"
+}
