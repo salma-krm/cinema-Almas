@@ -8,10 +8,10 @@
         @yield('contentcss')
 </head>
  <!-- Navigation -->
-        @include('layout.nav')
+        @include('layouts.nav')
       <!-- Product Section -->
    <section id="cinema" class="cinema-alma">
         @yield('content')
     </section>
      <!-- Footer -->
-  @include('layout.footer')
+  @include('layouts.footer')

@@ -62,4 +62,9 @@
 .date-button:hover:not(.active) {
   background-color: rgba(245, 197, 24, 0.2);
 }
+.text-red-500 {
+  color: #f56565;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
 

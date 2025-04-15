@@ -6,7 +6,10 @@ use app\Repositories\Interfaces\IUser;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
 
-class UserService
+use App\Services\Interfaces\IUserService;
+
+class UserService implements IUserService
+
 {
     protected $userRepository;
 
@@ -17,7 +20,10 @@ class UserService
 
     public function register(array $data)
     {
-        $data['password'] = Hash::make($data['password']);
         return $this->userRepository->register($data);
     }
+    public function login(array $data){
+        return $this->userRepository->login($data);
+    }
+        
 }

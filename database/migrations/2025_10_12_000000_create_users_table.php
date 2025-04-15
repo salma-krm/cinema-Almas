@@ -18,10 +18,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->enum('role',['client','admin'])->default('client');
-            $table->string('photo')->default('images/default-user.png');
+            $table->string('photo')->nullable();
             $table->string('password');
-            $table->foreignId('role_id')->constrained();
+            $table->foreignId('role_id')->nullable()->constrained();
             $table->rememberToken();
             $table->timestamps();
         });

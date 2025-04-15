@@ -1,9 +1,10 @@
 <?php
-namespace App\Services\Interfaces;
-interface IUserService{
-    public function Validate();
-    public function dateForm();
-    public function register();
-    
 
+namespace App\Services\Interfaces;
+
+interface IUserService
+{
+    public function register(array $data);
+    public function login(array $data);
 }
+
