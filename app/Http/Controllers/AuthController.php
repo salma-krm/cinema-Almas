@@ -14,18 +14,33 @@ class AuthController extends Controller
     {
         $this->user= $user;
     }
+    public function index()
+    {
+    }
 
     public function register(RegisterRequest $request)
     {
         
         $validatedData = $request->validated();
         $this->user->register($validatedData);
+        return redirect('/login')->with('message', 'Inscription réussie, Connectez-vous.');
         
     }
-    public function login(loginRequest $request){
-        
+    public function login(LoginRequest $request)
+    {
+       
         $validData = $request->validated();
-        $this->user->login($validData);
 
+  
+        $result = $this->user->login($validData);
+
+       
+        if ($result['status'] === 'failed') {
+            return redirect('/login')->with('message', $result['message']);
+
+        }
+
+        return redirect('/');
     }
 }
+

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SalleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +47,10 @@ Route::get('/Admin/film', function () {
 Route::get('/Admin/salle', function () {
     return view('admindashbord.salledashbord');
 });
+Route::get('/create/salle', function () {
+    return view('admindashbord.salleCreate');
+});
+Route::get('/Admin/salle',[SalleController::class, 'index']);
 Route::get('/Admin/users', function () {
     return view('admindashbord.userdashbord');
 });
@@ -54,6 +59,15 @@ Route::get('/logout', function () {
 });
 
 Route::post('/createuser', [AuthController::class, 'register']);
-Route::post('/loginUser', [AuthController::class, 'login']);
-// ->name('loginUser');
+Route::post('/userlogin', [AuthController::class, 'login'])->name('login')
+;
+
+
+Route::post('/updatedSalle',[SalleController::class ,'update']);
+Route::post('/update/{id}/salle',[SalleController::class, 'getById']);
+
+Route::delete('/delete/{id}/salle', [SalleController::class, 'delete'])->name('salle.delete');
+
+Route::post('/Sallecreate', [SalleController::class, 'create'])->name('Salle.create');
+
 

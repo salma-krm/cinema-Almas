@@ -16,7 +16,12 @@ return new class extends Migration
         Schema::create('salles', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->integer('capacite')->unsigned();       
+            $table->integer('capacite')->unsigned(); 
+            $table->enum('status', ['disponible', 'en seance', 'maitenance'])->default('disponible'); 
+            $table->string('maintenance_notes');
+            $table->string('type') ;
+            $table->string('description');
+            $table->string('equipment') ;
             $table->timestamps();
         });
     }
