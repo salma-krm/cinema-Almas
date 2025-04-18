@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repositories;
-
+use App\Enums\image;
 use App\Models\Role;
 use App\Models\User;
 use App\Repositories\Interfaces\IUser;
@@ -17,21 +17,26 @@ class UserRepository implements IUser
         if ($existingUser) {
             return redirect('/register')->with('message');
         }
-    
+
         $user = new User();
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->password = bcrypt($data['password']);
+        $user->photo = image::Profile;
         $user->save();
-    
+
         $role = Role::where('name', 'LIKE', '%client%')->first();
         if ($role) {
-            $user->roles()->attach($role->id); 
+            $user->roles()->associate($role->id);
+        }else{
+            $user = new User();
+        $role->name = $data['role_name'];
         }
-    
-        return redirect('/login')->with('message', 'inscription reussie, Connectez-vous.');
+
+
+       
     }
-    
+
 
     public function findByEmail($email)
     {
@@ -40,16 +45,32 @@ class UserRepository implements IUser
 
 
 
-    public function login(array $data){
-        $user = User::where('email', $data['email'])->first();
-        if (!$user || !Hash::check($data['password'], $user->password)){
-            return redirect('/login')->with('message');
 
-        }else{
-            return redirect('/')->with('message','connecte reussite');
+
+
+
+    public function login(array $data)
+    {
+        $user = User::where('email', $data['email'])->first();
+
+    if (!$user || !Hash::check($data['password'], $user->password))  {
+          
+            return [
+                'status' => 'failed',
+                'message' => 'Email or password is incorrect.'
+            ];
         }
 
+        
+        return [
+            'status' => 'success'
+        ];
     }
+
+
+
+
+
 
     public function delete($data)
     {

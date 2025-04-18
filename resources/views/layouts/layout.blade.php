@@ -7,6 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
         @yield('contentcss')
 </head>
+
+<body>
  <!-- Navigation -->
         @include('layouts.nav')
       <!-- Product Section -->
@@ -15,3 +17,7 @@
     </section>
      <!-- Footer -->
   @include('layouts.footer')
+
+</body>
+
+</html>

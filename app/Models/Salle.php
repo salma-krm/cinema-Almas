@@ -10,7 +10,10 @@ class Salle extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'capacite'];
+    protected $fillable = ['name', 'capacite','status','maintenance_notes','type','description','equipment'];
+  
+protected $table="salles";
+
 
   
     public function chaises()

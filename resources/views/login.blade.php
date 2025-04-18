@@ -18,10 +18,14 @@
           </a>
         </p>
       </div>
-      <form method="POST" action="/loginUser">
+      <form method="POST" action="{{ route('login') }}">
         @csrf
     @method('POST')
         <div class="rounded-md shadow-sm space-y-4">
+          @if (session('message'))
+          <p class="text-sm text-red-500 mt-1">{{ session('message') }}</p>
+      @endif
+      
             <!-- Email Field -->
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-300">
@@ -41,6 +45,7 @@
                     class="mt-1 appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-700 bg-gray-800/50 placeholder-gray-500 text-white focus:outline-none focus:ring-cinema-gold focus:border-cinema-gold focus:z-10 sm:text-sm"
                     placeholder="Votre mot de passe" />
             </div>
+
         </div>
     
         <!-- Remember Me + Forgot Password -->
