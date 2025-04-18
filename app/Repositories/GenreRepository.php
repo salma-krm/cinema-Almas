@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Genre;
 use App\Repositories\Interfaces\IGenre;
 use Exception;
+use Illuminate\Validation\Rules\Exists;
 
 class GenreRepository implements IGenre
 {
@@ -16,6 +17,7 @@ class GenreRepository implements IGenre
     public function create($data)
     {
         $existing = $this->findByName($data['name']);
+
 
         if ($existing) {
             throw new Exception("Genre already exists.");
@@ -41,14 +43,13 @@ class GenreRepository implements IGenre
     public function update($data)
     {
         $genre = Genre::find($data['id']);
-
         if (!$genre) {
             throw new Exception("Genre not found.");
         }
-
         $genre->name = $data['name'];
+       
         $genre->save();
-
+        
         return $genre;
     }
 

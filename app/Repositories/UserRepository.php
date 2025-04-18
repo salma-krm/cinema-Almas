@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repositories;
-
+use App\Enums\image;
 use App\Models\Role;
 use App\Models\User;
 use App\Repositories\Interfaces\IUser;
@@ -22,6 +22,7 @@ class UserRepository implements IUser
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->password = bcrypt($data['password']);
+        $user->photo = image::Profile;
         $user->save();
 
         $role = Role::where('name', 'LIKE', '%client%')->first();

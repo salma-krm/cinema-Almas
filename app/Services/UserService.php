@@ -11,7 +11,7 @@ use App\Services\Interfaces\IUserService;
 class UserService implements IUserService
 
 {
-    protected $userRepository;
+    protected  IUser $userRepository;
 
     public function __construct(IUser $userRepository)
     {

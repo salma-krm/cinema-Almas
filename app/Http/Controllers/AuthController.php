@@ -8,7 +8,7 @@ use App\Services\Interfaces\IUserService;
 
 class AuthController extends Controller
 {
-    protected $user;
+    protected IUserService $user;
 
     public function __construct(IUserService $user)
     {

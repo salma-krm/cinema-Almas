@@ -8,24 +8,23 @@ use Exception;
 
 class GenreController extends Controller
 {
-    protected $genre;
+    protected IGenreService $genre;
 
     public function __construct(IGenreService $genre)
     {
         $this->genre = $genre;
     }
 
-    public function index()
+    public function getAll()
     {
         $genres = $this->genre->show();
-        return view('admindashbord.genredashbord', compact('genres'));
+        return view('admindashbord.genre.genredashbord', compact('genres'));
     }
 
     public function create(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255'
-        ]);
+
+        $validated = $request;
 
         try {
             $this->genre->create($validated);
@@ -37,14 +36,9 @@ class GenreController extends Controller
 
     public function update(Request $request)
     {
-        $validated = $request->validate([
-            'id' => 'required|integer',
-            'name' => 'required|string|max:255'
-        ]);
-
         try {
-            $this->genre->update($validated);
-            return redirect()->route('genre.index')->with('message', 'Genre updated successfully.');
+            $this->genre->update($request);
+            return redirect('Admin/genre')->with('message', 'Genre updated successfully.');
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -53,7 +47,7 @@ class GenreController extends Controller
     public function delete($id)
     {
         $this->genre->delete($id);
-        return redirect()->route('genre.index')->with('message', 'Genre deleted.');
+        return redirect('Admin/genre')->with('message', 'Genre deleted.');
     }
 
     public function getById($id)
@@ -64,6 +58,6 @@ class GenreController extends Controller
             return redirect()->route('genre.index')->with('error', 'Genre not found.');
         }
 
-        return view('admindashbord.genreUpdate', compact('genre'));
+        return view('admindashbord.genre.genreupdate', compact('genre'));
     }
 }

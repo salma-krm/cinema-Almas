@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\SalleController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,7 +51,10 @@ Route::get('/Admin/salle', function () {
 Route::get('/create/salle', function () {
     return view('admindashbord.salleCreate');
 });
-Route::get('/Admin/salle',[SalleController::class, 'index']);
+Route::get('/create/genre', function () {
+    return view('admindashbord.genre.genrecreate');
+});
+
 Route::get('/Admin/users', function () {
     return view('admindashbord.userdashbord');
 });
@@ -62,12 +66,16 @@ Route::post('/createuser', [AuthController::class, 'register']);
 Route::post('/userlogin', [AuthController::class, 'login'])->name('login')
 ;
 
-
+Route::get('/Admin/salle',[SalleController::class, 'index']);
 Route::post('/updatedSalle',[SalleController::class ,'update']);
 Route::post('/update/{id}/salle',[SalleController::class, 'getById']);
-
 Route::delete('/delete/{id}/salle', [SalleController::class, 'delete'])->name('salle.delete');
-
 Route::post('/Sallecreate', [SalleController::class, 'create'])->name('Salle.create');
+
+Route:: get('Admin/genre',[GenreController::class,'getAll' ]);
+Route::post('/genrecreate', [GenreController::class, 'create'])->name('genre.create');
+Route::post('/update/{id}/genre',[GenreController::class, 'getById']);
+Route::post('/updategenre',[GenreController::class ,'update']);
+Route::delete('/delete/{id}/genre', [GenreController::class, 'delete'])->name('genre.delete');
 
 
