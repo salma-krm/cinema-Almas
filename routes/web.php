@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActeurController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\SalleController;
@@ -77,5 +78,8 @@ Route::post('/genrecreate', [GenreController::class, 'create'])->name('genre.cre
 Route::post('/update/{id}/genre',[GenreController::class, 'getById']);
 Route::post('/updategenre',[GenreController::class ,'update']);
 Route::delete('/delete/{id}/genre', [GenreController::class, 'delete'])->name('genre.delete');
+
+
+Route:: get('Admin/acteur',[ActeurController::class,'getAll' ]);
 
 
