@@ -1,15 +1,47 @@
 <?php
-namespace   App\Services;
-use app\Services\Interfaces\ISalleService;
-class SalleService{
-    protected $salleService;
 
-    public function construct(ISalleService $salleService){
-        $this->salleService =$salleService;
+namespace App\Services;
 
+use App\Repositories\Interfaces\ISalle;
+use App\Services\Interfaces\ISalleService;
 
+class SalleService implements ISalleService
+{
+    protected $salleRepository;
+
+    public function __construct(ISalle $salleRepository)
+    {
+        $this->salleRepository = $salleRepository;
     }
-    public function create(array $data){
-  
+
+    public function show()
+    {
+        return $this->salleRepository->show();
+    }
+
+    public function create($data)
+    {
+        return $this->salleRepository->create($data);
+    }
+
+    public function delete($id)
+    {
+        return $this->salleRepository->delete($id);
+    }
+
+    public function update($data)
+    {
+
+        return $this->salleRepository->update($data);
+    }
+
+    public function findById($id)
+    {
+        return $this->salleRepository->findById($id);
+    }
+
+    public function findByName($name)
+    {
+        return $this->salleRepository->findByName($name);
     }
 }

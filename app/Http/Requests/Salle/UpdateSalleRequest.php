@@ -6,34 +6,38 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateSalleRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            'capacite'=>'required|integer',
+            'id'=>"required",
+            'name' => 'required', 
+            'capacite' => 'required',  
+            'status' => 'required', 
+            'maintenance_notes' => 'required',  
+            'type' => 'required', 
+            'description' => 'required',  
+            'equipment' => 'required', 
         ];
     }
-    public function message(){
-        return[
-            'name.required'=>'le nom est obligatoire',
-            'capacite.required'=>'capacite est obligatoire',
-            'capacite.required'=>' nombre de capacite dont  negatif',
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Le nom est obligatoire.',
+            'name.unique' => 'Ce nom existe déjà.',
+            'capacite.required' => 'La capacité est obligatoire.',
+            'capacite.integer' => 'La capacité doit être un nombre entier.',
+            'capacite.min' => 'La capacité doit être un nombre positif.',
+            'status.required' => 'Le statut est obligatoire.',
+            'status.in' => 'Le statut doit être "disponible", "en séance" ou "maintenance".',
+            'type.required' => 'Le type est obligatoire.',
+            'description.string' => 'La description doit être une chaîne de caractères.',
+            'equipment.string' => 'L\'équipement doit être une chaîne de caractères.',
         ];
-      
     }
 }

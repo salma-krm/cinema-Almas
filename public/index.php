@@ -1,7 +1,10 @@
 <?php
 
-use Illuminate\Contracts\Http\Kernel;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Application;
+use Illuminate\Contracts\Http\Kernel;
+
 
 define('LARAVEL_START', microtime(true));
 
@@ -31,7 +34,9 @@ if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php'))
 |
 */
 
-require __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
+require_once '../vendor/autoload.php';
+
 
 /*
 |--------------------------------------------------------------------------
