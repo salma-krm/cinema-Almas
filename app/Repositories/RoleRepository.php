@@ -59,8 +59,9 @@ class RoleRepository implements IRole
     {
         return Role::all();
     }
-    public function GetRole($name){
+    public function GetRole($name)
+    {
         $role = Role::where('name', '=', $name)->first();
-return $role;
+        return $role;
     }
 }

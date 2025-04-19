@@ -17,13 +17,7 @@ class UserService implements IUserService
         $this->userRepository = $userRepository;
     }
 
-    public function register(array $data)
-    {
-        return $this->userRepository->register($data);
-    }
-    public function login(array $data){
-        return $this->userRepository->login($data);
-    }
+     
     public function findByEmail($email){
 
     }

@@ -17,11 +17,13 @@ use App\Repositories\Interfaces\ISalle;
 use App\Repositories\Interfaces\IUser;
 use App\Repositories\RoleRepository;
 use App\Services\ActeurService;
+use App\Services\AuthService;
 use App\Services\GenreService;
 use App\Services\SalleService;
 use App\Services\UserService;
 
 use App\Services\Interfaces\IActeurService;
+use App\Services\Interfaces\IAuthService;
 use App\Services\Interfaces\IGenreService;
 use App\Services\Interfaces\IRoleService;
 use App\Services\Interfaces\ISalleService;
@@ -42,6 +44,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IActeurService::class, ActeurService::class);
         $this->app->bind(IRole::class, RoleRepository::class);
         $this->app->bind(IRoleService::class, RoleService::class);
+        $this->app->bind(IAuthService::class, AuthService::class);
     }
 
     public function boot()
