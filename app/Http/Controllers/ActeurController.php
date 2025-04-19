@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Services\Interfaces\IActeurService;
 use Illuminate\Http\Request;
 use Exception;
@@ -14,20 +15,21 @@ class ActeurController extends Controller
         $this->acteur = $acteur;
     }
 
-    public function getAll(){
+    public function getAll()
+    {
+       
         $acteur = $this->acteur->show();
-        
+        // dd($acteur);
         return view('admindashbord.acteur.acteurdashbord', compact('acteur'));
     }
 
     public function create(Request $request)
     {
-
-        $validated = $request;
+        $validated = $request->all();
 
         try {
             $this->acteur->create($validated);
-            return back()->with('message', 'Genre created successfully.');
+            return back()->with('message', 'Acteur created successfully.');
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -36,8 +38,8 @@ class ActeurController extends Controller
     public function update(Request $request)
     {
         try {
-            $this->acteur->update($request);
-            return redirect('Admin/acteur')->with('message', 'Genre updated successfully.');
+            $this->acteur->update($request->all());
+            return redirect('/acteur')->with('message', 'Acteur updated successfully.');
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
@@ -46,17 +48,18 @@ class ActeurController extends Controller
     public function delete($id)
     {
         $this->acteur->delete($id);
-        return redirect('Admin/acteur')->with('message', 'Genre deleted.');
+        return redirect('/acteur')->with('message', 'Acteur deleted.');
     }
 
     public function getById($id)
     {
-        $acteur = $this->acteur->getById($id);
+        $actor = $this->acteur->getById($id);
 
-        if (!$acteur) {
-            return redirect()->route('acteur.index')->with('error', 'Genre not found.');
+        if (!$actor) {
+            
+            return redirect('Admin/acteur')->with('error', 'Acteur not found.');
         }
-
-        return view('admindashbord.acteur.acteurupdatre', compact('genre'));
+        
+        return view('admindashbord.acteur.acteurupdate', compact('actor'));
     }
 }

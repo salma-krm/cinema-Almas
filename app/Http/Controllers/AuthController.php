@@ -1,18 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\Requests\User\loginRequest;
 use App\Http\Requests\User\RegisterRequest;
-use App\Services\Interfaces\IUserService;
+use App\Services\Interfaces\IAuthService;
+use Exception;
 
 class AuthController extends Controller
 {
-    protected IUserService $user;
+    private IAuthService $service;
 
-    public function __construct(IUserService $user)
+    public function __construct(IAuthService $service)
     {
-        $this->user= $user;
+        $this->service = $service;
     }
     public function index()
     {
@@ -20,25 +20,48 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        
-        $validatedData = $request->validated();
-        $this->user->register($validatedData);
-        return redirect('/login')->with('message', 'Inscription réussie, Connectez-vous.');
-        
+        try {
+             
+            $validatedData = $request->validated();
+    
+            
+            $this->service->register($validatedData);
+    
+            
+            return redirect('/login')->with('message', 'Inscription réussie. Vous pouvez maintenant vous connecter.');
+    
+        } catch (Exception $e) {
+            
+            return redirect('/register')
+
+                ->with('error', $e->getMessage()); 
+        }
     }
+    
     public function login(LoginRequest $request)
     {
        
-        $validData = $request->validated();
+        try {
+             
+            $validatedData = $request->validated();
+    
+            
+            $this->service->login($validatedData);
+    
+            
+            return redirect('/')->with('message', 'connection réussie.');
+    
+        } catch (Exception $e) {
+            
+            return redirect('/login')->with('error', $e->getMessage()); 
+        }
+
 
   
-        $result = $this->user->login($validData);
+        
 
        
-        if ($result['status'] === 'failed') {
-            return redirect('/login')->with('message', $result['message']);
-
-        }
+       
 
         return redirect('/');
     }

@@ -1,12 +1,12 @@
 <?php
+
 namespace App\Services;
 use App\Repositories\Interfaces\IActeur;
 use App\Services\Interfaces\IActeurService;
 
-
 class ActeurService implements IActeurService
 {
-    protected  IActeur $acteurRepository;
+    protected IActeur $acteurRepository;
 
     public function __construct(IActeur $acteurRepository)
     {

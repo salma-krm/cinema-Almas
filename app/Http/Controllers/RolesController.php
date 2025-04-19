@@ -12,7 +12,7 @@ class RolesController extends Controller
     public function __construct(){
 
     }
-    public function create (CreateRuleRequest $request){
+    public function create (Request $request){
         $validatedData = $request->validated();
         try {
             $this->rolle->create($validatedData);
