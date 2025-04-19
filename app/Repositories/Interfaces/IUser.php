@@ -1,8 +1,5 @@
 <?php 
 namespace app\Repositories\Interfaces;
-
-use App\Models\User;
-
 interface IUser{
 
     public function register(array $data);

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Repositories;
+namespace App\Repositories;
 
 use App\Enums\image;
 use App\Models\Acteur;
@@ -25,7 +25,16 @@ class ActeurRepository implements IActeur
         $acteur = new Acteur();
         $acteur->name = $data['name'];
         $acteur->description = $data['description'] ?? '';
-        $acteur->photo = image::Profile;
+        if ($data['photo']) {
+            $photo = $data['photo'];
+            $extenstion =$photo->getClientOriginalExtension();
+            $fileName = 'acteur_'.time().'.'.$extenstion;
+            $path =$photo->storeAs('acteurs',$fileName,'public');
+            $data['photo'] =$path;
+            $acteur->photo =$data['photo'];
+        } else {
+            $acteur->photo = Image::Profile; 
+        }
         $acteur->save();
 
         return $acteur;
@@ -43,6 +52,7 @@ class ActeurRepository implements IActeur
         $acteur->description = $data['description'] ?? $acteur->description;
         $acteur->photo = $data['photo'] ?? $acteur->photo;
         $acteur->save();
+
         return $acteur;
     }
 

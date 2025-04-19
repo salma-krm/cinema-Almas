@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Services;
-
-use app\Repositories\Interfaces\IUser;
+use App\Repositories\Interfaces\IUser;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
 
@@ -11,7 +10,7 @@ use App\Services\Interfaces\IUserService;
 class UserService implements IUserService
 
 {
-    protected  IUser $userRepository;
+    private  IUser $userRepository;
 
     public function __construct(IUser $userRepository)
     {

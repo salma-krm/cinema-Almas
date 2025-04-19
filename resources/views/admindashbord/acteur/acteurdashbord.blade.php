@@ -9,7 +9,7 @@
       <div class="p-8">
         <div class="flex justify-between items-center mb-8">
           <h1 class="text-3xl font-bold">Gestion des Acteurs</h1>
-          <a href="/create/actor" class="bg-cinema-gold hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded-lg flex items-center">
+          <a href="/acteurcreate" class="bg-cinema-gold hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded-lg flex items-center">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
             </svg>
@@ -24,15 +24,13 @@
             <div class="flex flex-col md:flex-row gap-4">
               <!-- Actor Photo -->
               <div class="w-24 h-24 flex-shrink-0">
-                @if($actor->photo)
-                  <img src="{{ asset('storage/' . $actor->photo) }}" alt="{{ $actor->name }}" class="w-full h-full object-cover rounded-lg">
-                @else
-                  <div class="w-full h-full bg-gray-700 rounded-lg flex items-center justify-center">
-                    <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                  </div>
-                @endif
+                @php
+                $photo = Str::startsWith($actor->photo, ['http://', 'https://']) 
+                         ? $actor->photo : asset('/storage/app/public'.$actor->photo);
+              @endphp
+              
+              <img src= "/storage/app/public/acteurs" alt="{{ $actor->name }}" class="w-24 h-24 object-cover rounded-full border-2 border-cinema-gold shadow-md">
+            
               </div>
               
               <!-- Actor Info -->
@@ -44,11 +42,15 @@
                   </div>
                   
                   <div class="flex gap-2 mt-2 md:mt-0">
-                    <a href="/update/{{$actor->id}}/actor" class="px-3 py-2 border border-gray-700 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-colors">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                      </svg>
-                    </a>
+                    <form method="POST" action="/update/{{$actor->id}}/acteur">
+                      @csrf
+                      <input type="hidden" name="id" value="{{$actor->id}}"> 
+                      <button type="submit" class="px-3 py-2 border border-gray-700 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                        </svg>
+                      </button>
+                    </form>
                     
                     <button class="px-3 py-2 border border-gray-700 rounded-lg hover:bg-gray-800 hover:text-red-400 transition-colors"
                       onclick="confirmDelete({{ $actor->id }}, '{{ $actor->name }}')">

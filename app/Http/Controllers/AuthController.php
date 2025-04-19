@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\Requests\User\loginRequest;
 use App\Http\Requests\User\RegisterRequest;
 use App\Services\Interfaces\IUserService;
 
 class AuthController extends Controller
 {
-    protected IUserService $user;
+    private IUserService $user;
 
     public function __construct(IUserService $user)
     {
