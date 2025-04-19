@@ -35,12 +35,11 @@ class UserRepository implements IUser
     {
         User::delete($id);
     }
-
-
     public function findByName($name)
     {
         return User::where('name', 'LIKE', "%$name%")->get();
     }
+    
 
     public function save($data){
          $data->save();

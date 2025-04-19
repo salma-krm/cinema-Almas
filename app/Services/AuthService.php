@@ -10,6 +10,9 @@ use App\Repositories\Interfaces\IUser;
 use App\Services\Interfaces\IAuthService;
 use Exception;
 
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+
 class AuthService implements IAuthService
 {
     private IUser $repository;
@@ -21,7 +24,26 @@ class AuthService implements IAuthService
         $this->roleRepo = $roleRepo;
     }
 
-    public function login($data) {}
+    public function login($data)
+    {
+        $existingUser = $this->repository->findByEmail($data['email']);
+    
+        if (!$existingUser || !Hash::check($data['password'], $existingUser->password)) {
+            throw new Exception('Email or password is incorrect.');
+        }
+    
+        
+        session([
+            'user' => [
+                'id' => $existingUser->id,
+                'name' => $existingUser->name,
+                'email' => $existingUser->email
+            ]
+        ]);
+        return $existingUser;
+    }
+   
+    
     public function register($data)
     {
 
@@ -48,5 +70,9 @@ class AuthService implements IAuthService
 
         $this->repository->save($user);
     }
-    public function logout() {}
+    public function logout()
+    {
+        Session::forget('user');
+    }
 }
+

@@ -41,7 +41,21 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
        
-        $validData = $request->validated();
+        try {
+             
+            $validatedData = $request->validated();
+    
+            
+            $this->service->login($validatedData);
+    
+            
+            return redirect('/')->with('message', 'connection réussie.');
+    
+        } catch (Exception $e) {
+            
+            return redirect('/login')->with('error', $e->getMessage()); 
+        }
+
 
   
         
