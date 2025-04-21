@@ -33,3 +33,17 @@
         </div>
     </div>
 </nav>
+<div id="mobile-menu" class="md:hidden bg-cinema-dark border-t border-gray-800 hidden fixed w-full z-10 top-16">
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <a href="#" class="block px-3 py-2 text-gray-300 hover:text-cinema-gold">Films</a>
+      <a href="#" class="block px-3 py-2 text-gray-300 hover:text-cinema-gold">Horaires</a>
+      <a href="#" class="block px-3 py-2 text-gray-300 hover:text-cinema-gold">Tarifs</a>
+      <a href="#" class="block px-3 py-2 text-gray-300 hover:text-cinema-gold">Contact</a>
+      <div class="flex items-center space-x-2 px-3 py-2">
+        <span class="text-sm text-gray-300">Bienvenue, Jean Dupont</span>
+        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80" 
+             alt="Profile" 
+             class="w-6 h-6 rounded-full border-2 border-cinema-gold"/>
+      </div>
+    </div>
+  </div>

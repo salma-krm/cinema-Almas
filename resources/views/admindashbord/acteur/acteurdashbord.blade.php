@@ -24,12 +24,9 @@
             <div class="flex flex-col md:flex-row gap-4">
               <!-- Actor Photo -->
               <div class="w-24 h-24 flex-shrink-0">
-                @php
-                $photo = Str::startsWith($actor->photo, ['http://', 'https://']) 
-                         ? $actor->photo : asset('/storage/app/public'.$actor->photo);
-              @endphp
               
-              <img src= "/storage/app/public/acteurs" alt="{{ $actor->name }}" class="w-24 h-24 object-cover rounded-full border-2 border-cinema-gold shadow-md">
+              
+              <img src= "{{url('/storage/'. $actor->photo)}}" alt="{{ $actor->name }}" class="w-24 h-24 object-cover rounded-full border-2 border-cinema-gold shadow-md">
             
               </div>
               

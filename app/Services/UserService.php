@@ -18,7 +18,8 @@ class UserService implements IUserService
     }
 
      
-    public function findByEmail($email){
+    public function getAll(){
+        return $this->userRepository->getAll();
 
     }
     public function delete($id){
@@ -30,6 +31,10 @@ class UserService implements IUserService
     public function findByName($name)
     {
 
+    }
+    public  function findByEmail($email)
+    {
+        return  $this->userRepository->findByEmail($email);
     }
         
 }

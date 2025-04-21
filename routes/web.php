@@ -6,6 +6,9 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SalleController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FilmController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +22,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('/detailsfilm', function () {
+
+Route::get('/detail', function () {
     return view('detailsfilm');
 });
 Route::get('/register', function () {
@@ -41,11 +42,20 @@ Route::get('/paiement', function () {
 Route::get('/dashbord', function () {
     return view('dashbord');
 });
+
+
+// Route::get('/dashbord', [UserController::class, 'getAll'])->name('dashboard');
+
+
+
 Route::get('/Admin/dashbord', function () {
     return view('admindashbord.reservationdashbord');
 });
-Route::get('/Admin/film', function () {
-    return view('admindashbord.filmdashbord');
+// Route::get('/Admin/film', function () {
+//     return view('admindashbord.film.filmdashbord');
+// });
+Route::get('/create/film', function () {
+    return view('admindashbord.film.filmcreate');
 });
 Route::get('/Admin/salle', function () {
     return view('admindashbord.salledashbord');
@@ -70,6 +80,9 @@ Route::get('/acteurcreate', function () {
 Route::get('/rolecreate', function () {
     return view('admindashbord.role.rolecreate');
 });
+Route::get('/', [FilmController::class, 'getAll']);
+
+Route::get('/Admin/film', [FilmController::class, 'index']);
 Route::post('/createuser', [AuthController::class, 'register']);
 Route::post('/userlogin', [AuthController::class, 'login'])->name('login')
 ;
@@ -100,4 +113,6 @@ Route::post('/update/{id}/role',[RoleController::class, 'getById']);
 Route::post('/updaterole',[RoleController::class ,'update']);
 Route::delete('/delete/{id}/role', [RoleController::class, 'delete'])->name('role.delete');
 
+Route::get('/film/craete', [FilmController::class, 'getActeurGenre'])->name('film.create');
+Route::post('/create/film', [FilmController::class, 'create']);
 

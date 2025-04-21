@@ -2,12 +2,13 @@
 
 namespace App\Services\Interfaces;
 
-interface IUserService
+interface IFilmService
 { 
 
-    public function findByEmail($email);
+ 
     public function delete($id);
-    public function update(array $data, $id);
+    public function create($data);
+    public function update($data);
     public function findByName($name);
     public function getAll();
 }

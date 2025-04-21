@@ -68,7 +68,7 @@ class ActeurRepository implements IActeur
 
     public function getById($id)
     {
-        return Acteur::find($id);
+        return Acteur::where('id', $id)->first();
     }
 
     public function findByName($name)

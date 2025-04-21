@@ -180,222 +180,89 @@
         </div>
     </section>
 
-    <!-- Movies Grid -->
-    <section class="py-16 bg-cinema-dark">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="space-y-8">
-                <!-- Movie 1 -->
-                <div class="movie-card rounded-xl overflow-hidden">
-                    <div class="md:flex">
-                        <div class="md:flex-shrink-0">
-                            <img class="h-64 w-full md:w-64 object-cover" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/p10892939_v_h8_aa.jpg-ft3kbtHiFUqaFeKIzip7SpVt06xgxP.jpeg" alt="Sintel" />
-                        </div>
-                        <div class="p-8 w-full">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h2 class="text-2xl font-bold text-white">Sintel</h2>
-                                    <p class="mt-1 text-gray-400">Animation, Aventure, Fantaisie</p>
-                                </div>
-                                <span class="inline-block bg-cinema-gold/20 text-cinema-gold px-2 py-1 rounded-md text-sm font-semibold">
-                                    Tous publics
-                                </span>
-                            </div>
-                            <div class="mt-4 flex items-center text-gray-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span>15min</span>
-                            </div>
-                            <p class="mt-4 text-gray-400">
-                                Un court métrage d'animation qui suit l'histoire d'une jeune fille nommée Sintel qui recherche un bébé dragon qu'elle appelle Scales.
-                            </p>
-                            <div class="mt-6">
-                                <h3 class="text-lg font-semibold text-white mb-3">Séances</h3>
-                                <div class="flex flex-wrap gap-3">
-                                    <button class="px-4 py-2 border-2 border-cinema-gold text-cinema-gold rounded-md hover:bg-cinema-gold hover:text-cinema-dark transition-colors">
-                                        13:00
-                                    </button>
-                                    <button class="px-4 py-2 border-2 border-cinema-gold text-cinema-gold rounded-md hover:bg-cinema-gold hover:text-cinema-dark transition-colors">
-                                        15:30
-                                    </button>
-                                    <button class="px-4 py-2 border-2 border-cinema-gold text-cinema-gold rounded-md hover:bg-cinema-gold hover:text-cinema-dark transition-colors">
-                                        20:15
-                                    </button>
-                                </div>
-
-                            </div>
-                            <!-- Add the details button here -->
-                            <div class="mt-2">
-                                <button class=" w-[200px] hw-full bg-cinema-gold text-cinema-dark px-6 py-3 rounded-md hover:bg-yellow-400 transition-colors font-semibold flex items-center justify-center">
-                                    <span>Détails</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
+  <!-- Movies Grid -->
+<section class="py-16 bg-cinema-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <style>
+            /* Fixed size for movie posters */
+            .movie-poster {
+                width: 200px;         /* Fixed width */
+                height: 300px;        /* Fixed height - 3:2 aspect ratio is common for movie posters */
+                object-fit: cover;    /* This ensures the image covers the area without distortion */
+                object-position: center; /* Centers the image within the container */
+            }
+        
+            /* For mobile responsiveness */
+            @media (max-width: 768px) {
+                .movie-poster {
+                    width: 100%;      /* Full width on mobile */
+                    height: 250px;    /* Slightly smaller height on mobile */
+                }
+            }
+        
+            /* Additional styling for the movie card */
+            .movie-card {
+                background-color: #1A1B1E;
+                margin-bottom: 1.5rem;
+            }
+        </style>
+        
+       <div class="space-y-8">
+        <div class="space-y-8">
+            @foreach($films as $film)
+            <!-- Movie Card -->
+            <div class="movie-card bg-[#1a1c1e] rounded-xl overflow-hidden shadow-lg">
+                <div class="md:flex">
+                    <!-- Image Section -->
+                    <div class="md:flex-shrink-0">
+                        <img src="{{ url('/storage/'. $film->photo) }}" alt="{{ $film->title }}" class="movie-poster w-full h-48 object-cover" />
                     </div>
-                </div>
-
-                <!-- Movie 2 -->
-                <div class="movie-card rounded-xl overflow-hidden">
-                    <div class="md:flex">
-                        <div class="md:flex-shrink-0">
-                            <img class="h-64 w-full md:w-64 object-cover" src="https://images.unsplash.com/photo-1635805737707-575885ab0820?w=800&auto=format&fit=crop" alt="Captain America: Brave New World" />
-                        </div>
-                        <div class="p-8 w-full">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h2 class="text-2xl font-bold text-white">Captain America: Brave New World</h2>
-                                    <p class="mt-1 text-gray-400">Action, Aventure, Science Fiction</p>
-                                </div>
-                                <span class="inline-block bg-cinema-gold/20 text-cinema-gold px-2 py-1 rounded-md text-sm font-semibold">
-                                    12+
+        
+                    <!-- Details Section -->
+                    <div class="p-8 w-full">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h2 class="text-2xl font-bold text-white">{{ $film->title }}</h2>
+                                <p class="mt-1 text-gray-400">{{ $film->genre->name ?? 'N/A' }}</p>
+                                <p class="mt-1 text-gray-400">{{ $film->langue ?? 'N/A' }}</p>
+                                <span class="mt-1 text-gray-400">
+                                    {{ $film->description }}
                                 </span>
                             </div>
-                            <div class="mt-4 flex items-center text-gray-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span>2h 15min</span>
-                            </div>
-                            <p class="mt-4 text-gray-400">
-                                Sam Wilson assume le rôle de Captain America et doit faire face à de nouvelles menaces dans un monde en pleine mutation.
-                            </p>
-                            <div class="mt-6">
-                                <h3 class="text-lg font-semibold text-white mb-3">Séances</h3>
-                                <div class="flex flex-wrap gap-3">
-                                    <button class="px-4 py-2 border-2 border-cinema-gold text-cinema-gold rounded-md hover:bg-cinema-gold hover:text-cinema-dark transition-colors">
-                                        14:15
-                                    </button>
-                                    <button class="px-4 py-2 border-2 border-cinema-gold text-cinema-gold rounded-md hover:bg-cinema-gold hover:text-cinema-dark transition-colors">
-                                        18:45
-                                    </button>
-                                    <button class="px-4 py-2 border-2 border-cinema-gold text-cinema-gold rounded-md hover:bg-cinema-gold hover:text-cinema-dark transition-colors">
-                                        21:30
-                                    </button>
-                                </div>
-                            </div>
-                             <!-- Add the details button here -->
-                             <div class="mt-2">
-                                <button class=" w-[200px] hw-full bg-cinema-gold text-cinema-dark px-6 py-3 rounded-md hover:bg-yellow-400 transition-colors font-semibold flex items-center justify-center">
-                                    <span>Détails</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                    </svg>
-                                </button>
-                            </div>
-
+        
+                            <!-- Age Restriction -->
+                            <span class="inline-block bg-cinema-gold/20 text-cinema-gold px-2 py-1 rounded-md text-sm font-semibold">
+                                {{ $film->age_restriction ?? 'N/A' }}
+                            </span>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Movie 3 -->
-                <div class="movie-card rounded-xl overflow-hidden">
-                    <div class="md:flex">
-                        <div class="md:flex-shrink-0">
-                            <img class="h-64 w-full md:w-64 object-cover" src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop" alt="The Insiders" />
+        
+                        <!-- Duration -->
+                        <div class="mt-3">
+                            <span class="mt-1 text-gray-400">
+                                Durée: {{ $film->duree }} min
+                            </span>
                         </div>
-                        <div class="p-8 w-full">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h2 class="text-2xl font-bold text-white">The Insiders</h2>
-                                    <p class="mt-1 text-gray-400">Thriller, Drame</p>
-                                </div>
-                                <span class="inline-block bg-cinema-gold/20 text-cinema-gold px-2 py-1 rounded-md text-sm font-semibold">
-                                    16+
-                                </span>
-                            </div>
-                            <div class="mt-4 flex items-center text-gray-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span>1h 55min</span>
-                            </div>
-                            <p class="mt-4 text-gray-400">
-                                Un thriller haletant qui plonge dans les coulisses du monde de la finance et révèle des secrets bien gardés.
-                            </p>
-                            <div class="mt-6">
-                                <h3 class="text-lg font-semibold text-white mb-3">Séances</h3>
-                                <div class="flex flex-wrap gap-3">
-                                    <button class="px-4 py-2 border-2 border-cinema-gold text-cinema-gold rounded-md hover:bg-cinema-gold hover:text-cinema-dark transition-colors">
-                                        16:00
-                                    </button>
-                                    <button class="px-4 py-2 border-2 border-cinema-gold text-cinema-gold rounded-md hover:bg-cinema-gold hover:text-cinema-dark transition-colors">
-                                        19:15
-                                    </button>
-                                    <button class="px-4 py-2 border-2 border-cinema-gold text-cinema-gold rounded-md hover:bg-cinema-gold hover:text-cinema-dark transition-colors">
-                                        22:00
-                                    </button>
-                                </div>
-                            </div>
-                             <!-- Add the details button here -->
-                             <div class="mt-2">
-                                <button class=" w-[200px] hw-full bg-cinema-gold text-cinema-dark px-6 py-3 rounded-md hover:bg-yellow-400 transition-colors font-semibold flex items-center justify-center">
-                                    <span>Détails</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                    </svg>
-                                </button>
-                            </div>
+        
+                        <!-- Release Date -->
+                        <div class="mt-3">
+                            <h3 class="text-sm text-gray-400">Date de sortie</h3>
+                            <span class="mt-1 text-gray-400">
+                                {{ \Carbon\Carbon::parse($film->date_sortie)->format('d M Y') ?? 'Non disponible' }}
+                            </span>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Movie 4 -->
-                <div class="movie-card rounded-xl overflow-hidden">
-                    <div class="md:flex">
-                        <div class="md:flex-shrink-0">
-                            <img class="h-64 w-full md:w-64 object-cover" src="https://images.unsplash.com/photo-1596727147705-61a532a659bd?w=800&auto=format&fit=crop" alt="Les Gardiens de la Galaxie" />
-                        </div>
-                        <div class="p-8 w-full">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h2 class="text-2xl font-bold text-white">Les Gardiens de la Galaxie</h2>
-                                    <p class="mt-1 text-gray-400">Science Fiction, Comédie</p>
-                                </div>
-                                <span class="inline-block bg-cinema-gold/20 text-cinema-gold px-2 py-1 rounded-md text-sm font-semibold">
-                                    12+
-                                </span>
-                            </div>
-                            <div class="mt-4 flex items-center text-gray-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <span>2h 30min</span>
-                            </div>
-                            <p class="mt-4 text-gray-400">
-                                L'équipe improbable de héros intergalactiques revient pour de nouvelles aventures à travers la galaxie.
-                            </p>
-                            <div class="mt-6">
-                                <h3 class="text-lg font-semibold text-white mb-3">Séances</h3>
-                                <div class="flex flex-wrap gap-3">
-                                    <button class="px-4 py-2 border-2 border-cinema-gold text-cinema-gold rounded-md hover:bg-cinema-gold hover:text-cinema-dark transition-colors">
-                                        13:45
-                                    </button>
-                                    <button class="px-4 py-2 border-2 border-cinema-gold text-cinema-gold rounded-md hover:bg-cinema-gold hover:text-cinema-dark transition-colors">
-                                        17:30
-                                    </button>
-                                    <button class="px-4 py-2 border-2 border-cinema-gold text-cinema-gold rounded-md hover:bg-cinema-gold hover:text-cinema-dark transition-colors">
-                                        20:45
-                                    </button>
-                                </div>
-                            </div>
-                             <!-- Add the details button here -->
-                             <div class="mt-2">
-                                <button class=" w-[200px] hw-full bg-cinema-gold text-cinema-dark px-6 py-3 rounded-md hover:bg-yellow-400 transition-colors font-semibold flex items-center justify-center">
-                                    <span>Détails</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
-    </section>
+        
+</div>
+
+        
+        </div>
+    </div>
+</section>
 
     <!-- Promo Section -->
     <section class="py-20 bg-gray-900">

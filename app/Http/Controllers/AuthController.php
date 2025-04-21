@@ -14,9 +14,7 @@ class AuthController extends Controller
     {
         $this->service = $service;
     }
-    public function index()
-    {
-    }
+  
 
     public function register(RegisterRequest $request)
     {

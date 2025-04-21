@@ -37,7 +37,9 @@ class AuthService implements IAuthService
             'user' => [
                 'id' => $existingUser->id,
                 'name' => $existingUser->name,
-                'email' => $existingUser->email
+                'email' => $existingUser->email,
+                'password' =>$existingUser->password,
+                'photo' => $existingUser->photo
             ]
         ]);
         return $existingUser;

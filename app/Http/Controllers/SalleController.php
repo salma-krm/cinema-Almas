@@ -25,11 +25,12 @@ class SalleController extends Controller
 
     public function create(CreateSalleRequest $request)
     {
+        
         $validatedData = $request->validated();
 
         try {
             $this->salle->create($validatedData);
-            return back()->with('message', 'Salle created successfully');
+            return redirect('/Admin/salle')->with('message', 'Salle created successfully');
         } catch (Exception $e) {
             return back()->with('message', $e->getMessage());
         }

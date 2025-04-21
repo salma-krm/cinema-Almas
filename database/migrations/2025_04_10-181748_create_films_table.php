@@ -24,8 +24,9 @@ return new class extends Migration
             $table->float('duree'); 
             $table->string('langue');
             $table->string('photo'); 
+            $table->string('age_restriction')->nullable(); 
+            $table->string('video')->nullable(); 
             $table->foreignId('genre_id')->constrained()->onDelete('cascade');
-
             $table->timestamps();
         });
     }
