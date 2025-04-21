@@ -21,6 +21,9 @@ class Film extends Model
         'genre_id',
         'langue',
         'photo',
+        'video',
+     'age_restriction' 
+       
     ];
 
     public function genre()
@@ -28,9 +31,9 @@ class Film extends Model
         return $this->belongsTo(Genre::class);
     }
 
-    public function acteursPrincipaux()
+    public function acteurs()
     {
-        return $this->belongsToMany(Acteur::class, 'acteur_film');
+        return $this->belongsToMany(Acteur::class, 'acteur_films', 'acteur_id', 'film_id');
     }
     public function seances()
     {
