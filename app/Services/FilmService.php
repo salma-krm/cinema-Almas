@@ -2,13 +2,14 @@
 
 namespace App\Services;
 
+use App\Exceptions\CustomException\InCompleteProcess;
 use App\Models\Film;
 use App\Repositories\Interfaces\IActeur;
 use App\Repositories\Interfaces\IFilm;
 use App\Repositories\Interfaces\IFilmRepository;
 use App\Repositories\Interfaces\IGenre;
 use App\Services\Interfaces\IFilmService;
-use Exception;
+
 
 class FilmService implements IFilmService
 {
@@ -35,7 +36,7 @@ class FilmService implements IFilmService
 
         $existingFilm = $this->repo->findByName($data['title']);
         if ($existingFilm) {
-            throw new Exception('A film with this name already exists.');
+            throw new InCompleteProcess('A film with this name already exists.');
         }
 
         if (isset($data['photo']) && $data['photo']) {
@@ -43,22 +44,10 @@ class FilmService implements IFilmService
             $extension = $photo->getClientOriginalExtension();
             $fileName = 'film_' . time() . '.' . $extension;
             $path = $photo->storeAs('films', $fileName, 'public');
+            $data['photo']=$path; 
         }
 
-        $pathvideo = null;
-        if (isset($data['video']) && $data['video']) {
-            $video = $data['video'];
-            $extension = $video->getClientOriginalExtension();
-            $fileName = 'film_video_' . time() . '.' . $extension;
-            $destinationPath = public_path('videos');
-            if (!file_exists($destinationPath)) {
-                mkdir($destinationPath, 0777, true);
-            }
-           $video->move($destinationPath, $fileName);
-           
-        }
-
-
+       
         $film = new Film();
         $film->title = $data['title'];
         $film->description = $data['description'];
@@ -69,19 +58,17 @@ class FilmService implements IFilmService
         $film->duree = $data['duree'];
         $film->langue = $data['langue'];
         $film->age_restriction = $data['age_restriction'];
-        $film->video = $fileName;
-        $film->photo = $path ?? null;
-
-
-
+        $film->video = $data['video'];
+        $film->photo = $data['photo'] ;
+       
         if (!isset($data['genre']) || !is_numeric($data['genre'])) {
-            throw new Exception("Genre ID is required and must be numeric.");
+            throw new InCompleteProcess("Genre ID is required and must be numeric.");
         }
 
 
         $genre = $this->genreRepo->getById($data['genre']);
         if (!$genre) {
-            throw new Exception("Genre does not exist.");
+            throw new InCompleteProcess("Genre does not exist.");
         }
 
         $film->genre()->associate($genre);
@@ -95,34 +82,97 @@ class FilmService implements IFilmService
                 $acteur = $this->acteurRepo->getById($acteurId);
 
                 if ($acteur) {
-                    $film->acteurs()->attach($acteur->id); // Make sure you're passing the ID
+                    $film->acteurs()->attach($acteur->id); 
                 } else {
-                    throw new Exception("Actor does not exist: ID $acteurId");
+                    throw new InCompleteProcess("Actor does not exist: ID $acteurId");
                 }
             }
         }
 
-        // ✅ Return the film with its relationships (optional)
-        return $film->load('genre', 'acteurs');
+       
     }
+
 
 
     public function update($data)
     {
-        $film = $this->repo->update($data);
+        
+        $film = $this->repo->findById($data['id']);
         if (!$film) {
-            throw new Exception("Film introuvable.");
+            throw new InCompleteProcess("Film introuvable.");
         }
+    
+       
+        $existingFilm = $this->repo->findByName($data['title']);
+        if ($existingFilm && $existingFilm->id !== $film->id) {
+            throw new InCompleteProcess('A film with this name already exists.');
+        }
+    
+        
+        if (isset($data['photo']) && $data['photo']) {
+            if ($film->photo && file_exists(storage_path('app/public/' . $film->photo))) {
+            unlink(storage_path('app/public/' . $film->photo));
+            }
+            $photo = $data['photo'];
+            $extension = $photo->getClientOriginalExtension();
+            $fileName = 'film_' . time() . '.' . $extension;
+            $path = $photo->storeAs('films', $fileName, 'public');
+            $data['photo'] = $path;
+            
+           
+        }
+        
+        $film->title = $data['title'];
+        $film->description = $data['description'];
+        $film->date_sortie = $data['date_sortie'];
+        $film->resume = $data['resume'];
+        $film->budget = $data['budget'];
+        $film->realisateur = $data['realisateur'];
+        $film->duree = $data['duree'];
+        $film->langue = $data['langue'];
+        $film->photo = $path;
+        $film->age_restriction = $data['age_restriction'];
+        $film->video = $data['video'];
+        $genre = $this->genreRepo->getById($data['genre']);
+        if (!$genre) {
+            throw new InCompleteProcess("Genre does not exist.");
+        }
+        $film->genre()->associate($genre);
+    
+       
+        $film->save();
+    
+       
+        if (isset($data['cast'])) {
+            $film->acteurs()->detach();
+            foreach ($data['cast'] as $acteurId) {
+                $acteur = $this->acteurRepo->getById($acteurId);
+                if ($acteur) {
+                    $film->acteurs()->attach($acteur->id); 
+                } else {
+                    throw new InCompleteProcess("Actor does not exist: ID $acteurId");
+                }
+            }
+        }
+    
         return $film;
     }
-
     public function delete($id)
     {
         $deleted = $this->repo->delete($id);
-        if (!$deleted) {
-            throw new Exception("Film introuvable.");
+        if ($deleted) {
+            throw new InCompleteProcess("Film introuvable.");
         }
         return true;
     }
-    public function findByName($name) {}
+
+    public function findByName($name) {
+
+    return $this->repo->findByName($name);
+    }
+    public function getById($id){
+        
+    return $this->repo->findById($id);
+    }
 }
+

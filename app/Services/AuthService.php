@@ -4,11 +4,11 @@ namespace App\Services;
 
 use App\Enums\image;
 use App\Enums\Roles;
+use App\Exceptions\CustomException\InCompleteProcess;
 use App\Models\User;
 use App\Repositories\Interfaces\IRole;
 use App\Repositories\Interfaces\IUser;
 use App\Services\Interfaces\IAuthService;
-use Exception;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -29,7 +29,7 @@ class AuthService implements IAuthService
         $existingUser = $this->repository->findByEmail($data['email']);
     
         if (!$existingUser || !Hash::check($data['password'], $existingUser->password)) {
-            throw new Exception('Email or password is incorrect.');
+            throw new InCompleteProcess('Email or password is incorrect.');
         }
     
         
@@ -48,12 +48,11 @@ class AuthService implements IAuthService
     
     public function register($data)
     {
-
         $existingUser = $this->repository->findByEmail($data['email']);
 
 
         if ($existingUser) {
-            throw new Exception('User already exists with this email.');
+            throw new InCompleteProcess('User already exists with this email.');
         }
 
         $user = new User();
@@ -67,7 +66,7 @@ class AuthService implements IAuthService
         if ($role) {
             $user->roles()->associate($role);
         } else {
-            throw new Exception("Role does not exist.");
+            throw new InCompleteProcess("Role does not exist.");
         }
 
         $this->repository->save($user);

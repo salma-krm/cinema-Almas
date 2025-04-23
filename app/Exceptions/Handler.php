@@ -2,8 +2,10 @@
 
 namespace App\Exceptions;
 
+use App\Exceptions\CustomException\InCompleteProcess;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Support\Facades\Redirect;
 
 class Handler extends ExceptionHandler
 {
@@ -35,7 +37,15 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            //
+            // You can add custom reporting logic for this exception type
+        });
+
+        // Handle the custom exception for redirection
+        $this->renderable(function (InCompleteProcess $e, $request) {
+            // Redirect to a specific route with an error message in session
+            return back() // Change this to the route you want to redirect to
+                ->with('error', 'Process incomplete: ' . $e->getMessage());
         });
     }
 }
+

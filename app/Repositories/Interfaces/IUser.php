@@ -10,6 +10,6 @@ interface IUser{
     public function findByName($name);
     public function getById($id);
     public function save(User $data);
-    public function getAll();
+    public function getUser();
 
 }

@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Film\CreateFilmRequest as RequestsCreateFilmRequest;
+use App\Http\Requests\Film\CreateFilmRequest;
 use App\Http\Requests\Film\deleteRequest;
 use App\Http\Requests\Film\UpdateFilmRequest;
 use App\Http\Requests\FilmCreateRequest;
 use App\Http\Requests\FilmRequest;
+use App\Http\Requests\Film\FilmStoreRequest;
 use App\Http\Requests\FilmUpdateRequest;
+use App\Models\Acteur;
 use App\Models\Film;
+use App\Models\Genre;
 use App\Services\Interfaces\IActeurService;
 use App\Services\Interfaces\IAuthService;
 use App\Services\Interfaces\IFilmService;
@@ -34,52 +39,64 @@ class FilmController extends Controller
         return view('home', compact('films'));
     }
     public function index()
-{
-    $films =  $this->service->getAll();
-    return view('admindashbord.film.filmdashbord', compact('films'));
-}
-
-    
-    public function getActeurGenre(){
-       $actors =   $this->serviceActeur->getAll();
-       $servicegenre = $this->servicegenre->getAll();
-       return view('admindashbord.film.filmcreate',compact('actors','servicegenre'));
-
-
-
+    {
+        $films =  $this->service->getAll();
+        return view('admindashbord.film.filmdashbord', compact('films'));
     }
 
-    public function create(request $request)
+    public function getActeurGenre()
     {
-       
-         
-        try {
-            $validated = $request;
-            $this->service->create($validated);
-            return redirect()->back()->with('message', 'Film ajouté avec succès.');
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+        $actors =   $this->serviceActeur->getAll();
+        $servicegenre = $this->servicegenre->getAll();
+        return view('admindashbord.film.filmcreate', compact('actors', 'servicegenre'));
     }
 
-    public function update(FilmUpdateRequest $request)
+    public function create(Request $request)
     {
-        try {
-            $validated = $request->validated();
-            $this->service->update($validated);
-            return redirect()->back()->with('message', 'Film modifié avec succès.');
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+        $validated = $request;
+        $this->service->create($validated);
+        return redirect()->back()->with('message', 'Film ajouté avec succès.');
     }
 
-    public function delete(deleteRequest $deleteRequest)
+    public function update(Request $request)
     {
-        try {
-            $this->service->delete($deleteRequest);
-            return redirect()->back()->with('message', 'Film supprimé avec succès.');
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+        $validated = $request;
+        
+        $this->service->update($validated);
+        return redirect('/Admin/film')->with('message', 'Film modifié avec succès.');
+    }
+
+
+    public function delete($id)
+    {
+        $this->service->delete($id);
+        return redirect()->back()->with('message', 'Film supprimé avec succès.');
+    }
+
+
+    public function getById( Request $id){
+        
+          $film =  $this->service->getById($id)->first();
+          return view('', compact('film'));   
+    }
+
+    public function getDetailFilm(Request $id)
+    {
+        $film =  $this->service->getById($id)->first();
+        $filmsSimilaires = $this->service->getAll();
+        return view('detailsfilm', compact('film', 'filmsSimilaires'));
+        
+    }
+    public function getReservation(Request $request)
+    {
+        $film =  $this->service->getById($request)->first();
+        return view('reservation', compact('film'));
+    }
+    public function edit($id)
+    {
+        $film = Film::with('acteurs')->findOrFail($id);
+        $genres = Genre::all();
+        $actors = Acteur::all();
+        return view('admindashbord.film.filmupdate', compact('film', 'genres', 'actors'));
     }
 }

@@ -17,7 +17,8 @@ class FilmRepository implements IFilm
  
     public function delete($id)
     {
-        Film::delete($id);
+        $film=  Film::where('id','=',$id)->first();
+        $film->delete();
     }
     public function findByName($title)
     {
@@ -35,10 +36,18 @@ class FilmRepository implements IFilm
     }
   
     public function update( $data){
-        $data->save();
+        
+        $film = Film::where( 'id',$data->id)->first();
+        
+        if ($film) {
+           dd($film);
+          $film->update($data->all());   
+        }
 
     }
-    public function findById(int $id){
-        return Film::find($id);
+    public function findById( $id){
+       
+        return Film::with(['genre', 'acteurs'])->find($id);
+      
     }
 }

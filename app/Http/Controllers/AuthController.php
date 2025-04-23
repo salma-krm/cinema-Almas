@@ -18,7 +18,7 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        try {
+   
              
             $validatedData = $request->validated();
     
@@ -28,40 +28,20 @@ class AuthController extends Controller
             
             return redirect('/login')->with('message', 'Inscription réussie. Vous pouvez maintenant vous connecter.');
     
-        } catch (Exception $e) {
-            
-            return redirect('/register')
-
-                ->with('error', $e->getMessage()); 
-        }
+        
     }
     
     public function login(LoginRequest $request)
     {
-       
-        try {
-             
-            $validatedData = $request->validated();
-    
-            
-            $this->service->login($validatedData);
-    
-            
+  
+            $validatedData = $request->validated();   
+            $this->service->login($validatedData);        
             return redirect('/')->with('message', 'connection réussie.');
     
-        } catch (Exception $e) {
-            
-            return redirect('/login')->with('error', $e->getMessage()); 
-        }
-
-
-  
-        
-
        
-       
-
-        return redirect('/');
+    }
+    public function logout(){
+        $this->service->logout();
     }
 }
 

@@ -16,20 +16,15 @@ class UserController extends Controller
     {
         $this->service = $service;
     }
-       public function getAll()
+       public function getUser()
     {
-        $user = Session::get('user');
-       
-  
-$getUser = $this->service->findByEmail($user["email"]) ;
-
-
-
-if (!$getUser) {
+        
+         $user  = $this->service->getUser();
+      if (!$user) {
                 return redirect('/login')->with('error', 'Veuillez vous connecter.');
             }
         
-            return view('dashbord',compact('getUser'));
+            return view('dashbord',compact('user'));
         }
         
     }

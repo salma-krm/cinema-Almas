@@ -4,14 +4,12 @@
 {{-- link css --}}
 <link rel="stylesheet" href="{{asset('css/app.css')}}"> 
 <body class="bg-cinema-dark text-cinema-white min-h-screen">
-    <!-- Mobile Navigation -->
     <!-- Hero Section -->
     <section class="pt-16 relative h-screen">
         <div class="absolute inset-0 bg-black opacity-60 z-0"></div>
         <div class="absolute inset-0 z-0">
-            <img
+               <img
                 src="{{asset('images/best-iptv-provider.webp')}}"
-
                 alt="Sintel Movie"
                 class="w-full h-full object-cover" />
         </div>
@@ -181,6 +179,7 @@
     </section>
 
   <!-- Movies Grid -->
+
 <section class="py-16 bg-cinema-dark">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <style>
@@ -207,7 +206,6 @@
             }
         </style>
         
-       <div class="space-y-8">
         <div class="space-y-8">
             @foreach($films as $film)
             <!-- Movie Card -->
@@ -250,17 +248,24 @@
                                 {{ \Carbon\Carbon::parse($film->date_sortie)->format('d M Y') ?? 'Non disponible' }}
                             </span>
                         </div>
+
+                        <!-- Button to View Details -->
+                        <form action="{{ route('films.show') }}" method="POST">
+                            @csrf <!-- CSRF protection -->
+                            <input type="hidden" name="film_id" value="{{ $film->id }}">
                         
+                            <button type="submit" class="inline-block bg-cinema-gold text-cinema-dark px-6 py-2 rounded-full hover:bg-yellow-400 transition-colors font-semibold">
+                                Voir Détails
+                            </button>
+                        </form> 
                     </div>
                 </div>
             </div>
             @endforeach
         </div>
-        
-</div>
-
-        
-        </div>
+    </div>
+</section>
+     </div>
     </div>
 </section>
 

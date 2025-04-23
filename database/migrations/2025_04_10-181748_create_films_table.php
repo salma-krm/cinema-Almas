@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('resume'); 
             $table->decimal('budget', 15, 2); 
             $table->string('realisateur');
-            $table->float('duree'); 
+            $table->date('duree'); 
             $table->string('langue');
             $table->string('photo'); 
             $table->string('age_restriction')->nullable(); 

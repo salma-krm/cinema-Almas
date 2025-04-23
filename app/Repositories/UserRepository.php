@@ -46,7 +46,11 @@ class UserRepository implements IUser
     public function save($data){
          $data->save();
     }
-    public function getAll(){
+    public function getUser(){
         $user = Session::get('user');
+        $useremail = $user["email"];
+        $getuser = $this->findByEmail($useremail);
+        return $getuser;
     }
-}
+    }
+

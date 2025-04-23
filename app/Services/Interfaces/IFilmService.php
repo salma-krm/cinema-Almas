@@ -11,5 +11,6 @@ interface IFilmService
     public function update($data);
     public function findByName($name);
     public function getAll();
+    public function getById($id);
 }
 

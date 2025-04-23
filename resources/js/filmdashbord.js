@@ -12,3 +12,14 @@ tailwind.config = {
   }
 }
 
+function confirmFilmDelete(id, title) {
+  document.getElementById('filmToDelete').innerText = title;
+  document.getElementById('filmDeleteForm').action ="/film/{id}/delete";
+  document.getElementById('filmDeleteModal').classList.remove('hidden');
+}
+
+function closeFilmDeleteModal() {
+  document.getElementById('filmDeleteModal').classList.add('hidden');
+}
+
+

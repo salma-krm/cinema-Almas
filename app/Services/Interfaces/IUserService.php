@@ -9,6 +9,6 @@ interface IUserService
     public function delete($id);
     public function update(array $data, $id);
     public function findByName($name);
-    public function getAll();
+    public function getUser();
 }
 

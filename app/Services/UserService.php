@@ -18,8 +18,8 @@ class UserService implements IUserService
     }
 
      
-    public function getAll(){
-        return $this->userRepository->getAll();
+    public function getUser(){
+        return $this->userRepository->getUser();
 
     }
     public function delete($id){
