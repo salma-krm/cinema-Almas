@@ -12,5 +12,6 @@ interface IFilm
     public function update( $data);
     public function findByName(string $name);
     public function findById($id);
+    public function getdetailfilm($id);
     public function getAll();
 }

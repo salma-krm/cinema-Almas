@@ -18,7 +18,7 @@ class Film extends Model
         'budget',
         'realisateur',
         'duree',
-        'genre_id',
+        
         'langue',
         'photo',
         'video',
@@ -28,7 +28,7 @@ class Film extends Model
 
     public function genre()
     {
-        return $this->belongsTo(Genre::class);
+        return $this->belongsTo(Genre::class,'genre_id');
     }
 
     public function acteurs()

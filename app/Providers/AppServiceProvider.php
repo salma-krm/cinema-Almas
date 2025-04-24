@@ -16,8 +16,10 @@ use App\Repositories\Interfaces\IFilm;
 use App\Repositories\Interfaces\IGenre;
 use App\Repositories\Interfaces\IRole;
 use App\Repositories\Interfaces\ISalle;
+use App\Repositories\Interfaces\ISeance;
 use App\Repositories\Interfaces\IUser;
 use App\Repositories\RoleRepository;
+use App\Repositories\SeanceRepository;
 use App\Services\ActeurService;
 use App\Services\AuthService;
 use App\Services\FilmService;
@@ -31,8 +33,11 @@ use App\Services\Interfaces\IFilmService;
 use App\Services\Interfaces\IGenreService;
 use App\Services\Interfaces\IRoleService;
 use App\Services\Interfaces\ISalleService;
+use App\Services\Interfaces\ISeanceService;
 use App\Services\Interfaces\IUserService;
 use App\Services\RoleService;
+use App\Services\SeanceService as ServicesSeanceService;
+use SeanceService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -51,6 +56,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IAuthService::class, AuthService::class);
         $this->app->bind(IFilm::class, FilmRepository::class);
         $this->app->bind(IFilmService::class, FilmService::class);
+        $this->app->bind(ISeance::class, SeanceRepository::class);
+        $this->app->bind(ISeanceService::class, ServicesSeanceService::class);
 
     }
 

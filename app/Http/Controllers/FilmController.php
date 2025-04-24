@@ -76,27 +76,30 @@ class FilmController extends Controller
 
     public function getById( Request $id){
         
-          $film =  $this->service->getById($id)->first();
+          $film =  $this->service->getById($id);
           return view('', compact('film'));   
     }
 
     public function getDetailFilm(Request $id)
     {
-        $film =  $this->service->getById($id)->first();
+
+        $film =  $this->service->getdetailfilm($id);
         $filmsSimilaires = $this->service->getAll();
         return view('detailsfilm', compact('film', 'filmsSimilaires'));
-        
     }
-    public function getReservation(Request $request)
+    public function CustomDtail($id)
     {
-        $film =  $this->service->getById($request)->first();
-        return view('reservation', compact('film'));
+
+        $film = $this->service->getById($id);
+        return view('customdetail', compact('film'));
     }
     public function edit($id)
     {
+       
         $film = Film::with('acteurs')->findOrFail($id);
         $genres = Genre::all();
         $actors = Acteur::all();
+
         return view('admindashbord.film.filmupdate', compact('film', 'genres', 'actors'));
     }
 }

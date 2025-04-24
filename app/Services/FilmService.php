@@ -46,8 +46,6 @@ class FilmService implements IFilmService
             $path = $photo->storeAs('films', $fileName, 'public');
             $data['photo']=$path; 
         }
-
-       
         $film = new Film();
         $film->title = $data['title'];
         $film->description = $data['description'];
@@ -109,7 +107,7 @@ class FilmService implements IFilmService
         }
     
         
-        if (isset($data['photo']) && $data['photo']) {
+        
             if ($film->photo && file_exists(storage_path('app/public/' . $film->photo))) {
             unlink(storage_path('app/public/' . $film->photo));
             }
@@ -120,7 +118,7 @@ class FilmService implements IFilmService
             $data['photo'] = $path;
             
            
-        }
+        
         
         $film->title = $data['title'];
         $film->description = $data['description'];
@@ -141,8 +139,6 @@ class FilmService implements IFilmService
     
        
         $film->save();
-    
-       
         if (isset($data['cast'])) {
             $film->acteurs()->detach();
             foreach ($data['cast'] as $acteurId) {
@@ -173,6 +169,9 @@ class FilmService implements IFilmService
     public function getById($id){
         
     return $this->repo->findById($id);
+    }
+    public function getdetailfilm($id){
+        return $this->repo->getdetailfilm($id);
     }
 }
 

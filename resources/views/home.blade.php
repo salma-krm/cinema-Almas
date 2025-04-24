@@ -182,73 +182,50 @@
 
 <section class="py-16 bg-cinema-dark">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <style>
-            /* Fixed size for movie posters */
-            .movie-poster {
-                width: 200px;         /* Fixed width */
-                height: 300px;        /* Fixed height - 3:2 aspect ratio is common for movie posters */
-                object-fit: cover;    /* This ensures the image covers the area without distortion */
-                object-position: center; /* Centers the image within the container */
-            }
-        
-            /* For mobile responsiveness */
-            @media (max-width: 768px) {
-                .movie-poster {
-                    width: 100%;      /* Full width on mobile */
-                    height: 250px;    /* Slightly smaller height on mobile */
-                }
-            }
-        
-            /* Additional styling for the movie card */
-            .movie-card {
-                background-color: #1A1B1E;
-                margin-bottom: 1.5rem;
-            }
-        </style>
-        
         <div class="space-y-8">
             @foreach($films as $film)
             <!-- Movie Card -->
-            <div class="movie-card bg-[#1a1c1e] rounded-xl overflow-hidden shadow-lg">
+            <div class="movie-card bg-[#1a1c1e] border-2 border-gray-600 rounded-xl overflow-hidden shadow-lg">
                 <div class="md:flex">
                     <!-- Image Section -->
                     <div class="md:flex-shrink-0">
                         <img src="{{ url('/storage/'. $film->photo) }}" alt="{{ $film->title }}" class="movie-poster w-full h-48 object-cover" />
                     </div>
-        
+            
                     <!-- Details Section -->
                     <div class="p-8 w-full">
                         <div class="flex justify-between items-start">
                             <div>
                                 <h2 class="text-2xl font-bold text-white">{{ $film->title }}</h2>
                                 <p class="mt-1 text-gray-400">{{ $film->genre->name ?? 'N/A' }}</p>
-                                <p class="mt-1 text-gray-400">{{ $film->langue ?? 'N/A' }}</p>
+                               
                                 <span class="mt-1 text-gray-400">
                                     {{ $film->description }}
                                 </span>
+                                {{-- <p class="mt-1 bg-jeunecolor text-white">{{ $film->langue ?? 'N/A' }}</p> --}}
                             </div>
-        
+            
                             <!-- Age Restriction -->
                             <span class="inline-block bg-cinema-gold/20 text-cinema-gold px-2 py-1 rounded-md text-sm font-semibold">
                                 {{ $film->age_restriction ?? 'N/A' }}
                             </span>
                         </div>
-        
+            
                         <!-- Duration -->
                         <div class="mt-3">
-                            <span class="mt-1 text-gray-400">
-                                Durée: {{ $film->duree }} min
+                            <span class="mt-2 bg-jeunecolor text-white">
+                                Durée: {{ $film->duree }} s
                             </span>
                         </div>
-        
+            
                         <!-- Release Date -->
                         <div class="mt-3">
                             <h3 class="text-sm text-gray-400">Date de sortie</h3>
-                            <span class="mt-1 text-gray-400">
+                            <span class="mt-1 bg-jeunecolor text-white">
                                 {{ \Carbon\Carbon::parse($film->date_sortie)->format('d M Y') ?? 'Non disponible' }}
                             </span>
                         </div>
-
+            
                         <!-- Button to View Details -->
                         <form action="{{ route('films.show') }}" method="POST">
                             @csrf <!-- CSRF protection -->
@@ -261,6 +238,7 @@
                     </div>
                 </div>
             </div>
+            
             @endforeach
         </div>
     </div>

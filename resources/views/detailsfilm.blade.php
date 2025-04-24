@@ -45,7 +45,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-cinema-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            {{ $film->duree }} min
+                            {{ $film->duree }} S
                         </span>
                     </div>
                     
@@ -62,6 +62,9 @@
                             @if($film->genre)
                                 <span class="bg-gray-800 text-cinema-light px-3 py-1 rounded-full text-sm">{{ $film->genre->name }}</span>
                             @endif
+                           
+                          
+                       
                         </div>
                     </div>
                     
@@ -70,7 +73,7 @@
                     </p>
                     
                     <div class="flex flex-wrap gap-4 mb-8">
-                      <form action="/reservation" method="POST">
+                      <form action="/customDetail/{{ $film->id }}" method="POST">
                         @csrf
                         <input type="hidden" name="movie_id" value="{{ $film->id }}">
                         <button class="bg-cinema-gold text-cinema-dark px-6 py-3 rounded-md hover:bg-yellow-400 transition-colors font-semibold flex items-center">
@@ -125,12 +128,14 @@
                                     <li><span class="text-cinema-gold">Réalisateur:</span> {{ $film->realisateur }}</li>
                                     <li><span class="text-cinema-gold">Date de sortie:</span> {{ $film->date_sortie}}</li>
                                     <li><span class="text-cinema-gold">Budget:</span> {{ number_format($film->budget, 2) }} €</li>
+                                    
                                 </ul>
+                                
                             </div>
                             <div>
                                 <h3 class="text-lg font-semibold mb-3 text-cinema-light">Technique</h3>
                                 <ul class="space-y-2 text-gray-300">
-                                    <li><span class="text-cinema-gold">Durée:</span> {{ $film->duree }} minutes</li>
+                                    <li><span class="text-cinema-gold">Durée:</span> {{ $film->duree }} S</li>
                                     <li><span class="text-cinema-gold">Langue:</span> {{ $film->langue }}</li>
                                 </ul>
                             </div>
@@ -157,7 +162,7 @@
                                 </svg>
                                 <div>
                                     <span class="block text-cinema-gold">Durée</span>
-                                    <span class="text-gray-300">{{ $film->duree }} minutes</span>
+                                    <span class="text-gray-300">{{ $film->duree }} S</span>
                                 </div>
                             </li>
                             <li class="flex items-start">
@@ -182,10 +187,86 @@
                             @endif
                         </ul>
                     </div>
+                 
                 </div>
             </div>
+            
         </div>
     </section>
+  <!-- Sessions Section -->
+<!-- Sessions Section -->
+<!-- Sessions Section -->
+<!-- Sessions Section -->
+<section id="sessions" class="py-16 bg-cinema-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-cinema-light mb-8">Séances disponibles</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @forelse ($film->seances as $seance)
+                <div class="bg-gray-900/30 backdrop-blur-sm border border-gray-800 rounded-xl overflow-hidden transition-all duration-300 group hover:border-cinema-gold hover:bg-gray-900/50 hover:scale-105">
+                    <!-- Card Header with Date -->
+                    <div class="bg-cinema-gold/10 p-4 border-b border-gray-800 transition-all duration-300 group-hover:bg-cinema-gold/20">
+                        <h3 class="text-xl font-semibold text-white">
+                            {{ \Carbon\Carbon::parse($seance->horaire)->translatedFormat('l d F Y') }}
+                        </h3>
+                    </div>
+                    
+                    <!-- Card Body -->
+                    <div class="p-6">
+                        <!-- Time with Icon -->
+                        <div class="flex items-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-cinema-gold mr-3 transition-transform duration-300 group-hover:rotate-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="text-cinema-light text-lg font-medium">
+                                {{ \Carbon\Carbon::parse($seance->horaire)->format('H:i') }}
+                            </span>
+                        </div>
+                        
+                        <!-- Room with Icon -->
+                        <div class="flex items-center mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-cinema-gold mr-3 transition-transform duration-300 group-hover:rotate-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            </svg>
+                            <span class="text-gray-300">
+                                <span class="text-gray-400">Salle:</span>
+                                <span class="text-cinema-light font-medium ml-1">
+                                    {{ $seance->salle->name ?? 'Salle inconnue' }}
+                                </span>
+                            </span>
+                        </div>
+
+                        <!-- Button -->
+                        <form action="" method="POST" class="mt-2">
+                            @csrf
+                            <button type="submit" 
+                                class="w-full bg-cinema-gold text-cinema-dark py-3 rounded-lg font-semibold 
+                                hover:bg-yellow-400 transition-all flex items-center justify-center relative overflow-hidden group-hover:brightness-110">
+                                <span class="relative z-10 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 transition-transform duration-300 group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+                                    </svg>
+                                    <span class="transition-all duration-300 group-hover:translate-x-1">Réserver des places</span>
+                                </span>
+                                <span class="absolute inset-0 bg-cinema-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            @empty
+                <div class="col-span-3 bg-gray-900/30 backdrop-blur-sm border border-gray-800 rounded-xl p-10 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-500 mx-auto mb-4 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <p class="text-xl text-gray-400">Aucune séance disponible pour le moment.</p>
+                    <p class="text-gray-500 mt-2">Veuillez vérifier ultérieurement pour les nouvelles programmations.</p>
+                </div>
+            @endforelse
+        </div>
+    </div>
+</section>
+
+
 
 
 
@@ -307,7 +388,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-cinema-gold mr-1" viewBox="0 0 20 20" fill="currentColor">
                                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                 </svg>
-                                <span class="text-sm text-gray-300">Durée : {{ $similar->duree }} min</span>
+                                <span class="text-sm text-gray-300">Durée : {{ $similar->duree }} S</span>
                             </div>
                             <p class="text-cinema-gold text-sm">{{ $similar->genre->nom ?? '' }}</p>
                         </div>

@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Services;
-
 use App\Repositories\Interfaces\ISalle;
 use App\Services\Interfaces\ISalleService;
 
 class SalleService implements ISalleService
 {
-    protected $salleRepository;
+    private $salleRepository;
 
     public function __construct(ISalle $salleRepository)
     {

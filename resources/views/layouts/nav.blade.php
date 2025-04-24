@@ -8,16 +8,24 @@
 
             <!-- Desktop Navigation -->
             <div class="hidden md:flex items-center space-x-8">
-                <a href="/home" class="text-gray-300 hover:text-cinema-gold">Films</a>
-                
-                <a href="/dashbord" class="text-gray-300 hover:text-cinema-gold">Dashboard</a>
+                <a href="/" class="text-gray-300 hover:text-cinema-gold">Films</a>
                 <a href="#" class="text-gray-300 hover:text-cinema-gold">Contact</a>
+                
+                <!-- Shopping Cart -->
+                <a href="/cart" class="text-gray-300 hover:text-cinema-gold relative group">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transition-transform duration-300 group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <span class="absolute -top-2 -right-2 bg-cinema-gold text-cinema-dark rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">0</span>
+                    </div>
+                </a>
 
                 @if(session()->has('user'))
                 <!-- Utilisateur connecté -->
                 <div class="flex items-center space-x-4 ml-6">
+                    <a href="/dashbord" class="text-gray-300 hover:text-cinema-gold">Dashboard</a>
                     <span class="text-gray-300 text-sm font-medium">
-                        {{ session('user.name') }}
                     </span>
                     <img src="{{ session('user.photo')  }}" 
                          alt="Photo de profil" 
@@ -42,7 +50,15 @@
             </div>
 
             <!-- Mobile menu button -->
-            <div class="md:hidden flex items-center">
+            <div class="md:hidden flex items-center space-x-4">
+                <!-- Mobile Shopping Cart -->
+                <a href="/cart" class="text-gray-300 hover:text-cinema-gold relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span class="absolute -top-2 -right-2 bg-cinema-gold text-cinema-dark rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">0</span>
+                </a>
+                
                 <button id="mobile-menu-button" class="text-gray-300 hover:text-cinema-gold">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor">

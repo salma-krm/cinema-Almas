@@ -11,19 +11,18 @@ class Seance extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['horaire', 'film_id', 'salle_id', 'rest_ticket'];
+    protected $fillable = ['horaire', 'rest_ticket'];
 
  
     public function film()
     {
-        return $this->belongsTo(Film::class);
+        return $this->belongsTo(Film::class,'film_id');
     }
 
     public function salle()
     {
-        return $this->belongsTo(Salle::class);
+        return $this->belongsTo(Salle::class,'salle_id');
     }
-
    
     public function reservations()
     {

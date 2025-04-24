@@ -16,8 +16,9 @@ class SalleRepository implements ISalle
     }
     public function create($data)
     {
+       
         $existingSalle = $this->findByName($data['name']);
-
+     
         if ($existingSalle) {
             throw new Exception(" cant create the salle ");
         }

@@ -8,6 +8,7 @@ use App\Http\Controllers\SalleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FilmController;
+use App\Http\Controllers\SeanceController;
 use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,7 @@ use App\Http\Controllers\UserController;
 Route::get('/', [FilmController::class, 'getAll']);
 Route::post('/filmdetail', [FilmController::class, 'getDetailFilm'])->name('films.show');
 Route::get('/Admin/film', [FilmController::class, 'index']);
-Route::post('/reservation', [FilmController::class, 'getReservation'])->name('films.reserve');
+Route::post('/customDetail/{id}', [FilmController::class, 'CustomDtail'])->name('film.custom');
 Route::get('/filmcreate', [FilmController::class, 'getActeurGenre'])->name('film.create');
 Route::post('/create/film', [FilmController::class, 'create']);
 Route::post('/film/update', [FilmController::class, 'update'])->name('update.film');
@@ -32,12 +33,11 @@ Route::post('/film/edit/{id}', [FilmController::class, 'edit'])->name('edit.film
 Route::delete('/film/delete/{id}', [FilmController::class, 'delete'])->name('film.delete');
 
 // Salle Routes
-Route::get('/Admin/salle', [SalleController::class, 'index']);
+Route::get('/salle', [SalleController::class, 'index']);
 Route::post('/updatedSalle', [SalleController::class, 'update']);
 Route::post('/update/{id}/salle', [SalleController::class, 'getById']);
 Route::delete('/delete/{id}/salle', [SalleController::class, 'delete'])->name('salle.delete');
 Route::post('/Sallecreate', [SalleController::class, 'create'])->name('Salle.create');
-
 // Genre Routes
 Route::get('Admin/genre', [GenreController::class, 'getAll']);
 Route::post('/genrecreate', [GenreController::class, 'create'])->name('genre.create');
@@ -62,9 +62,13 @@ Route::delete('/delete/{id}/role', [RoleController::class, 'delete'])->name('rol
 // Auth Routes
 Route::post('/createuser', [AuthController::class, 'register']);
 Route::post('/userlogin', [AuthController::class, 'login'])->name('login');
-// user 
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// seances 
 Route::get('/dashbord', [UserController::class, 'getUser'])->name('dashbord');
-
+Route::get('/seance', [SeanceController::class, 'getFilmSalle'])->name('seance');
+Route::post('/create/seance', [SeanceController::class, 'create'])->name('seance.create');
+Route::get('/seance/dashbord', [SeanceController::class, 'getAll'])->name('seance.dashbord');
+Route::post('/update/{id}/seance', [SeanceController::class, 'getById'])->name('seance.edit');
 // Static Pages Routes
 Route::get('/detail', function () {
     return view('detailsfilm');

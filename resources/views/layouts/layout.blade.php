@@ -9,9 +9,11 @@
 </head>
 
 <body>
+
  <!-- Navigation -->
         @include('layouts.nav')
       <!-- Product Section -->
+
    <section id="cinema" class="cinema-alma">
         @yield('content')
     </section>

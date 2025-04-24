@@ -33,12 +33,8 @@
                 <!-- Photo actuelle -->
                 <div>
                     <label class="block text-sm font-medium mb-2 text-white">Photo actuelle</label>
-                    @php
-                        $photo = Str::startsWith($actor->photo, ['http://', 'https://']) 
-                                 ? $actor->photo 
-                                 : asset('storage' . $actor->photo);
-                    @endphp
-                    <img src="{{ $photo }}" alt="{{ $actor->name }}" class="w-24 h-24 object-cover rounded-full border-2 border-cinema-gold shadow-md mb-3">
+                  
+                    <img src= "{{url('/storage/'. $actor->photo)}}" alt="{{ $actor->name }}" class="w-24 h-24 object-cover rounded-full border-2 border-cinema-gold shadow-md mb-3">
                 </div>
 
                 <!-- Nouvelle Photo -->

@@ -19,18 +19,19 @@ class SalleController extends Controller
 
     public function index()
     {
-        $Salles = $this->salle->show();
-        return view('admindashbord.salledashbord', compact('Salles'));
+        $salles = $this->salle->show();
+       
+        return view('admindashbord.salledashbord', compact('salles'));
     }
 
     public function create(CreateSalleRequest $request)
     {
-        
+       
         $validatedData = $request->validated();
 
         try {
             $this->salle->create($validatedData);
-            return redirect('/Admin/salle')->with('message', 'Salle created successfully');
+            return back()->with('message', 'Salle created successfully');
         } catch (Exception $e) {
             return back()->with('message', $e->getMessage());
         }

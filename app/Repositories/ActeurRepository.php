@@ -25,7 +25,7 @@ class ActeurRepository implements IActeur
         $acteur = new Acteur();
         $acteur->name = $data['name'];
         $acteur->description = $data['description'] ?? '';
-        if ($data['photo']) {
+         if ($data['photo']) {
             $photo = $data['photo'];
             $extenstion =$photo->getClientOriginalExtension();
             $fileName = 'acteur_'.time().'.'.$extenstion;
@@ -49,8 +49,17 @@ class ActeurRepository implements IActeur
         }
 
         $acteur->name = $data['name'];
-        $acteur->description = $data['description'] ?? $acteur->description;
-        $acteur->photo = $data['photo'] ?? $acteur->photo;
+        $acteur->description = $data['description'] ;
+
+        if ($data['photo']) {
+            $photo = $data['photo'];
+            $extenstion = $photo->getClientOriginalExtension();
+            $fileName = 'acteur_' . time() . '.' . $extenstion;
+            $path = $photo->storeAs('acteurs', $fileName, 'public');
+            $data['photo'] = $path;
+            $acteur->photo = $data['photo'];
+        }
+
         $acteur->save();
 
         return $acteur;
