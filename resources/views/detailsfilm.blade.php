@@ -205,7 +205,7 @@
             @forelse ($film->seances as $seance)
                 <div class="bg-gray-900/30 backdrop-blur-sm border border-gray-800 rounded-xl overflow-hidden transition-all duration-300 group hover:border-cinema-gold hover:bg-gray-900/50 hover:scale-105">
                     <!-- Card Header with Date -->
-                    <div class="bg-cinema-gold/10 p-4 border-b border-gray-800 transition-all duration-300 group-hover:bg-cinema-gold/20">
+                    <div class="bg-cinema-light/10 p-4 border-b border-gray-800 transition-all duration-300 group-hover:bg-cinema-light/20">
                         <h3 class="text-xl font-semibold text-white">
                             {{ \Carbon\Carbon::parse($seance->horaire)->translatedFormat('l d F Y') }}
                         </h3>
@@ -234,23 +234,19 @@
                                     {{ $seance->salle->name ?? 'Salle inconnue' }}
                                 </span>
                             </span>
+                           
                         </div>
-
-                        <!-- Button -->
-                        <form action="" method="POST" class="mt-2">
-                            @csrf
-                            <button type="submit" 
-                                class="w-full bg-cinema-gold text-cinema-dark py-3 rounded-lg font-semibold 
-                                hover:bg-yellow-400 transition-all flex items-center justify-center relative overflow-hidden group-hover:brightness-110">
-                                <span class="relative z-10 flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 transition-transform duration-300 group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
-                                    </svg>
-                                    <span class="transition-all duration-300 group-hover:translate-x-1">Réserver des places</span>
-                                </span>
-                                <span class="absolute inset-0 bg-cinema-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-                            </button>
-                        </form>
+                        <!-- Separate link for navigating to another page -->
+                        <a href="/bookTicket/{{$seance->id}}" class="block mt-2 text-center w-full bg-cinema-gold text-cinema-dark py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-all flex items-center justify-center relative overflow-hidden group-hover:brightness-110">
+                            <span class="relative z-10 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 transition-transform duration-300 group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+                                </svg>
+                                Book tickets
+                            </span>
+                            <span class="absolute inset-0 bg-cinema-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                        </a>
+                        
                     </div>
                 </div>
             @empty
@@ -268,10 +264,6 @@
 
 
 
-
-
-  
-
     <!-- Reviews Section -->
     <section id="reviews" class="py-16 bg-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -286,80 +278,95 @@
             </div>
             
             <div class="space-y-6">
-                <!-- Review 1 -->
+               
+                
+                @forelse ($film->avis as $avis)
                 <div class="bg-cinema-dark rounded-xl p-6 border border-gray-800">
                     <div class="flex justify-between items-start mb-4">
                         <div class="flex items-center">
                             <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
-                                <img src="/placeholder.svg?height=50&width=50" alt="User" class="w-full h-full object-cover" />
+                                <img src="{{url('/storage/'. $avis->user->photo)}}"   alt="{{$avis->user->name}}" class="w-full h-full object-cover" />
                             </div>
-                            <div>
-                                <h3 class="font-semibold text-cinema-light">Sophie Martin</h3>
+                            <div> <span class="text-gray-300">
+                                <h3 class="font-semibold text-cinema-light">{{$avis->user->name}}</h3>
                                 <div class="flex items-center">
                                     <div class="flex text-cinema-gold">
+                                        @for ($i = 0; $i < $avis->rating; $i++)
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
+                                        </svg>   
+                                        @endfor
                                     </div>
-                                    <span class="text-gray-400 text-sm ml-2">il y a 2 jours</span>
+                                    <span class="text-gray-400 text-sm ml-2">{{ $avis->created_at->diff(now())->format(' %i minutes') }}</span>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                     <p class="text-gray-300">
-                        Une animation époustouflante et une histoire touchante. Ce court métrage m'a vraiment émue, surtout la fin qui est à la fois belle et déchirante. La qualité visuelle est impressionnante pour un projet open source.
+                        {{$avis->description}}
                     </p>
                 </div>
+                @empty
+                <div class="col-span-3 bg-gray-900/30 backdrop-blur-sm border border-gray-800 rounded-xl p-10 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-500 mx-auto mb-4 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <p class="text-xl text-gray-400">Aucune critique disponible pour le moment.</p>
+                    <p class="text-gray-500 mt-2">Veuillez vérifier ultérieurement pour les nouvelles programmations.</p>
+                </div>
+            @endforelse
                 
                 <!-- Review 2 -->
-                <div class="bg-cinema-dark rounded-xl p-6 border border-gray-800">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
-                                <img src="/placeholder.svg?height=50&width=50" alt="User" class="w-full h-full object-cover" />
-                            </div>
-                            <div>
-                                <h3 class="font-semibold text-cinema-light">Thomas Dubois</h3>
-                                <div class="flex items-center">
-                                    <div class="flex text-cinema-gold">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                    </div>
-                                    <span class="text-gray-400 text-sm ml-2">il y a 1 semaine</span>
-                                </div>
-                            </div>
+              
+            </div>
+            <!-- Comment Form -->
+            <div class="mt-10 bg-cinema-dark rounded-xl p-6 border border-gray-800">
+                <h3 class="text-lg font-semibold text-cinema-light mb-4">Laissez votre critique</h3>
+                @if (session('error'))
+                <p class="text-l text-red-500 mt-8 font-semibold">{{ session('error') }}</p>
+                @endif
+                <form action="/avis/create" method="POST" class="space-y-4">
+                   @csrf
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Note</label>
+                        <div id="ratingStars" class="flex space-x-1 text-cinema-gold cursor-pointer">
+                            <!-- 5 étoiles dynamiques -->
+                            <svg data-value="1" class="star h-6 w-6 fill-current text-gray-600 hover:text-yellow-400 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M10 15l-5.878 3.09L5.854 12 1 7.91l6.06-.878L10 2l2.94 5.032L19 7.91 14.146 12l1.732 6.09z"/>
+                            </svg>
+                            <svg data-value="2" class="star h-6 w-6 fill-current text-gray-600 hover:text-yellow-400 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M10 15l-5.878 3.09L5.854 12 1 7.91l6.06-.878L10 2l2.94 5.032L19 7.91 14.146 12l1.732 6.09z"/>
+                            </svg>
+                            <svg data-value="3" class="star h-6 w-6 fill-current text-gray-600 hover:text-yellow-400 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M10 15l-5.878 3.09L5.854 12 1 7.91l6.06-.878L10 2l2.94 5.032L19 7.91 14.146 12l1.732 6.09z"/>
+                            </svg>
+                            <svg data-value="4" class="star h-6 w-6 fill-current text-gray-600 hover:text-yellow-400 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M10 15l-5.878 3.09L5.854 12 1 7.91l6.06-.878L10 2l2.94 5.032L19 7.91 14.146 12l1.732 6.09z"/>
+                            </svg>
+                            <svg data-value="5" class="star h-6 w-6 fill-current text-gray-600 hover:text-yellow-400 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M10 15l-5.878 3.09L5.854 12 1 7.91l6.06-.878L10 2l2.94 5.032L19 7.91 14.146 12l1.732 6.09z"/>
+                            </svg>
+                            <!-- Champ caché pour stocker la note -->
+                            <input type="hidden" name="rating" id="ratingValue" required>
                         </div>
                     </div>
-                    <p class="text-gray-300">
-                        Un chef-d'œuvre technique qui montre ce qu'on peut faire avec des logiciels libres comme Blender. L'histoire est simple mais efficace, et les paysages sont magnifiques. Je recommande vivement ce court métrage à tous les amateurs d'animation.
-                    </p>
-                </div>
+            
+                    <!-- Commentaire + bouton -->
+                    <div class="flex flex-col md:flex-row md:items-end md:space-x-4">
+                        <input name="description" rows="3" placeholder="Votre avis..." class="w-full px-4 py-2 rounded-md bg-gray-800 text-cinema-light border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cinema-gold resize-none" required>
+                        <input type="hidden" name="film_id" value= {{$film->id}}>
+                        <button type="submit" class="mt-2 md:mt-0 px-6 py-2 bg-cinema-gold text-gray-900 font-semibold rounded-md hover:bg-yellow-400 transition whitespace-nowrap">
+                            Envoyer
+                        </button>
+                    </div>
+                </form>
             </div>
+            
+          
+            
+            
+
         </div>
     </section>
 
@@ -396,10 +403,37 @@
                 @endforeach
             </div>
         </div>
-    </section>
-   
- 
-
+    </section>  
+    <script>
+        const stars = document.querySelectorAll('.star');
+        const ratingInput = document.getElementById('ratingValue');
+        let currentRating = 0;
+        stars.forEach((star, index) => {
+            star.addEventListener('click', () => {
+                currentRating = index + 1;
+                ratingInput.value = currentRating;
+                updateStars(currentRating);
+            });
+            star.addEventListener('mouseover', () => {
+                updateStars(index + 1);
+            });
+            star.addEventListener('mouseout', () => {
+                updateStars(currentRating);
+            });
+        });
+    
+        function updateStars(rating) {
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.remove('text-gray-600');
+                    star.classList.add('text-yellow-400');
+                } else {
+                    star.classList.remove('text-yellow-400');
+                    star.classList.add('text-gray-600');
+                }
+            });
+        }
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Date selection

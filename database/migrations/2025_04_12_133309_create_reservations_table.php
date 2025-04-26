@@ -16,9 +16,8 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('dateCreated');
-            $table->string('dateFine');
-            $table->enum('status', ['pending', 'en cours', 'terminer'])->default('pending');
+            $table->integer('quantite');
+            $table->enum('status', ['annuler', 'en cours', 'terminer'])->default('en cours');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('seance_id')->constrained()->onDelete('cascade');
             $table->timestamps();

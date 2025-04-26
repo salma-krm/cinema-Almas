@@ -6,12 +6,14 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
 use App\Repositories\ActeurRepository;
+use App\Repositories\AvisRepositiry;
 use App\Repositories\FilmRepository;
 use App\Repositories\GenreRepository;
 use App\Repositories\SalleRepository;
 use App\Repositories\UserRepository;
 
 use App\Repositories\Interfaces\IActeur;
+use App\Repositories\Interfaces\IAvis;
 use App\Repositories\Interfaces\IFilm;
 use App\Repositories\Interfaces\IGenre;
 use App\Repositories\Interfaces\IRole;
@@ -22,6 +24,7 @@ use App\Repositories\RoleRepository;
 use App\Repositories\SeanceRepository;
 use App\Services\ActeurService;
 use App\Services\AuthService;
+use App\Services\AvisService;
 use App\Services\FilmService;
 use App\Services\GenreService;
 use App\Services\SalleService;
@@ -29,6 +32,7 @@ use App\Services\UserService;
 
 use App\Services\Interfaces\IActeurService;
 use App\Services\Interfaces\IAuthService;
+use App\Services\Interfaces\IAvisService;
 use App\Services\Interfaces\IFilmService;
 use App\Services\Interfaces\IGenreService;
 use App\Services\Interfaces\IRoleService;
@@ -58,6 +62,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IFilmService::class, FilmService::class);
         $this->app->bind(ISeance::class, SeanceRepository::class);
         $this->app->bind(ISeanceService::class, ServicesSeanceService::class);
+        $this->app->bind(IAvis::class,AvisRepositiry::class);
+        $this->app->bind(IAvisService::class,AvisService::class);
+       
 
     }
 

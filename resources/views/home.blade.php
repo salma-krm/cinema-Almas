@@ -4,7 +4,7 @@
 {{-- link css --}}
 <link rel="stylesheet" href="{{asset('css/app.css')}}"> 
 <body class="bg-cinema-dark text-cinema-white min-h-screen">
-    <!-- Hero Section -->
+    <!-- Hero Section -->  
     <section class="pt-16 relative h-screen">
         <div class="absolute inset-0 bg-black opacity-60 z-0"></div>
         <div class="absolute inset-0 z-0">
@@ -196,13 +196,14 @@
                     <div class="p-8 w-full">
                         <div class="flex justify-between items-start">
                             <div>
-                                <h2 class="text-2xl font-bold text-white">{{ $film->title }}</h2>
+                                <h3 class="text-cinema-gold text-2xl font-bold mb-2">{{ $film->title }}</h3>
+                           
+                               
                                 <p class="mt-1 text-gray-400">{{ $film->genre->name ?? 'N/A' }}</p>
                                
-                                <span class="mt-1 text-gray-400">
-                                    {{ $film->description }}
-                                </span>
-                                {{-- <p class="mt-1 bg-jeunecolor text-white">{{ $film->langue ?? 'N/A' }}</p> --}}
+                               
+                                     <div class="mb-4 text-gray-300 italic"> {{ $film->description }}</div>
+                              
                             </div>
             
                             <!-- Age Restriction -->
@@ -227,10 +228,9 @@
                         </div>
             
                         <!-- Button to View Details -->
-                        <form action="{{ route('films.show') }}" method="POST">
-                            @csrf <!-- CSRF protection -->
+                        <form action="/filmdetail/{{ $film->id }}" method="GET">
+                            @csrf 
                             <input type="hidden" name="film_id" value="{{ $film->id }}">
-                        
                             <button type="submit" class="inline-block bg-cinema-gold text-cinema-dark px-6 py-2 rounded-full hover:bg-yellow-400 transition-colors font-semibold">
                                 Voir Détails
                             </button>

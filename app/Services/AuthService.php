@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Repositories\Interfaces\IRole;
 use App\Repositories\Interfaces\IUser;
 use App\Services\Interfaces\IAuthService;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -31,18 +31,14 @@ class AuthService implements IAuthService
         if (!$existingUser || !Hash::check($data['password'], $existingUser->password)) {
             throw new InCompleteProcess('Email or password is incorrect.');
         }
-    
-        
-        session([
-            'user' => [
-                'id' => $existingUser->id,
-                'name' => $existingUser->name,
-                'email' => $existingUser->email,
-                'password' =>$existingUser->password,
-                'photo' => $existingUser->photo
-            ]
-        ]);
-        return $existingUser;
+
+        if (!Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
+            throw new InCompleteProcess('Failed to authenticate user.');
+        }
+
+        return [
+            'user' => auth()->user(),
+        ];
     }
    
     
@@ -59,7 +55,7 @@ class AuthService implements IAuthService
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->password = bcrypt($data['password']);
-        $user->photo = image::Profile;
+        $user->photo = 'users/user_11111111111111.jpg';
 
         $role = $this->roleRepo->findByName(Roles::CLIENT);
 
@@ -73,7 +69,8 @@ class AuthService implements IAuthService
     }
     public function logout()
     {
-        Session::forget('user');
+        Auth::logout();
+        request()->session()->invalidate();
     }
 }
 

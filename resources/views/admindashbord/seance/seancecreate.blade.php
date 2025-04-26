@@ -26,7 +26,7 @@
           <select name="salle_id" id="salle_id" required class="w-full bg-[#131416] border border-gray-700 rounded-lg py-2 px-4 text-white">
             <option value="" disabled selected>Choisissez une salle</option>
             @foreach($salles as $salle)
-              <option value="{{ $salle->id }}">{{ $salle->nom }}</option>
+              <option value="{{ $salle->id }}">{{ $salle->name }}</option>
             @endforeach
           </select>
         </div>

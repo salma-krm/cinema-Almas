@@ -3,7 +3,6 @@
 @section('contentcss')
 <link rel="stylesheet" href="{{ asset('css/dashbord.css') }}">
 @endsection
-
 @section('content')
 <script>
     tailwind.config = {
@@ -19,7 +18,7 @@
 </script>
 
 <div class="bg-cinema-dark text-white min-h-screen flex items-center justify-center px-4">
-    <div class="w-full max-w-2xl bg-[#1a1c1e] rounded-xl shadow-lg p-8">
+    <div class="w-full max-w-2xl bg-[#1a1c1e] rounded-xl shadow-lg p-8 mt-20">
         <!-- Page Title -->
         <div class="mb-6 text-center">
             <h1 class="text-2xl font-bold">Mon Profil</h1>
@@ -27,34 +26,40 @@
         </div>
 
         <!-- User Form -->
-        <form id="user-form" method="POST" action="" enctype="multipart/form-data">
+        <form id="user-form" method="POST" action="/update/user" enctype="multipart/form-data">
+          
+            <div class="mb-8 flex flex-col items-center">
+                <div class="relative mb-4">
+                    <!-- Check if photo is a Data URL or a file URL -->
+                    <img id="profile-preview"
+                         src="{{ is_data_url($user->photo) ? $user->photo : asset('storage/' . $user->photo) }}"
+                         alt="Photo de profil" 
+                         class="w-32 h-32 rounded-full border-4 border-cinema-gold object-cover" />
+                </div>
+
+                <!-- Input + Button visible -->
+                <label for="photo-upload"
+                       class="cursor-pointer inline-flex items-center bg-cinema-gold text-black px-4 py-2 rounded-lg hover:bg-yellow-400 transition duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M3 7h2l3.6 7.59L5.25 18H19a1 1 0 000-2H6.42l.93-2h7.57a1 1 0 00.96-.73l1.36-4.09A1 1 0 0016.36 8H7.21l-.94-2H3z"/>
+                    </svg>
+                    Choisir une photo
+                </label>
+                <input type="file" id="photo-upload" name="photo" accept="image/*" class="hidden">
+
+                <!-- Nom du fichier sélectionné -->
+                <p id="file-name" class="text-sm text-gray-400 mt-2"></p>
+            </div>
+
             @csrf
-            <!-- Profile Picture -->
-            <!-- Profile Picture -->
-<div class="mb-8 flex flex-col items-center">
-    <div class="relative mb-4">
-        <img id="profile-preview"
-             src="{{ $user->photo }}" 
-             alt="Photo de profil" 
-             class="w-32 h-32 rounded-full border-4 border-cinema-gold object-cover" />
-    </div>
-
-    <!-- Input + Button visible -->
-    <label for="photo-upload"
-           class="cursor-pointer inline-flex items-center bg-cinema-gold text-black px-4 py-2 rounded-lg hover:bg-yellow-400 transition duration-200">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-             stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M3 7h2l3.6 7.59L5.25 18H19a1 1 0 000-2H6.42l.93-2h7.57a1 1 0 00.96-.73l1.36-4.09A1 1 0 0016.36 8H7.21l-.94-2H3z"/>
-        </svg>
-        Choisir une photo
-    </label>
-    <input type="file" id="photo-upload" name="photo" accept="image/*" class="hidden">
-
-    <!-- Nom du fichier sélectionné -->
-    <p id="file-name" class="text-sm text-gray-400 mt-2"></p>
-</div>
-
+            @if (session('message'))
+            <p class="text-sm text-green-500 mt-2 font-semibold">{{ session('message') }}</p>
+            @endif
+            @if (session('error'))
+            <p class="text-l text-red-500 mt-8 font-semibold">{{ session('error') }}</p>
+            @endif
 
             <!-- Personal Information -->
             <div class="space-y-6 mb-8">
@@ -70,7 +75,11 @@
                            class="w-full rounded bg-gray-800 p-2 text-white">
                 </div>
 
-              
+                <div>
+                    <label for="new-password">Mot de passe</label>
+                    <input type="password" id="new-password" name="password"
+                           class="w-full rounded bg-gray-800 p-2 text-white" placeholder="Laissez mot passe actuel">
+                </div>
 
                 <div>
                     <label for="new-password">Nouveau mot de passe</label>
@@ -98,6 +107,11 @@
     </div>
 </div>
 
-<!-- Script JS -->
-
 @endsection
+<script src= "{{asset('js/dashbordsalle.js')}}"></script> 
+@php
+    
+    function is_data_url($url) {
+        return preg_match('/^data:image\/(\w+);base64,/', $url);
+    }
+@endphp

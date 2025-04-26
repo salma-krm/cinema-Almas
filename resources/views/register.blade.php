@@ -46,7 +46,8 @@
           @enderror
           
         </div>
-      
+        
+    
         <!-- Mot de passe -->
         <div class="mt-4">
           <label for="password" class="block text-sm font-medium text-gray-300">Mot de passe</label>

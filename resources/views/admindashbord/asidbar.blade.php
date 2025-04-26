@@ -79,7 +79,7 @@
           </svg>
           Utilisateurs
         </a>
-        <a href="/Admin/salle" class="sidebar-link active flex items-center px-4 py-3 rounded-lg transition-colors">
+        <a href="/salle" class="sidebar-link active flex items-center px-4 py-3 rounded-lg transition-colors">
           <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
           </svg>
@@ -90,6 +90,24 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
          seances
+        </a>
+        <a href="/acteur" class="sidebar-link flex items-center px-4 py-3 rounded-lg transition-colors">
+          <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        acteurs
+        </a>
+        <a href="Admin/genre" class="sidebar-link flex items-center px-4 py-3 rounded-lg transition-colors">
+          <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+         genres
+        </a>
+        <a href="/role" class="sidebar-link flex items-center px-4 py-3 rounded-lg transition-colors">
+          <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+         roles
         </a>
       </nav>
       
@@ -111,17 +129,17 @@
       
       <!-- Informations utilisateur -->
       <div class="mt-4 px-4 py-3 bg-gray-800/50 rounded-lg flex items-center">
-        @if(session()->has('user'))
+        @if(auth()->user())
         <div class="w-8 h-8 rounded-full bg-cinema-gold flex items-center justify-center text-black font-bold mr-3">
-          <img src="{{ session('user.photo')  }}" 
+          <img src="{{url('storage/' . auth()->user()->photo )}}" 
           alt="Photo de profil" 
           class="w-8 h-8 rounded-full border-2 border-cinema-gold object-cover" />
         </div>
      
        
         <div class="overflow-hidden">
-          <p class="text-sm font-medium truncate">{{ session('user.name') ??'Admin' }}</p>
-          <p class="text-xs text-gray-400 truncate">{{session('user.email') ?? 'email@Admin.com' }}</p>
+          <p class="text-sm font-medium truncate">{{ auth()->user()->name }}</p>
+          <p class="text-xs text-gray-400 truncate">{{ auth()->user()->email }}</p>
         </div>
      
       </div>

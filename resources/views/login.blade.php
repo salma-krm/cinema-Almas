@@ -26,7 +26,10 @@
         <div class="rounded-md shadow-sm space-y-4">
           @if (session('message'))
           <p class="text-sm text-green-500 mt-2 font-semibold">{{ session('message') }}</p>
-      @endif
+          @endif
+          @if (session('error'))
+          <p class="text-l text-red-500 mt-8 font-semibold">{{ session('error') }}</p>
+          @endif
       
             <!-- Email Field -->
             <div>

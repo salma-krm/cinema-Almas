@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActeurController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AvisController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SalleController;
@@ -23,7 +24,8 @@ use App\Http\Controllers\UserController;
 
 // Film Routes
 Route::get('/', [FilmController::class, 'getAll']);
-Route::post('/filmdetail', [FilmController::class, 'getDetailFilm'])->name('films.show');
+
+Route::get('/filmdetail/{id}', [FilmController::class, 'getDetailFilm'])->name('film.show');
 Route::get('/Admin/film', [FilmController::class, 'index']);
 Route::post('/customDetail/{id}', [FilmController::class, 'CustomDtail'])->name('film.custom');
 Route::get('/filmcreate', [FilmController::class, 'getActeurGenre'])->name('film.create');
@@ -63,12 +65,25 @@ Route::delete('/delete/{id}/role', [RoleController::class, 'delete'])->name('rol
 Route::post('/createuser', [AuthController::class, 'register']);
 Route::post('/userlogin', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-// seances 
+// user info
+Route::post('/update/user', [UserController::class, 'update'])->name('update.user');
 Route::get('/dashbord', [UserController::class, 'getUser'])->name('dashbord');
+Route::get('/users', [UserController::class, 'getAll'])->name('dashbord.users');
+// seances 
 Route::get('/seance', [SeanceController::class, 'getFilmSalle'])->name('seance');
 Route::post('/create/seance', [SeanceController::class, 'create'])->name('seance.create');
 Route::get('/seance/dashbord', [SeanceController::class, 'getAll'])->name('seance.dashbord');
-Route::post('/update/{id}/seance', [SeanceController::class, 'getById'])->name('seance.edit');
+Route::post('/update/{id}/seance', [SeanceController::class, 'getSalle'])->name('seance.edit');
+Route::delete('/delete/{id}/seance', [SeanceController::class, 'delete'])->name('seance.delete');
+Route::post('/update/seance', [SeanceController::class, 'update'])->name('seance.update');
+Route::get('/Panier/{id}', [SeanceController::class, 'AjouterPanier'])->name('Panier.ajouter');
+Route::get('/show/panier', [SeanceController::class, 'getPanier'])->name('Panier');
+Route::get('/delete/{id}/panier', [SeanceController::class, 'deletePanier'])->name('delete.panier');
+Route::get('/bookTicket/{id}', [SeanceController::class, 'bookTicket'])->name('bookTicket');
+
+//Avis
+Route::post('/avis/create', [AvisController::class, 'create'])->name('avis.create');
+
 // Static Pages Routes
 Route::get('/detail', function () {
     return view('detailsfilm');
@@ -100,9 +115,9 @@ Route::get('/create/salle', function () {
 Route::get('/create/genre', function () {
     return view('admindashbord.genre.genrecreate');
 });
-Route::get('/Admin/users', function () {
-    return view('admindashbord.userdashbord');
-});
+// Route::get('/Admin/users', function () {
+//     return view('admindashbord.userdashbord');
+// });
 Route::get('/logout', function () {
     return view('admindashbord.userdashbord');
 });
@@ -112,4 +127,5 @@ Route::get('/acteurcreate', function () {
 Route::get('/rolecreate', function () {
     return view('admindashbord.role.rolecreate');
 });
+
 

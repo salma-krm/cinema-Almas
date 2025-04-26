@@ -5,10 +5,9 @@
     <div class="w-full max-w-3xl bg-[#1a1c1e] rounded-xl p-10 shadow-lg">
         <h2 class="text-3xl font-bold text-cinema-light mb-8 text-center">Modifier une Séance</h2>
 
-        <form method="POST" action="">
+        <form method="POST" action="/update/seance">
             @csrf
             <input type="hidden" name="id" value="{{ $seance->id }}">
-
             <div class="space-y-6">
                 <!-- Horaire -->
                 <div>
@@ -27,7 +26,7 @@
                     <select name="film_id" class="w-full bg-[#131416] border border-gray-700 rounded-lg py-3 px-4 text-white" required>
                         @foreach($films as $film)
                             <option value="{{ $film->id }}" {{ $seance->film_id == $film->id ? 'selected' : '' }}>
-                                {{ $film->titre }}
+                                {{ $film->title }}
                             </option>
                         @endforeach
                     </select>
@@ -42,7 +41,7 @@
                     <select name="salle_id" class="w-full bg-[#131416] border border-gray-700 rounded-lg py-3 px-4 text-white" required>
                         @foreach($salles as $salle)
                             <option value="{{ $salle->id }}" {{ $seance->salle_id == $salle->id ? 'selected' : '' }}>
-                                {{ $salle->nom }}
+                                {{ $salle->name }}
                             </option>
                         @endforeach
                     </select>

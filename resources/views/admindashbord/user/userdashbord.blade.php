@@ -154,15 +154,21 @@
       <th class="pb-3 font-medium">Actions</th> <!-- Nouvelle colonne -->
     </tr>
   </thead>
+  @foreach ($users as $user)
+  
+      
+
   <tbody class="text-gray-300">
     <tr class="border-b border-gray-700">
       <td class="py-3 flex items-center">
-        <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold mr-3">JD</div>
-        Jean Dupont
+        <img src="{{url('storage/' . $user->photo )}}"
+        alt="Profile Picture" 
+        class="w-8 h-8 rounded-full border-2 border-cinema-gold object-cover" />
+            {{$user->name}}
       </td>
-      <td class="py-3">jean.dupont@example.com</td>
-      <td class="py-3">Client</td>
-      <td class="py-3">15 Mars 2023</td>
+      <td class="py-3">{{$user->email}}</td>
+      <td class="py-3">{{$user->roles->name}}</td>
+      <td class="py-3">{{$user->created_at}}</td>
       <td class="py-3">
         <span class="px-2 py-1 bg-green-900 text-green-200 rounded-full text-xs">Actif</span>
       </td>
@@ -182,6 +188,7 @@
       </td>
     </tr>
   </tbody>
+  @endforeach
 </table>
 
 <!-- Modal de confirmation de suppression -->

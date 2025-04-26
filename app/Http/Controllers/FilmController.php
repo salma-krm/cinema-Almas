@@ -55,13 +55,13 @@ class FilmController extends Controller
     {
         $validated = $request;
         $this->service->create($validated);
-        return redirect()->back()->with('message', 'Film ajouté avec succès.');
+        return redirect('/Admin/film')->with('message', 'Film ajouté avec succès.');
     }
 
     public function update(Request $request)
     {
         $validated = $request;
-        
+
         $this->service->update($validated);
         return redirect('/Admin/film')->with('message', 'Film modifié avec succès.');
     }
@@ -74,15 +74,16 @@ class FilmController extends Controller
     }
 
 
-    public function getById( Request $id){
-        
-          $film =  $this->service->getById($id);
-          return view('', compact('film'));   
-    }
-
-    public function getDetailFilm(Request $id)
+    public function getById(Request $id)
     {
 
+        $film =  $this->service->getById($id);
+        return view('', compact('film'));
+    }
+
+    public function getDetailFilm(  $id)
+   {
+    // dd($id);
         $film =  $this->service->getdetailfilm($id);
         $filmsSimilaires = $this->service->getAll();
         return view('detailsfilm', compact('film', 'filmsSimilaires'));
@@ -95,11 +96,21 @@ class FilmController extends Controller
     }
     public function edit($id)
     {
-       
+
         $film = Film::with('acteurs')->findOrFail($id);
         $genres = Genre::all();
         $actors = Acteur::all();
 
         return view('admindashbord.film.filmupdate', compact('film', 'genres', 'actors'));
     }
+  
+   
+//     public function viderPanier()
+// {
+    
+//     session()->forget('ticket');
+
+//     return redirect('/')->with('success', 'Votre panier a été vidé.');
+// }
+
 }

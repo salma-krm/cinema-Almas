@@ -46,6 +46,9 @@ class FilmService implements IFilmService
             $path = $photo->storeAs('films', $fileName, 'public');
             $data['photo']=$path; 
         }
+        // dd($path);
+
+       
         $film = new Film();
         $film->title = $data['title'];
         $film->description = $data['description'];
@@ -57,7 +60,7 @@ class FilmService implements IFilmService
         $film->langue = $data['langue'];
         $film->age_restriction = $data['age_restriction'];
         $film->video = $data['video'];
-        $film->photo = $data['photo'] ;
+        $film->photo = $path ;
        
         if (!isset($data['genre']) || !is_numeric($data['genre'])) {
             throw new InCompleteProcess("Genre ID is required and must be numeric.");
@@ -105,18 +108,19 @@ class FilmService implements IFilmService
         if ($existingFilm && $existingFilm->id !== $film->id) {
             throw new InCompleteProcess('A film with this name already exists.');
         }
-    
-        
-        
+
+        if (isset($data['photo']) && $data['photo']) {
             if ($film->photo && file_exists(storage_path('app/public/' . $film->photo))) {
             unlink(storage_path('app/public/' . $film->photo));
             }
             $photo = $data['photo'];
             $extension = $photo->getClientOriginalExtension();
-            $fileName = 'film_' . time() . '.' . $extension;
+            $fileName = 'film_' . uniqid() . '.' . $extension;
             $path = $photo->storeAs('films', $fileName, 'public');
             $data['photo'] = $path;
-            
+        } else {
+            $data['photo'] = $film->photo; 
+        }
            
         
         
@@ -162,16 +166,28 @@ class FilmService implements IFilmService
         return true;
     }
 
+
     public function findByName($name) {
 
     return $this->repo->findByName($name);
     }
+
     public function getById($id){
         
     return $this->repo->findById($id);
     }
+
+
     public function getdetailfilm($id){
         return $this->repo->getdetailfilm($id);
     }
+
+   
+
+    
 }
+
+
+    
+
 

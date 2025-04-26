@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Seance\CreateSeanceRequest;
+use App\Http\Requests\Seance\UpdateSeanceRequest;
 use App\Services\Interfaces\IFilmService;
 use App\Services\Interfaces\ISalleService;
 use App\Services\Interfaces\ISeanceService;
+
+// use Illuminate\Http\Client\Request as ClientRequest;
+use Illuminate\Http\Request;
 
 class SeanceController extends Controller
 {
@@ -36,12 +40,47 @@ class SeanceController extends Controller
     public function create(CreateSeanceRequest $request)
     {
         $this->serviceSeance->create($request->validated());
-        return redirect('/');
+        return redirect('/seance/dashbord')->with('message', 'seance created successfully');;
     }
-    public function getByid($id){
+
+    public function update(request $request){
+        $this->serviceSeance->update($request);
+        return redirect('/seance/dashbord')->with('message', 'seance updated successfully');;
+
+    }
+    public function getSalle($id){
         $seance =  $this->serviceSeance->getById($id);
         $films = $this->servicefilm->getAll();
         $salles = $this->servicesalle->show();
           return view('admindashbord.seance.seanceupdate', compact('films', 'salles','seance'));  
     }
+    public function delete($id){
+        $this->serviceSeance->delete($id);
+        return redirect('/seance/dashbord')->with('message', 'seance deleted successfully');;
+    }
+
+    public function bookTicket($id){
+        $seance =  $this->serviceSeance->getById($id);
+        return view ('ticket',compact('seance'));
+    }
+    public function AjouterPanier( request $request)
+    {
+         $this->serviceSeance->AjouterPanier($request);
+         return redirect('/show/panier');
+
+    }
+    public function getPanier(){
+       
+        $panier =  $this->serviceSeance->getPanier();
+        // dd($panier);
+        return view('panier',compact('panier'));
+    }
+
+    public function deletePanier($id){
+       
+         $this->serviceSeance->deletPanier($id);
+         return redirect('/show/panier')->with('success', 'Le ticket a été supprimé ');
+    }
+
+
 }

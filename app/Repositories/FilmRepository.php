@@ -54,8 +54,10 @@ class FilmRepository implements IFilm
 
     public function getdetailfilm($id)
     {
+        
 
-        $film = Film::find($id)->first();
+        $film = Film::where('id',$id)->first();
+        // dd($film);
         return  $film;
     }
 }
