@@ -63,24 +63,7 @@ class SeanceController extends Controller
         $seance =  $this->serviceSeance->getById($id);
         return view ('ticket',compact('seance'));
     }
-    public function AjouterPanier( request $request)
-    {
-         $this->serviceSeance->AjouterPanier($request);
-         return redirect('/show/panier');
-
-    }
-    public function getPanier(){
-       
-        $panier =  $this->serviceSeance->getPanier();
-        // dd($panier);
-        return view('panier',compact('panier'));
-    }
-
-    public function deletePanier($id){
-       
-         $this->serviceSeance->deletPanier($id);
-         return redirect('/show/panier')->with('success', 'Le ticket a été supprimé ');
-    }
+ 
 
 
 }

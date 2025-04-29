@@ -24,7 +24,9 @@
       
       <form method="POST" action="/createuser">
         @csrf
-      
+        @if (session('error'))
+          <p class="text-l text-red-500 mt-8 font-semibold">{{ session('error') }}</p>
+          @endif
         <!-- Nom -->
         <div>
           <label for="last-name" class="block text-sm font-medium text-gray-300">Nom</label>

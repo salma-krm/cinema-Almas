@@ -11,24 +11,23 @@ class Film extends Model
     use HasFactory;
 
     protected $fillable = [
-        'titre',
+        'title',
         'description',
         'dateSortie',
         'resume',
         'budget',
         'realisateur',
         'duree',
-        
         'langue',
         'photo',
         'video',
-     'age_restriction' 
-       
+        'age_restriction'
+
     ];
 
     public function genre()
     {
-        return $this->belongsTo(Genre::class,'genre_id');
+        return $this->belongsTo(Genre::class, 'genre_id');
     }
 
     public function acteurs()
@@ -40,7 +39,7 @@ class Film extends Model
         return $this->hasMany(Seance::class);
     }
 
- 
+
     public function avis()
     {
         return $this->hasMany(Avis::class);

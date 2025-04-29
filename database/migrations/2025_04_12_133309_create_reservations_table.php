@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->integer('quantite');
             $table->enum('status', ['annuler', 'en cours', 'terminer'])->default('en cours');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');

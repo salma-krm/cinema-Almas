@@ -132,7 +132,6 @@ class FilmService implements IFilmService
         $film->realisateur = $data['realisateur'];
         $film->duree = $data['duree'];
         $film->langue = $data['langue'];
-        $film->photo = $path;
         $film->age_restriction = $data['age_restriction'];
         $film->video = $data['video'];
         $genre = $this->genreRepo->getById($data['genre']);

@@ -31,11 +31,13 @@ class UserRepository implements IUser
     {
         return User::where('email', $email)->first();
     }
+    
 
     
     public function delete($id)
     {
-        User::delete($id);
+        $user =  User::where('id', '=', $id)->first();
+        $user->delete();
     }
     public function findByName($name)
     {

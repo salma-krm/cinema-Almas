@@ -81,61 +81,6 @@ class SeanceService implements ISeanceService
       $this->SeanceRepo->delete($id);
 
     }
-    public function AjouterPanier($data)
-    {
-      
-     $id = $data['id'];
-        $seance = $this->SeanceRepo->getById($id);
-        
-        if (!$seance) {
-            throw new InCompleteProcess('seance non trouvable');
-        }
-        $film = $this->filmRepo->findById($seance->film_id);
-       
+  
 
-        $ticket = session()->get('ticket', []);
-        if (isset($ticket[$id])) {
-            $ticket[$id]['quantity'] += $data->get('quantity');
-        } else {
-          
-            $ticket[$id] = [
-                'title' => $film->title,
-                'prix_unite' => $film->budget, 
-                'date_sortie' => $seance->horaire,
-                'description' => $film->resume,
-                'photo' => $film->photo,
-                'duree' => $film->duree,
-                'age_restriction' => $film->age_restriction,
-                'quantity' => $data['quantity'] ?? 1
-            ];
-        }
-
-        $panier = session()->put('ticket', $ticket);
-        return $panier;
-        
-        
-    }
-
-
-    public function getPanier(){
-      $panier = session()->get('ticket', []);
-      // dd($panier);
-      return $panier;
-    }
-   
-    public function deletPanier($id)
-{
-    
-    $ticket = session()->get('ticket', []);
-
-    if (isset($ticket[$id])) {
-       
-        unset($ticket[$id]);
-
-        session()->put('ticket', $ticket);
-
-       
-    }
-
-}
 }

@@ -28,7 +28,7 @@ class FilmRepository implements IFilm
 
     public function getAll()
     {
-        return Film::with(['acteurs', 'genre'])->get();
+        return Film::with(['acteurs', 'genre'])->paginate(5);
     }
     public function create($data)
     {

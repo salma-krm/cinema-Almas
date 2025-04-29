@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('paiements', function (Blueprint $table) {
             $table->id();
             $table->double('montant');
-            $table->date('date');
-            $table->string('statut');
+            $table->enum('status', ['payer', 'en cours', 'traiter'])->default('payer');
             $table->foreignId('reservation_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
+        
     }
 
     /**

@@ -84,7 +84,8 @@
                   <td class="py-3">
                     <span class="px-2 py-1 bg-green-900 text-green-200 rounded-full text-xs">En cours</span>
                   </td>
-                  <td class="py-3">{{ $film->seances_count ?? 0 }}</td>
+                  <td class="py-3">{{ $film->seances->count() ?? 0 }}</td>
+
                   <td class="py-3">
                     <div class="flex space-x-2">
                       <!-- Modifier -->
@@ -98,12 +99,13 @@
                       </form>
 
                       <!-- Supprimer -->
-                      <button type="button" onclick="confirmFilmDelete({{ $film->id }}, '{{ $film->title }}')" class="p-1 text-red-400 hover:text-red-300">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7V4a1 1 0 011-1h4a1 1 0 011 1v3M4 7h16" />
-                        </svg>
-                      </button>
+                      <div class="flex gap-2">
+                        <a href="{{ route('film.delete', $film->id) }}" class="px-3 py-2 border border-gray-700 rounded-lg hover:bg-gray-800 hover:text-red-400 transition-colors">
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg>
+                        </a>
+                      </div>
                     </div>
                   </td>
                 </tr>
@@ -113,49 +115,15 @@
           </div>
         </div>  
 
-        <!-- Modal de confirmation suppression -->
-        <div id="filmDeleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-          <div class="bg-[#1a1c1e] rounded-xl p-6 max-w-md w-full mx-4">
-            <h3 class="text-xl font-bold mb-4">Supprimer le film</h3>
-            <p class="mb-6">Confirmez-vous la suppression du film <span id="filmToDelete" class="text-cinema-gold"></span> ?</p>
-            <div class="flex justify-end gap-3">
-              <button onclick="closeFilmDeleteModal()" class="px-4 py-2 border border-gray-700 rounded-lg hover:bg-gray-800 transition-colors">Annuler</button>
-              <form id="filmDeleteForm" method="POST" action="">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">Supprimer</button>
-              </form>
-            </div>
-          </div>
-        </div>
 
         <!-- Pagination -->
-        <div class="flex justify-between items-center">
-          <div class="text-sm text-gray-400">Affichage de 1-4 sur 24 films</div>
-          <div class="flex space-x-1">
-            <button class="px-3 py-1 bg-[#1a1c1e] rounded-md text-gray-400 hover:bg-[#252729]">Précédent</button>
-            <button class="px-3 py-1 bg-cinema-gold rounded-md text-black font-medium">1</button>
-            <button class="px-3 py-1 bg-[#1a1c1e] rounded-md text-gray-400 hover:bg-[#252729]">2</button>
-            <button class="px-3 py-1 bg-[#1a1c1e] rounded-md text-gray-400 hover:bg-[#252729]">3</button>
-            <button class="px-3 py-1 bg-[#1a1c1e] rounded-md text-gray-400 hover:bg-[#252729]">Suivant</button>
-          </div>
+        <div >
+          {{$films->links()}}
         </div>
       </div>
     </main>
   </div>
 
-  <script>
-    function confirmFilmDelete(id, title) {
-      const route = `{{ route('film.delete', ':id') }}`.replace(':id', id);
-      document.getElementById("filmToDelete").innerText = title;
-      document.getElementById("filmDeleteForm").action = route;
-      document.getElementById("filmDeleteModal").classList.remove('hidden');
-    }
-
-    function closeFilmDeleteModal() {
-      document.getElementById("filmDeleteModal").classList.add('hidden');
-    }
-  </script>
 
   <script src="{{ asset('js/filmdashbord.js') }}"></script>
 </body>

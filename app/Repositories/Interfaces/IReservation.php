@@ -7,6 +7,7 @@ interface  IReservation{
   public function getById($id);
   public function findByName($name);
   public function update($data);
+  public function getReservedCount($id);
 
   
 }

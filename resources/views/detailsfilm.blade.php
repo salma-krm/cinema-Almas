@@ -278,16 +278,14 @@
             </div>
             
             <div class="space-y-6">
-               
-                
                 @forelse ($film->avis as $avis)
                 <div class="bg-cinema-dark rounded-xl p-6 border border-gray-800">
                     <div class="flex justify-between items-start mb-4">
                         <div class="flex items-center">
                             <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
-                                <img src="{{url('/storage/'. $avis->user->photo)}}"   alt="{{$avis->user->name}}" class="w-full h-full object-cover" />
+                                <img src="{{url('/storage/'. $avis->user->photo)}}" alt="{{$avis->user->name}}" class="w-full h-full object-cover" />
                             </div>
-                            <div> <span class="text-gray-300">
+                            <div>
                                 <h3 class="font-semibold text-cinema-light">{{$avis->user->name}}</h3>
                                 <div class="flex items-center">
                                     <div class="flex text-cinema-gold">
@@ -298,14 +296,51 @@
                                         @endfor
                                     </div>
                                     <span class="text-gray-400 text-sm ml-2">{{ $avis->created_at->diff(now())->format(' %i minutes') }}</span>
-
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <p class="text-gray-300">
-                        {{$avis->description}}
-                    </p>
+            
+                    <p class="text-gray-300" id="avisText{{$avis->id}}">{{$avis->description}}</p>
+                    <input id="inputUpdate{{$avis->id}}" type="hidden" name="description" value="{{$avis->description}}" class="w-full bg-gray-700 text-white p-2 rounded hidden">
+
+            
+                    @auth
+                        @if(auth()->user()->id === $avis->user_id)
+                        <button id="buttonUpdate{{$avis->id}}" class="text-green-500 hover:text-green-700 text-xl p-4 rounded-full" title="Update">
+                            <!-- Edit (Update) Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M17.293 3.707a1 1 0 00-1.414 0L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414L8.586 12l-2.293 2.293a1 1 0 001.414 1.414L9 13.414l5.879-5.879a1 1 0 000-1.414l-2.586-2.586a1 1 0 00-1.414 0L12 6.586 4.707 13.879a2 2 0 002.828 2.828L13.414 9l-2.829-2.828a1 1 0 00-1.415 0L9 5.586a1 1 0 00-.707.293L4.707 9.707a2 2 0 002.828 2.828L9 8.414l5.879-5.879a1 1 0 000-1.414l-2.586-2.586z" clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+                        
+                        
+                        
+                        <button id="buttonDelete{{$avis->id}}" class="text-red-500 hover:text-red-700" title="Supprimer">
+                            <!-- Trash Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M6 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8zm-5 9a2 2 0 002 2h6a2 2 0 002-2V7H5v10zM8 4a1 1 0 00-1-1h-1V2h8v1h-1a1 1 0 00-1 1H8z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        
+                        
+                        
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    const button = document.getElementById("buttonUpdate{{$avis->id}}");
+                                    const input = document.getElementById("inputUpdate{{$avis->id}}");
+                                    const text = document.getElementById("avisText{{$avis->id}}");
+            
+                                    button.addEventListener("click", function (e) {
+                                        e.preventDefault();
+                                        text.style.display = "none";
+                                        input.type = "text";
+                                        input.classList.remove("hidden");
+                                    });
+                                });
+                            </script>
+                        @endif
+                    @endauth
                 </div>
                 @empty
                 <div class="col-span-3 bg-gray-900/30 backdrop-blur-sm border border-gray-800 rounded-xl p-10 text-center">
@@ -315,11 +350,13 @@
                     <p class="text-xl text-gray-400">Aucune critique disponible pour le moment.</p>
                     <p class="text-gray-500 mt-2">Veuillez vérifier ultérieurement pour les nouvelles programmations.</p>
                 </div>
-            @endforelse
+                @endforelse
+            </div>
+            
                 
                 <!-- Review 2 -->
               
-            </div>
+            
             <!-- Comment Form -->
             <div class="mt-10 bg-cinema-dark rounded-xl p-6 border border-gray-800">
                 <h3 class="text-lg font-semibold text-cinema-light mb-4">Laissez votre critique</h3>
@@ -327,46 +364,46 @@
                 <p class="text-l text-red-500 mt-8 font-semibold">{{ session('error') }}</p>
                 @endif
                 <form action="/avis/create" method="POST" class="space-y-4">
-                   @csrf
+                    @csrf
+                
+                    <!-- Rating Section -->
                     <div>
                         <label class="block text-sm text-gray-400 mb-1">Note</label>
                         <div id="ratingStars" class="flex space-x-1 text-cinema-gold cursor-pointer">
-                            <!-- 5 étoiles dynamiques -->
-                            <svg data-value="1" class="star h-6 w-6 fill-current text-gray-600 hover:text-yellow-400 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path d="M10 15l-5.878 3.09L5.854 12 1 7.91l6.06-.878L10 2l2.94 5.032L19 7.91 14.146 12l1.732 6.09z"/>
-                            </svg>
-                            <svg data-value="2" class="star h-6 w-6 fill-current text-gray-600 hover:text-yellow-400 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path d="M10 15l-5.878 3.09L5.854 12 1 7.91l6.06-.878L10 2l2.94 5.032L19 7.91 14.146 12l1.732 6.09z"/>
-                            </svg>
-                            <svg data-value="3" class="star h-6 w-6 fill-current text-gray-600 hover:text-yellow-400 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path d="M10 15l-5.878 3.09L5.854 12 1 7.91l6.06-.878L10 2l2.94 5.032L19 7.91 14.146 12l1.732 6.09z"/>
-                            </svg>
-                            <svg data-value="4" class="star h-6 w-6 fill-current text-gray-600 hover:text-yellow-400 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path d="M10 15l-5.878 3.09L5.854 12 1 7.91l6.06-.878L10 2l2.94 5.032L19 7.91 14.146 12l1.732 6.09z"/>
-                            </svg>
-                            <svg data-value="5" class="star h-6 w-6 fill-current text-gray-600 hover:text-yellow-400 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path d="M10 15l-5.878 3.09L5.854 12 1 7.91l6.06-.878L10 2l2.94 5.032L19 7.91 14.146 12l1.732 6.09z"/>
-                            </svg>
-                            <!-- Champ caché pour stocker la note -->
-                            <input type="hidden" name="rating" id="ratingValue" required>
+                            <!-- Star rating clickable buttons -->
+                            <input type="radio" name="rating" value="1" id="star1" class="hidden" required>
+                            <label for="star1" class="star h-6 w-6 text-gray-600 hover:text-yellow-400 transition">1★</label>
+                
+                            <input type="radio" name="rating" value="2" id="star2" class="hidden">
+                            <label for="star2" class="star h-6 w-6 text-gray-600 hover:text-yellow-400 transition">2★</label>
+                
+                            <input type="radio" name="rating" value="3" id="star3" class="hidden">
+                            <label for="star3" class="star h-6 w-6 text-gray-600 hover:text-yellow-400 transition">3★</label>
+                
+                            <input type="radio" name="rating" value="4" id="star4" class="hidden">
+                            <label for="star4" class="star h-6 w-6 text-gray-600 hover:text-yellow-400 transition">4★</label>
+                
+                            <input type="radio" name="rating" value="5" id="star5" class="hidden">
+                            <label for="star5" class="star h-6 w-6 text-gray-600 hover:text-yellow-400 transition">5★</label>
                         </div>
                     </div>
-            
-                    <!-- Commentaire + bouton -->
+                
+                    <!-- Comment Section -->
                     <div class="flex flex-col md:flex-row md:items-end md:space-x-4">
-                        <input name="description" rows="3" placeholder="Votre avis..." class="w-full px-4 py-2 rounded-md bg-gray-800 text-cinema-light border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cinema-gold resize-none" required>
-                        <input type="hidden" name="film_id" value= {{$film->id}}>
+                        <textarea name="description" rows="3" placeholder="Votre avis..." class="w-full px-4 py-2 rounded-md bg-gray-800 text-cinema-light border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cinema-gold resize-none" required></textarea>
+                        <input type="hidden" name="film_id" value="{{ $film->id }}">
+                
+                        <!-- Submit button -->
                         <button type="submit" class="mt-2 md:mt-0 px-6 py-2 bg-cinema-gold text-gray-900 font-semibold rounded-md hover:bg-yellow-400 transition whitespace-nowrap">
                             Envoyer
                         </button>
                     </div>
                 </form>
+                
+                
+                
+                
             </div>
-            
-          
-            
-            
-
         </div>
     </section>
 
@@ -404,60 +441,12 @@
             </div>
         </div>
     </section>  
-    <script>
-        const stars = document.querySelectorAll('.star');
-        const ratingInput = document.getElementById('ratingValue');
-        let currentRating = 0;
-        stars.forEach((star, index) => {
-            star.addEventListener('click', () => {
-                currentRating = index + 1;
-                ratingInput.value = currentRating;
-                updateStars(currentRating);
-            });
-            star.addEventListener('mouseover', () => {
-                updateStars(index + 1);
-            });
-            star.addEventListener('mouseout', () => {
-                updateStars(currentRating);
-            });
-        });
+<script>
+   const input = document.getElementById("inputUpdate");
+   const button = document.getElementById("buttonUodate");
+   button.addEventListener(onclick(e)=>{
+
+   });
     
-        function updateStars(rating) {
-            stars.forEach((star, index) => {
-                if (index < rating) {
-                    star.classList.remove('text-gray-600');
-                    star.classList.add('text-yellow-400');
-                } else {
-                    star.classList.remove('text-yellow-400');
-                    star.classList.add('text-gray-600');
-                }
-            });
-        }
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Date selection
-            const dateButtons = document.querySelectorAll('.date-button');
-            
-            dateButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Remove active class from all buttons
-                    dateButtons.forEach(btn => {
-                        btn.classList.remove('active', 'bg-cinema-gold', 'text-cinema-dark');
-                        btn.classList.add('bg-transparent', 'text-white');
-                    });
-                    
-                    // Add active class to clicked button
-                    this.classList.add('active', 'bg-cinema-gold', 'text-cinema-dark');
-                    this.classList.remove('bg-transparent', 'text-white');
-                });
-            });
-            
-            // Initialize the first date button as active
-            if (dateButtons.length > 0) {
-                dateButtons[0].classList.add('bg-cinema-gold', 'text-cinema-dark');
-                dateButtons[0].classList.remove('bg-transparent', 'text-white');
-            }
-        });
-    </script>
+</script>
     @endsection

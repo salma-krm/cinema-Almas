@@ -81,9 +81,9 @@ class FilmController extends Controller
         return view('', compact('film'));
     }
 
-    public function getDetailFilm(  $id)
-   {
-    // dd($id);
+    public function getDetailFilm($id)
+    {
+        
         $film =  $this->service->getdetailfilm($id);
         $filmsSimilaires = $this->service->getAll();
         return view('detailsfilm', compact('film', 'filmsSimilaires'));
@@ -103,14 +103,25 @@ class FilmController extends Controller
 
         return view('admindashbord.film.filmupdate', compact('film', 'genres', 'actors'));
     }
-  
-   
-//     public function viderPanier()
-// {
-    
-//     session()->forget('ticket');
 
-//     return redirect('/')->with('success', 'Votre panier a été vidé.');
-// }
+    public function search(Request $request)
+    {
+        $title = $request->query('query');
+        $genre = $request->query('genre');
+
+       
+        $films = Film::where('title', 'like', '%' . $title . '%');
+
+        if ($genre) {
+            $films->where('genre_id', $genre);
+        }
+
+        $films = $films->get();
+
+        return view('components.films', compact('films'));
+    }
+
+
+
 
 }

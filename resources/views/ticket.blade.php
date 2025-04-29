@@ -8,7 +8,9 @@
         <div class="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
            
             <h2 class="text-4xl font-bold text-white mt-10 mb-8 text-center">Votre <span class="text-cinema-gold">ticket</span></h2>
-            
+            @if (session('error'))
+            <p class="text-xl font-bold text-red-500 mt-10 mb-8 text-center">{{ session('error') }}</p>
+            @endif
             <div class="grid grid-cols-1 gap-8">
                 <div class="ticket-container bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl overflow-hidden shadow-2xl">
                     <div class="ticket-header bg-cinema-gold py-3 px-6">

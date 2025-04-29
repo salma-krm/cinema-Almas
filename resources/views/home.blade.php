@@ -43,7 +43,7 @@
     <section id="about" class="py-20 bg-cinema-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Bienvenue à <span class="text-cinema-gold">CinéMax</span></h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-cinema-light mb-4">Bienvenue à <span class="text-cinema-gold">CinéMax</span></h2>
                 <p class="text-xl text-gray-400 max-w-3xl mx-auto">
                     Votre destination cinématographique par excellence, où chaque film devient une expérience inoubliable.
                 </p>
@@ -56,7 +56,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Écrans Ultra HD</h3>
+                    <h3 class="text-xl font-bold mb-2 text-cinema-light">Écrans Ultra HD</h3>
                     <p class="text-gray-400">
                         Profitez de nos écrans de dernière génération pour une qualité d'image exceptionnelle.
                     </p>
@@ -68,7 +68,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414-9.9m-2.828 9.9a9 9 0 010-12.728" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Son Immersif</h3>
+                    <h3 class="text-xl font-bold mb-2 text-cinema-light">Son Immersif</h3>
                     <p class="text-gray-400">
                         Un système audio Dolby Atmos pour une immersion sonore totale.
                     </p>
@@ -80,7 +80,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-2">Tarifs Avantageux</h3>
+                    <h3 class="text-xl font-bold mb-2 text-cinema-light">Tarifs Avantageux</h3>
                     <p class="text-gray-400">
                         Des prix accessibles et des offres spéciales pour tous les cinéphiles.
                     </p>
@@ -91,43 +91,37 @@
     <!-- Date Selection -->
     <section id="movies" class="bg-gray-900 py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-bold mb-6 text-center">Sélectionnez une date</h2>
+            <h2 class="text-2xl font-bold mb-6 text-center text-cinema-light">Sélectionnez une date</h2>
             <div class="flex justify-between items-center overflow-x-auto pb-2">
                 <button
                     data-day="13"
                     data-month="MARS"
                     class="date-button active flex flex-col items-center p-4 rounded-lg min-w-[100px]">
-                    <span class="text-2xl font-bold">13</span>
-                    <span class="text-sm">MARS</span>
+                    <span class="text-2xl font-bold text-cinema-light">13</span>
+                    <span class="text-sm text-cinema-light">MARS</span>
                 </button>
                 <button
                     data-day="14"
                     data-month="MARS"
                     class="date-button flex flex-col items-center p-4 rounded-lg min-w-[100px]">
-                    <span class="text-2xl font-bold">14</span>
-                    <span class="text-sm">MARS</span>
+                    <span class="text-2xl font-bold text-cinema-light">14</span>
+                    <span class="text-sm text-cinema-light">MARS</span>
                 </button>
                 <button
                     data-day="15"
                     data-month="MARS"
                     class="date-button flex flex-col items-center p-4 rounded-lg min-w-[100px]">
-                    <span class="text-2xl font-bold">15</span>
-                    <span class="text-sm">MARS</span>
+                    <span class="text-2xl font-bold text-cinema-light">15</span>
+                    <span class="text-sm text-cinema-light">MARS</span>
                 </button>
                 <button
                     data-day="16"
                     data-month="MARS"
                     class="date-button flex flex-col items-center p-4 rounded-lg min-w-[100px]">
-                    <span class="text-2xl font-bold">16</span>
-                    <span class="text-sm">MARS</span>
+                    <span class="text-2xl font-bold text-cinema-light">16</span>
+                    <span class="text-sm text-cinema-light">MARS</span>
                 </button>
-                <button
-                    data-day="17"
-                    data-month="MARS"
-                    class="date-button flex flex-col items-center p-4 rounded-lg min-w-[100px]">
-                    <span class="text-2xl font-bold">17</span>
-                    <span class="text-sm">MARS</span>
-                </button>
+                
             </div>
         </div>
     </section>
@@ -142,7 +136,7 @@
                 <div class="flex flex-col sm:flex-row w-full md:w-auto gap-4">
                     <!-- Search by title -->
                     <div class="relative flex-grow">
-                        <input type="text"name="search"id="search-movies" placeholder="Rechercher un film..."class="w-full px-4 py-2 pl-10 bg-gray-800 border border-gray-700 rounded-md text-white focus:outline-none focus:border-cinema-gold" />
+                        <input type="text"name="search" id="search-movies" placeholder="Rechercher un film..."class="w-full px-4 py-2 pl-10 bg-gray-800 border border-gray-700 rounded-md text-white focus:outline-none focus:border-cinema-gold" />
                         <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 top-2.5 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
@@ -158,14 +152,14 @@
                             id="filter-genre"
                             class="w-full appearance-none px-4 py-2 pl-10 bg-gray-800 border border-gray-700 rounded-md text-white focus:outline-none focus:border-cinema-gold">
                             <option value="">Tous les genres</option>
-                            <option value="Action">Action</option>
-                            <option value="Animation">Animation</option>
-                            <option value="Aventure">Aventure</option>
-                            <option value="Comédie">Comédie</option>
-                            <option value="Drame">Drame</option>
-                            <option value="Fantaisie">Fantaisie</option>
-                            <option value="Science Fiction">Science Fiction</option>
-                            <option value="Thriller">Thriller</option>
+                            <option value="1">Action</option>
+                            <option value="2">Animation</option>
+                            <option value="3">Aventure</option>
+                            <option value="4">Comédie</option>
+                            <option value="5">Drame</option>
+                            <option value="6">Fantaisie</option>
+                            <option value="7">Science Fiction</option>
+                            <option value="8">Thriller</option>
                         </select>
                         <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                             <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -180,68 +174,8 @@
 
   <!-- Movies Grid -->
 
-<section class="py-16 bg-cinema-dark">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="space-y-8">
-            @foreach($films as $film)
-            <!-- Movie Card -->
-            <div class="movie-card bg-[#1a1c1e] border-2 border-gray-600 rounded-xl overflow-hidden shadow-lg">
-                <div class="md:flex">
-                    <!-- Image Section -->
-                    <div class="md:flex-shrink-0">
-                        <img src="{{ url('/storage/'. $film->photo) }}" alt="{{ $film->title }}" class="movie-poster w-full h-48 object-cover" />
-                    </div>
-            
-                    <!-- Details Section -->
-                    <div class="p-8 w-full">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="text-cinema-gold text-2xl font-bold mb-2">{{ $film->title }}</h3>
-                           
-                               
-                                <p class="mt-1 text-gray-400">{{ $film->genre->name ?? 'N/A' }}</p>
-                               
-                               
-                                     <div class="mb-4 text-gray-300 italic"> {{ $film->description }}</div>
-                              
-                            </div>
-            
-                            <!-- Age Restriction -->
-                            <span class="inline-block bg-cinema-gold/20 text-cinema-gold px-2 py-1 rounded-md text-sm font-semibold">
-                                {{ $film->age_restriction ?? 'N/A' }}
-                            </span>
-                        </div>
-            
-                        <!-- Duration -->
-                        <div class="mt-3">
-                            <span class="mt-2 bg-jeunecolor text-white">
-                                Durée: {{ $film->duree }} s
-                            </span>
-                        </div>
-            
-                        <!-- Release Date -->
-                        <div class="mt-3">
-                            <h3 class="text-sm text-gray-400">Date de sortie</h3>
-                            <span class="mt-1 bg-jeunecolor text-white">
-                                {{ \Carbon\Carbon::parse($film->date_sortie)->format('d M Y') ?? 'Non disponible' }}
-                            </span>
-                        </div>
-            
-                        <!-- Button to View Details -->
-                        <form action="/filmdetail/{{ $film->id }}" method="GET">
-                            @csrf 
-                            <input type="hidden" name="film_id" value="{{ $film->id }}">
-                            <button type="submit" class="inline-block bg-cinema-gold text-cinema-dark px-6 py-2 rounded-full hover:bg-yellow-400 transition-colors font-semibold">
-                                Voir Détails
-                            </button>
-                        </form> 
-                    </div>
-                </div>
-            </div>
-            
-            @endforeach
-        </div>
-    </div>
+<section id="films_places" class="py-16 bg-cinema-dark">
+   @include("components.films")
 </section>
      </div>
     </div>
@@ -281,7 +215,7 @@
     <section class="py-20 bg-cinema-dark">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Questions Fréquentes</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-cinema-light">Questions Fréquentes</h2>
                 <p class="text-xl text-gray-400">
                     Tout ce que vous devez savoir pour profiter pleinement de votre expérience cinématographique.
                 </p>
@@ -369,7 +303,7 @@
     <!-- Newsletter Section -->
     <section class="py-16 bg-gray-900">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold mb-4">Restez informé</h2>
+            <h2 class="text-3xl font-bold mb-4 text-cinema-light">Restez informé</h2>
             <p class="text-xl text-gray-400 mb-8">
                 Inscrivez-vous à notre newsletter pour recevoir en avant-première notre programmation et nos offres spéciales.
             </p>
@@ -431,6 +365,29 @@
                 });
             });
         });
+
+        
+        const searchInput = document.getElementById("search-movies");
+     const genreSelect = document.getElementById("filter-genre");
+const filmsContainer = document.getElementById("films_places");
+function fetchFilms() {
+    const query = searchInput.value.trim();
+    const category = genreSelect.value;
+    fetch('/search?query=' + encodeURIComponent(query) + '&genre=' + encodeURIComponent(category), {
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    })
+    .then(response => response.text())
+    .then(html => {
+        filmsContainer.innerHTML = html;
+    })
+    .catch(error => console.error('Erreur lors de la recherche :', error));
+}
+
+searchInput.addEventListener("input", fetchFilms);
+genreSelect.addEventListener("change", fetchFilms);
+
     </script>
   <script src= "{{asset('js/app.js')}}"></script>
 

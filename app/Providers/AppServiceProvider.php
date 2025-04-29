@@ -16,10 +16,14 @@ use App\Repositories\Interfaces\IActeur;
 use App\Repositories\Interfaces\IAvis;
 use App\Repositories\Interfaces\IFilm;
 use App\Repositories\Interfaces\IGenre;
+use App\Repositories\Interfaces\IPaiement;
+use App\Repositories\Interfaces\IReservation;
 use App\Repositories\Interfaces\IRole;
 use App\Repositories\Interfaces\ISalle;
 use App\Repositories\Interfaces\ISeance;
 use App\Repositories\Interfaces\IUser;
+use app\Repositories\PaiementRepository;
+use App\Repositories\ReservationRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\SeanceRepository;
 use App\Services\ActeurService;
@@ -35,10 +39,14 @@ use App\Services\Interfaces\IAuthService;
 use App\Services\Interfaces\IAvisService;
 use App\Services\Interfaces\IFilmService;
 use App\Services\Interfaces\IGenreService;
+use App\Services\Interfaces\IPaiementService;
+use App\Services\Interfaces\IReservationService;
 use App\Services\Interfaces\IRoleService;
 use App\Services\Interfaces\ISalleService;
 use App\Services\Interfaces\ISeanceService;
 use App\Services\Interfaces\IUserService;
+use App\Services\PaiementService;
+use App\Services\ReservationService;
 use App\Services\RoleService;
 use App\Services\SeanceService as ServicesSeanceService;
 use SeanceService;
@@ -64,6 +72,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ISeanceService::class, ServicesSeanceService::class);
         $this->app->bind(IAvis::class,AvisRepositiry::class);
         $this->app->bind(IAvisService::class,AvisService::class);
+        $this->app->bind(IReservation::class, ReservationRepository::class);
+        $this->app->bind(IReservationService::class ,ReservationService::class);
+        $this->app->bind(IPaiement::class,PaiementRepository::class);
+        $this->app->bind(IPaiementService::class,PaiementService::class);
        
 
     }

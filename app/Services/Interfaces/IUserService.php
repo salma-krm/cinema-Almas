@@ -11,5 +11,6 @@ interface IUserService
     public function findByName($name);
     public function getUser();
     public function getAll();
+    public function updateRole($data);
 }
 
