@@ -18,6 +18,7 @@ class PaiementController extends Controller
     }
     public function session(){
        
+       
         return $this->iPaiementService->session();
     }
 

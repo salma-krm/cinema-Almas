@@ -108,7 +108,7 @@
                             @if (session('error'))
                             <p class="text-l text-red-500 mt-8 font-semibold">{{ session('error') }}</p>
                             @endif
-                            <form method="post" action="{{ route('session') }}">    
+                            <form method="post" action="/session">    
                                 @csrf
                                 <button class="w-full bg-cinema-gold text-black px-4 py-2 rounded hover:bg-yellow-400 font-bold transition-all duration-300">
                                     <i class="fas fa-credit-card mr-2"></i> Passer au paiement

@@ -17,8 +17,16 @@ class AvisController extends Controller
     }
     public function create( Request $request)
     {
-        // dd($request);
            $this->avisService->create($request);
            return back();
+    }
+    public function update( Request $request){
+       
+        $this->avisService->update($request);
+        return back();
+    }
+    public function delete ($id){
+        $this->avisService->delete($id);
+        return back();
     }
 }

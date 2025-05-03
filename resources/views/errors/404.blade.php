@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+{{-- @extends('layouts.layout')
 
 @section('content')
     <div class="flex items-center justify-center min-h-screen bg-gray-800">
@@ -9,4 +9,4 @@
         </div>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
-@endsection
+@endsection --}}

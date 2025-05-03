@@ -13,73 +13,80 @@ use App\Http\Controllers\SeanceController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth', 'admin'])->group(function () {
+// Route::middleware(['auth', 'admin'])->group(function () {
 
     // Film Routes
+    Route::post('/avis/update/{id}', [AvisController::class, 'update']);
+    Route::get('/avis/delete/{id}', [AvisController::class, 'delete']);
     Route::get('/filmcreate', [FilmController::class, 'getActeurGenre'])->name('film.create');
     Route::post('/create/film', [FilmController::class, 'create']);
     Route::post('/film/update', [FilmController::class, 'update'])->name('update.film');
     Route::post('/film/edit/{id}', [FilmController::class, 'edit'])->name('edit.film');
     Route::get('/film/delete/{id}', [FilmController::class, 'delete'])->name('film.delete');
 
-    // Salle Routes
     Route::get('/salle', [SalleController::class, 'index']);
     Route::post('/updatedSalle', [SalleController::class, 'update']);
     Route::post('/update/{id}/salle', [SalleController::class, 'getById']);
     Route::delete('/delete/{id}/salle', [SalleController::class, 'delete'])->name('salle.delete');
     Route::post('/Sallecreate', [SalleController::class, 'create'])->name('Salle.create');
 
-    // Genre Routes
+
     Route::get('Admin/genre', [GenreController::class, 'getAll']);
     Route::post('/genrecreate', [GenreController::class, 'create'])->name('genre.create');
     Route::post('/update/{id}/genre', [GenreController::class, 'getById']);
     Route::post('/updategenre', [GenreController::class, 'update']);
     Route::delete('/delete/{id}/genre', [GenreController::class, 'delete'])->name('genre.delete');
 
-    // Acteur Routes
     Route::get('/acteur', [ActeurController::class, 'getAll']);
     Route::post('/acteurcreate', [ActeurController::class, 'create'])->name('acteur.create');
     Route::post('/update/{id}/acteur', [ActeurController::class, 'getById']);
     Route::post('/updateacteur', [ActeurController::class, 'update']);
     Route::delete('/delete/{id}/actor', [ActeurController::class, 'delete'])->name('actor.delete');
 
-    // Role Routes
+
     Route::get('/role', [RoleController::class, 'getAll']);
     Route::post('/rolecreate', [RoleController::class, 'create'])->name('role.create');
     Route::post('/update/{id}/role', [RoleController::class, 'getById']);
     Route::post('/updaterole', [RoleController::class, 'update']);
     Route::delete('/delete/{id}/role', [RoleController::class, 'delete'])->name('role.delete');
 
-    // User Role Update
-    Route::post('/user/updaterole/{id}', [UserController::class, 'updateRole'])->name('user.updateRole');
-    
-    // Other Admin routes
-    Route::get('/users', [UserController::class, 'getAll'])->name('dashbord.users');
-    Route::post('/update/user', [UserController::class, 'update'])->name('update.user');
-    Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
-    Route::get('/dashbord', [UserController::class, 'getUser'])->name('dashbord');
+// Auth Routes
+Route::post('/createuser', [AuthController::class, 'register']);
+Route::post('/userlogin', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// user info
+Route::post('/update/user', [UserController::class, 'update'])->name('update.user');
+Route::get('/dashbord', [UserController::class, 'getUser'])->name('dashbord');
+Route::get('/users', [UserController::class, 'getAll'])->name('dashbord.users');
+Route::post('/user/updaterole/{id}', [UserController::class, 'updateRole'])->name('user.updateRole');
+Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
+// seances 
+Route::get('/seance', [SeanceController::class, 'getFilmSalle'])->name('seance');
+Route::post('/create/seance', [SeanceController::class, 'create'])->name('seance.create');
+Route::get('/seance/dashbord', [SeanceController::class, 'getAll'])->name('seance.dashbord');
+Route::post('/update/{id}/seance', [SeanceController::class, 'getSalle'])->name('seance.edit');
+Route::delete('/delete/{id}/seance', [SeanceController::class, 'delete'])->name('seance.delete');
+Route::post('/update/seance', [SeanceController::class, 'update'])->name('seance.update');
+Route::get('/bookTicket/{id}', [SeanceController::class, 'bookTicket'])->name('bookTicket');
+Route::get('/search', [FilmController::class, 'search'])->name('search');
 
-    // Seances
-    Route::get('/seance', [SeanceController::class, 'getFilmSalle'])->name('seance');
-    Route::post('/create/seance', [SeanceController::class, 'create'])->name('seance.create');
-    Route::get('/seance/dashbord', [SeanceController::class, 'getAll'])->name('seance.dashbord');
-    Route::post('/update/{id}/seance', [SeanceController::class, 'getSalle'])->name('seance.edit');
-    Route::delete('/delete/{id}/seance', [SeanceController::class, 'delete'])->name('seance.delete');
-    Route::post('/update/seance', [SeanceController::class, 'update'])->name('seance.update');
-    
-    // Reservation Routes
+//Avis
+Route::post('/avis/create', [AvisController::class, 'create'])->name('avis.create');
+
+
     Route::post('/resrvation/create',[ReservationController::class ,'create'])->name('reservation.create');
     Route::get('/admin/reservation', [ReservationController::class,'getAll'])->name('reservayion.show');
     
     // Paiement Routes
-    Route::post('/checkout',[PaiementController::class ,'session'])->name('checkout.session');
+    // Route::post('',[PaiementController::class ,'session'])->name('session');
+    Route::post('/session', 'App\Http\Controllers\PaiementController@session')->name('checkout')->auth();
+    Route::get('/success', 'App\Http\Controllers\PaiementController@success')->name('success')->auth();
     Route::get('/Panier/{id}', [PaiementController::class, 'AjouterPanier'])->name('Panier.ajouter');
     Route::get('/show/panier', [PaiementController::class, 'getPanier'])->name('Panier');
     Route::get('/delete/{id}/panier', [PaiementController::class, 'deletePanier'])->name('delete.panier');
 
-});
+// });
 
-// Public routes (no middleware required)
 Route::get('/', [FilmController::class, 'getAll']);
 Route::get('/filmdetail/{id}', [FilmController::class, 'getDetailFilm'])->name('film.show');
 Route::get('/search', [FilmController::class, 'search'])->name('search');
@@ -88,8 +95,9 @@ Route::get('/register', function () { return view('register'); });
 Route::get('/login', function () { return view('login'); });
 Route::get('/paiement', function () { return view('paiement'); });
 Route::get('/detail', function () { return view('detailsfilm'); });
+Route::get('/dashbord', [UserController::class, 'getUser'])->name('dashbord');
+Route::post('/update/user', [UserController::class, 'update'])->name('update.user');
 
-// Auth Routes (public)
 Route::post('/createuser', [AuthController::class, 'register']);
 Route::post('/userlogin', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

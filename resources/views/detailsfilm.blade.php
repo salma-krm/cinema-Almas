@@ -277,81 +277,94 @@
                 </button>
             </div>
             
-            <div class="space-y-6">
-                @forelse ($film->avis as $avis)
-                <div class="bg-cinema-dark rounded-xl p-6 border border-gray-800">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
-                                <img src="{{url('/storage/'. $avis->user->photo)}}" alt="{{$avis->user->name}}" class="w-full h-full object-cover" />
-                            </div>
-                            <div>
-                                <h3 class="font-semibold text-cinema-light">{{$avis->user->name}}</h3>
-                                <div class="flex items-center">
-                                    <div class="flex text-cinema-gold">
-                                        @for ($i = 0; $i < $avis->rating; $i++)
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>   
-                                        @endfor
-                                    </div>
-                                    <span class="text-gray-400 text-sm ml-2">{{ $avis->created_at->diff(now())->format(' %i minutes') }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            
-                    <p class="text-gray-300" id="avisText{{$avis->id}}">{{$avis->description}}</p>
-                    <input id="inputUpdate{{$avis->id}}" type="hidden" name="description" value="{{$avis->description}}" class="w-full bg-gray-700 text-white p-2 rounded hidden">
-
-            
-                    @auth
-                        @if(auth()->user()->id === $avis->user_id)
-                        <button id="buttonUpdate{{$avis->id}}" class="text-green-500 hover:text-green-700 text-xl p-4 rounded-full" title="Update">
-                            <!-- Edit (Update) Icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M17.293 3.707a1 1 0 00-1.414 0L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414L8.586 12l-2.293 2.293a1 1 0 001.414 1.414L9 13.414l5.879-5.879a1 1 0 000-1.414l-2.586-2.586a1 1 0 00-1.414 0L12 6.586 4.707 13.879a2 2 0 002.828 2.828L13.414 9l-2.829-2.828a1 1 0 00-1.415 0L9 5.586a1 1 0 00-.707.293L4.707 9.707a2 2 0 002.828 2.828L9 8.414l5.879-5.879a1 1 0 000-1.414l-2.586-2.586z" clip-rule="evenodd"/>
-                            </svg>
-                        </button>
-                        
-                        
-                        
-                        <button id="buttonDelete{{$avis->id}}" class="text-red-500 hover:text-red-700" title="Supprimer">
-                            <!-- Trash Icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M6 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8zm-5 9a2 2 0 002 2h6a2 2 0 002-2V7H5v10zM8 4a1 1 0 00-1-1h-1V2h8v1h-1a1 1 0 00-1 1H8z" clip-rule="evenodd" />
-                            </svg>
-                        </button>
-                        
-                        
-                        
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function () {
-                                    const button = document.getElementById("buttonUpdate{{$avis->id}}");
-                                    const input = document.getElementById("inputUpdate{{$avis->id}}");
-                                    const text = document.getElementById("avisText{{$avis->id}}");
-            
-                                    button.addEventListener("click", function (e) {
-                                        e.preventDefault();
-                                        text.style.display = "none";
-                                        input.type = "text";
-                                        input.classList.remove("hidden");
-                                    });
-                                });
-                            </script>
-                        @endif
-                    @endauth
-                </div>
-                @empty
-                <div class="col-span-3 bg-gray-900/30 backdrop-blur-sm border border-gray-800 rounded-xl p-10 text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-500 mx-auto mb-4 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
-                    <p class="text-xl text-gray-400">Aucune critique disponible pour le moment.</p>
-                    <p class="text-gray-500 mt-2">Veuillez vérifier ultérieurement pour les nouvelles programmations.</p>
-                </div>
-                @endforelse
+          <!-- In your Reviews Section -->
+@forelse ($film->avis as $avis)
+<div class="bg-cinema-dark rounded-xl p-6 border border-gray-800">
+    <div class="flex justify-between items-start mb-4">
+        <div class="flex items-center">
+            <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
+                <img src="{{url('/storage/'. $avis->user->photo)}}" alt="{{$avis->user->name}}" class="w-full h-full object-cover" />
             </div>
+            <div>
+                <h3 class="font-semibold text-cinema-light">{{$avis->user->name}}</h3>
+                <div class="flex items-center">
+                    <div class="flex text-cinema-gold">
+                        @for ($i = 0; $i < $avis->rating; $i++)
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>   
+                        @endfor
+                    </div>
+                    <span class="text-gray-400 text-sm ml-2">{{ $avis->created_at->diff(now())->format(' %i minutes') }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review text (visible by default) -->
+    <p class="text-gray-300 mb-2" id="avisText{{$avis->id}}">{{$avis->description}}</p>
+    
+    <!-- Update form (hidden by default) -->
+    <form id="updateForm{{$avis->id}}" action="/avis/update/{{$avis->id}}" method="POST" class="hidden">
+        @csrf
+        @method('POST')
+        <div class="flex items-center gap-2 mb-2">
+            <input type="text" name="description" value="{{$avis->description}}" 
+                   class="flex-1 bg-gray-700 text-white p-2 rounded">
+            <button type="submit" class="bg-green-500 text-white px-3 py-2 rounded hover:bg-green-600">
+                Update
+            </button>
+            <button type="button" onclick="cancelUpdate({{$avis->id}})" 
+                    class="bg-gray-500 text-white px-3 py-2 rounded hover:bg-gray-600">
+                Cancel
+            </button>
+        </div>
+    </form>
+    
+    @auth
+        @if(auth()->user()->id === $avis->user_id)
+        <div class="flex gap-2">
+            <!-- Edit button -->
+            <button onclick="showUpdateForm({{$avis->id}})" 
+                    class="text-green-500 hover:text-green-700 flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                </svg>
+                Edit
+            </button>
+            
+            <!-- Delete button -->
+            <form action="/avis/delete/{{$avis->id}}" method="GET">
+                @csrf
+                <button type="submit" class="text-red-500 hover:text-red-700 flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M6 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8zm-5 9a2 2 0 002 2h6a2 2 0 002-2V7H5v10zM8 4a1 1 0 00-1-1h-1V2h8v1h-1a1 1 0 00-1 1H8z" clip-rule="evenodd" />
+                    </svg>
+                    Delete
+                </button>
+            </form>
+        </div>
+        @endif
+    @endauth
+</div>
+
+<script>
+    function showUpdateForm(avisId) {
+        // Hide the review text
+        document.getElementById('avisText' + avisId).classList.add('hidden');
+        // Show the update form
+        document.getElementById('updateForm' + avisId).classList.remove('hidden');
+    }
+    
+    function cancelUpdate(avisId) {
+
+        document.getElementById('avisText' + avisId).classList.remove('hidden');
+        document.getElementById('updateForm' + avisId).classList.add('hidden');
+    }
+</script>
+@empty
+<!-- Your empty state code here -->
+@endforelse
             
                 
                 <!-- Review 2 -->
@@ -365,7 +378,6 @@
                 @endif
                 <form action="/avis/create" method="POST" class="space-y-4">
                     @csrf
-                
                     <!-- Rating Section -->
                     <div>
                         <label class="block text-sm text-gray-400 mb-1">Note</label>

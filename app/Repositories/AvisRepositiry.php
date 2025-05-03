@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\Models\Avis;
 use App\Repositories\Interfaces\IAvis;
 
 class AvisRepositiry implements IAvis{
@@ -11,9 +12,13 @@ class AvisRepositiry implements IAvis{
 
   }
   public function delete( $id){
-
+    $avis =  Avis::where('id', '=', $id)->first();
+    $avis->delete();
   }
   public function update( $data){
+    
+    $avis = Avis::where('id', $data->id)->first();
+     $avis->update( $data->all());
 
   }
   public function findByName( $name){

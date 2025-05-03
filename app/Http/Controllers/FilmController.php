@@ -115,9 +115,7 @@ class FilmController extends Controller
         if ($genre) {
             $films->where('genre_id', $genre);
         }
-
         $films = $films->get();
-
         return view('components.films', compact('films'));
     }
 

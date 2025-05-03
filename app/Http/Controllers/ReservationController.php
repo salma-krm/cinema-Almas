@@ -13,9 +13,9 @@ class ReservationController extends Controller
         $this->reservationService = $reservationService;
     }
     public function getAll(){
-        $reservation =$this->reservationService->getAll();
-        dd($reservation);
-        return view ('admindashbord.reservation.reservationdashbord',compact('reservation'));
+        $reservations =$this->reservationService->getAll();
+        
+        return view ('admindashbord.reservation.reservationdashbord',compact('reservations'));
     }
    
 }

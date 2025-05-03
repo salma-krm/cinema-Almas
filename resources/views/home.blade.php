@@ -368,18 +368,18 @@
 
         
         const searchInput = document.getElementById("search-movies");
-     const genreSelect = document.getElementById("filter-genre");
-const filmsContainer = document.getElementById("films_places");
-function fetchFilms() {
-    const query = searchInput.value.trim();
-    const category = genreSelect.value;
-    fetch('/search?query=' + encodeURIComponent(query) + '&genre=' + encodeURIComponent(category), {
+        const genreSelect = document.getElementById("filter-genre");
+        const filmsContainer = document.getElementById("films_places");
+     function fetchFilms() {
+        const query = searchInput.value.trim();
+         const category = genreSelect.value;
+        fetch('/search?query=' + encodeURIComponent(query) + '&genre=' + encodeURIComponent(category), {
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         }
-    })
-    .then(response => response.text())
-    .then(html => {
+      })
+      .then(response => response.text())
+       .then(html => {
         filmsContainer.innerHTML = html;
     })
     .catch(error => console.error('Erreur lors de la recherche :', error));

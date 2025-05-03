@@ -41,9 +41,11 @@ class AvisService implements IAvisService{
 
   }
   public function delete( $id){
+    $this->avisRepo->delete($id);
 
   }
   public function update( $data){
+    $this->avisRepo->update($data);
 
   }
   public function findByName( $name){
