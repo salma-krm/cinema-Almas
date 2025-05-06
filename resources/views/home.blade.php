@@ -323,29 +323,28 @@
     </section>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle
+         
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenuButton.addEventListener('click', function() {
                 mobileMenu.classList.toggle('hidden');
             });
 
-            // Date selection
+           
             const dateButtons = document.querySelectorAll('.date-button');
 
             dateButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    // Remove active class from all buttons
+              
                     dateButtons.forEach(btn => {
                         btn.classList.remove('active');
                     });
 
-                    // Add active class to clicked button
                     this.classList.add('active');
                 });
             });
 
-            // FAQ accordion
+        
             const faqQuestions = document.querySelectorAll('.faq-question');
 
             faqQuestions.forEach(question => {
@@ -353,10 +352,10 @@
                     const faqItem = this.parentNode;
                     const icon = this.querySelector('.faq-icon');
 
-                    // Toggle active class
+                    
                     faqItem.classList.toggle('active');
 
-                    // Rotate icon
+                   
                     if (faqItem.classList.contains('active')) {
                         icon.style.transform = 'rotate(180deg)';
                     } else {

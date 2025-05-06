@@ -13,17 +13,16 @@ use App\Http\Controllers\SeanceController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-// Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
 
     // Film Routes
-    Route::post('/avis/update/{id}', [AvisController::class, 'update']);
-    Route::get('/avis/delete/{id}', [AvisController::class, 'delete']);
+
     Route::get('/filmcreate', [FilmController::class, 'getActeurGenre'])->name('film.create');
     Route::post('/create/film', [FilmController::class, 'create']);
     Route::post('/film/update', [FilmController::class, 'update'])->name('update.film');
     Route::post('/film/edit/{id}', [FilmController::class, 'edit'])->name('edit.film');
     Route::get('/film/delete/{id}', [FilmController::class, 'delete'])->name('film.delete');
-
+    Route::get('/Admin/film', [FilmController::class, 'index'])->name('film.show');
     Route::get('/salle', [SalleController::class, 'index']);
     Route::post('/updatedSalle', [SalleController::class, 'update']);
     Route::post('/update/{id}/salle', [SalleController::class, 'getById']);
@@ -49,6 +48,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('/update/{id}/role', [RoleController::class, 'getById']);
     Route::post('/updaterole', [RoleController::class, 'update']);
     Route::delete('/delete/{id}/role', [RoleController::class, 'delete'])->name('role.delete');
+});
 
 // Auth Routes
 Route::post('/createuser', [AuthController::class, 'register']);
@@ -69,9 +69,11 @@ Route::delete('/delete/{id}/seance', [SeanceController::class, 'delete'])->name(
 Route::post('/update/seance', [SeanceController::class, 'update'])->name('seance.update');
 Route::get('/bookTicket/{id}', [SeanceController::class, 'bookTicket'])->name('bookTicket');
 Route::get('/search', [FilmController::class, 'search'])->name('search');
-
 //Avis
 Route::post('/avis/create', [AvisController::class, 'create'])->name('avis.create');
+Route::post('/avis/update/{id}', [AvisController::class, 'update']);
+Route::get('/avis/delete/{id}', [AvisController::class, 'delete']);
+
 
 
     Route::post('/resrvation/create',[ReservationController::class ,'create'])->name('reservation.create');
@@ -79,13 +81,13 @@ Route::post('/avis/create', [AvisController::class, 'create'])->name('avis.creat
     
     // Paiement Routes
     // Route::post('',[PaiementController::class ,'session'])->name('session');
-    Route::post('/session', 'App\Http\Controllers\PaiementController@session')->name('checkout')->auth();
-    Route::get('/success', 'App\Http\Controllers\PaiementController@success')->name('success')->auth();
+    Route::post('/session', 'App\Http\Controllers\PaiementController@session')->name('checkout');
+    Route::get('/success', 'App\Http\Controllers\PaiementController@success')->name('success');
     Route::get('/Panier/{id}', [PaiementController::class, 'AjouterPanier'])->name('Panier.ajouter');
     Route::get('/show/panier', [PaiementController::class, 'getPanier'])->name('Panier');
     Route::get('/delete/{id}/panier', [PaiementController::class, 'deletePanier'])->name('delete.panier');
 
-// });
+
 
 Route::get('/', [FilmController::class, 'getAll']);
 Route::get('/filmdetail/{id}', [FilmController::class, 'getDetailFilm'])->name('film.show');

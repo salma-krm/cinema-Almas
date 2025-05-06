@@ -283,7 +283,7 @@
     <div class="flex justify-between items-start mb-4">
         <div class="flex items-center">
             <div class="w-12 h-12 rounded-full bg-gray-700 mr-4 overflow-hidden">
-                <img src="{{url('/storage/'. $avis->user->photo)}}" alt="{{$avis->user->name}}" class="w-full h-full object-cover" />
+                <img src="{{url('/storage/'. $avis->user->photo ?? "")}}  " alt="{{$avis->user->name}}" class="w-full h-full object-cover" />
             </div>
             <div>
                 <h3 class="font-semibold text-cinema-light">{{$avis->user->name}}</h3>
