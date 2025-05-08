@@ -13,6 +13,7 @@ use GuzzleHttp\RequestOptions;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Facades\Session;
 
@@ -61,6 +62,13 @@ class UserController extends Controller
         
         $this->service->delete($id);
         return back();
+      }
+      public function InActivateAcounte ($id){
+        
+        $this->service->delete($id);
+        Auth::logout();
+        request()->session()->invalidate();
+        return redirect('/');
       }
       
         

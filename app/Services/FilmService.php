@@ -39,7 +39,7 @@ class FilmService implements IFilmService
             throw new InCompleteProcess('A film with this name already exists.');
         }
 
-        if (isset($data['photo']) && $data['photo']) {
+        if (isset($data['photo']) ) {
             $photo = $data['photo'];
             $extension = $photo->getClientOriginalExtension();
             $fileName = 'film_' . time() . '.' . $extension;
@@ -98,6 +98,7 @@ class FilmService implements IFilmService
     public function update($data)
     {
         
+        
         $film = $this->repo->findById($data['id']);
         if (!$film) {
             throw new InCompleteProcess("Film introuvable.");
@@ -139,18 +140,19 @@ class FilmService implements IFilmService
             throw new InCompleteProcess("Genre does not exist.");
         }
         $film->genre()->associate($genre);
-    
-       
         $film->save();
+    
         if (isset($data['cast'])) {
             $film->acteurs()->detach();
+           
             foreach ($data['cast'] as $acteurId) {
                 $acteur = $this->acteurRepo->getById($acteurId);
-                if ($acteur) {
-                    $film->acteurs()->attach($acteur->id); 
-                } else {
-                    throw new InCompleteProcess("Actor does not exist: ID $acteurId");
+              
+                if (!$acteur) {
+                    throw new InCompleteProcess("Acteur inexistant: ID $acteurId");
                 }
+                
+                $film->acteurs()->attach($acteur);
             }
         }
     

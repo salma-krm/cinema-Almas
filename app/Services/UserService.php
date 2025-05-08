@@ -11,6 +11,7 @@ use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
 
 use App\Services\Interfaces\IUserService;
+use Illuminate\Support\Facades\Auth;
 
 class UserService implements IUserService
 
@@ -68,7 +69,6 @@ class UserService implements IUserService
     public function delete($id) 
     {
     $this->userRepository->delete($id);
-    
 
     }
     public function getAll(){

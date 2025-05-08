@@ -60,6 +60,7 @@ class FilmController extends Controller
 
     public function update(Request $request)
     {
+        
         $validated = $request;
 
         $this->service->update($validated);

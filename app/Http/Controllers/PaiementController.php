@@ -8,7 +8,7 @@ class PaiementController extends Controller
     private IPaiementService $iPaiementService;
     
     public function __construct(IPaiementService $iPaiementService)
-    {
+    { 
         $this->iPaiementService = $iPaiementService;
      
     }
@@ -17,8 +17,7 @@ class PaiementController extends Controller
         return  $this->iPaiementService->success(); 
     }
     public function session(){
-       
-       
+
         return $this->iPaiementService->session();
     }
 

@@ -31,9 +31,9 @@ class SalleController extends Controller
 
         try {
             $this->salle->create($validatedData);
-            return back()->with('message', 'Salle created successfully');
+            return redirect('/salle')->with('message', 'Salle created successfully');
         } catch (Exception $e) {
-            return back()->with('message', $e->getMessage());
+            return redirect('/salle')->with('message', $e->getMessage());
         }
     }
 
@@ -45,9 +45,9 @@ class SalleController extends Controller
 
             $this->salle->update($validatedData);
 
-            return redirect('/Admin/salle')->with('message', 'Salle updated successfully');
+            return redirect('/salle')->with('message', 'Salle updated successfully');
         } catch (Exception $e) {
-            return redirect('/Admin/salle')->with('error', $e->getMessage());
+            return redirect('/salle')->with('error', $e->getMessage());
         }
     }
 

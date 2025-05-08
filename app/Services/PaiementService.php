@@ -10,6 +10,7 @@ use App\Repositories\Interfaces\IReservation;
 use App\Repositories\Interfaces\ISalle;
 use App\Repositories\Interfaces\ISeance;
 use App\Services\Interfaces\IPaiementService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
@@ -30,12 +31,17 @@ class PaiementService implements IPaiementService
     }
     public function getPanier()
     {
+        
       $panier = session()->get('ticket');
       return $panier;
     }
 
     public function session()
     {
+    $user = auth()->user();
+    if (!$user) {
+        return redirect('login')->with('error', 'Veuillez vous connecter pour continuer.');
+    }
         try {
             Stripe::setApiKey(config('services.stripe.secret'));
 

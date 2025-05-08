@@ -104,9 +104,11 @@
                     <button type="submit" class="bg-cinema-gold hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-lg flex-1">
                         Mettre à jour le profil
                     </button>
-                    <button type="button" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg flex-1" id="delete-account">
+                    <a href="/user/inActiveUser/{{ $user->id }}" 
+                        class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg flex-1 text-center block">
                         Supprimer le compte
-                    </button>
+                     </a>
+                     
                 </div>
             </form>
         </div>
