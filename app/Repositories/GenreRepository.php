@@ -55,7 +55,10 @@ class GenreRepository implements IGenre
 
     public function getById($id)
     {
-        return Genre::find($id);
+      
+         $genre = Genre::find($id);
+       
+        return  $genre ;
     }
 
     public function findByName($name)

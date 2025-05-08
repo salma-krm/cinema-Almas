@@ -142,61 +142,61 @@
       <a href="#" class="text-cinema-gold hover:underline text-sm">Voir tous</a>
     </div>
     <div class="overflow-x-auto">
-     <!-- Modification du tableau des utilisateurs récents -->
-<table class="w-full">
-  <thead>
-    <tr class="text-left border-b border-gray-700">
-      <th class="pb-3 font-medium">Utilisateur</th>
-      <th class="pb-3 font-medium">Email</th>
-      <th class="pb-3 font-medium">Rôle</th>
-      <th class="pb-3 font-medium">Date d'inscription</th>
-      <th class="pb-3 font-medium">Statut</th>
-      <th class="pb-3 font-medium">Actions</th> <!-- Nouvelle colonne -->
-    </tr>
-  </thead>
-  <tbody class="text-gray-300">
-    <tr class="border-b border-gray-700">
-      <td class="py-3 flex items-center">
-        <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold mr-3">JD</div>
-        Jean Dupont
-      </td>
-      <td class="py-3">jean.dupont@example.com</td>
-      <td class="py-3">Client</td>
-      <td class="py-3">15 Mars 2023</td>
-      <td class="py-3">
-        <span class="px-2 py-1 bg-green-900 text-green-200 rounded-full text-xs">Actif</span>
-      </td>
-      <td class="py-3">
-        <div class="flex gap-2">
-          <button class="px-3 py-2 border border-gray-700 rounded-lg hover:bg-gray-800 transition-colors">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-            </svg>
-          </button>
-          <button class="px-3 py-2 border border-gray-700 rounded-lg hover:bg-gray-800 hover:text-red-400 transition-colors" onclick="confirmDelete(1, 'Jean Dupont')">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-            </svg>
-          </button>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
 
-<!-- Modal de confirmation de suppression -->
-<div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-  <div class="bg-[#1a1c1e] rounded-xl p-6 max-w-md w-full mx-4">
-    <h3 class="text-xl font-bold mb-4">Confirmer la suppression</h3>
-    <p class="mb-6">Êtes-vous sûr de vouloir supprimer l'utilisateur <span id="userToDelete" class="text-cinema-gold"></span> ? Cette action est irréversible.</p>
-    <div class="flex justify-end gap-3">
-      <button onclick="closeDeleteModal()" class="px-4 py-2 border border-gray-700 rounded-lg hover:bg-gray-800 transition-colors">
-        Annuler
-      </button>
-      <button id="confirmDeleteBtn" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
-        Supprimer
-      </button>
-    </div>
+    <table class="w-full">
+      <thead>
+        <tr class="text-left border-b border-gray-700">
+          <th class="pb-3 font-medium">Utilisateur</th>
+          <th class="pb-3 font-medium">Email</th>
+          <th class="pb-3 font-medium">Rôle</th>
+          <th class="pb-3 font-medium">Date d'inscription</th>
+          <th class="pb-3 font-medium">Statut</th>
+          <th class="pb-3 font-medium">Actions</th> 
+        </tr>
+      </thead>
+      @foreach ($users as $user)
+      <tbody class="text-gray-300">
+        <tr class="border-b border-gray-700">
+          <td class="py-3 flex items-center">
+            <img src="{{url('storage/' . $user->photo )}}"
+            alt="Profile Picture" 
+            class="w-8 h-8 rounded-full border-2 border-cinema-gold object-cover" />
+                {{$user->name}}
+          </td>
+          <td class="py-3">{{$user->email}}</td>
+          <td class="py-3">
+            <form action="{{ route('user.updateRole', $user->id) }}" method="POST">
+              @csrf
+              @method('POST')
+              <select name="role" class="bg-gray-800 text-gray-300 border border-gray-700 rounded-md py-1 px-2" onchange="this.form.submit()">
+                  <option value="{{ $user->roles->name }}" selected>{{ $user->roles->name }}</option>
+                  @foreach ($roles as $role)
+                      @if ($role->name !== $user->roles->name)
+                          <option value="{{ $role->name }}">{{ $role->name }}</option>
+                      @endif
+                  @endforeach
+              </select>
+          </form>
+          
+          </td>
+          <td class="py-3">{{$user->created_at}}</td>
+          <td class="py-3">
+            <span class="px-2 py-1 bg-green-900 text-green-200 rounded-full text-xs">Actif</span>
+          </td>
+          <td class="py-3">
+            <div class="flex gap-2">
+              <a href="{{ route('user.delete', $user->id) }}" class="px-3 py-2 border border-gray-700 rounded-lg hover:bg-gray-800 hover:text-red-400 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              </a>
+            </div>
+            
+          </td>
+        </tr>
+      </tbody>
+      @endforeach
+    </table>
   </div>
 </div>
 </div>

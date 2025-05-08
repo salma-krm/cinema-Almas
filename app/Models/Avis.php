@@ -10,17 +10,17 @@ class Avis extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['description', 'rating', 'user_id', 'film_id'];
+    protected $fillable = ['description', 'rating'];
 
    
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
   
     public function film()
     {
-        return $this->belongsTo(Film::class);
+        return $this->belongsTo(Film::class, 'film_id');
     }
 }

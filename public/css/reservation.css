@@ -12,7 +12,7 @@ top: 0;
 left: 0;
 right: 0;
 bottom: 0;
-background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/p10892939_v_h8_aa.jpg-ft3kbtHiFUqaFeKIzip7SpVt06xgxP.jpeg');
+/* background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/p10892939_v_h8_aa.jpg-ft3kbtHiFUqaFeKIzip7SpVt06xgxP.jpeg'); */
 background-size: cover;
 background-position: center;
 background-attachment: fixed;
@@ -25,14 +25,15 @@ position: relative;
 z-index: 1;
 }
 
-/* Update hero section styles */
+
+
 .hero-section {
 position: relative;
 background-color: transparent;
 }
 
 .hero-background {
-background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/p10892939_v_h8_aa.jpg-ft3kbtHiFUqaFeKIzip7SpVt06xgxP.jpeg');
+/* background-image: url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/p10892939_v_h8_aa.jpg-ft3kbtHiFUqaFeKIzip7SpVt06xgxP.jpeg'); */
 opacity: 0.2;
 }
 .seat {
@@ -94,7 +95,7 @@ opacity: 0.2;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('https://durian.blender.org/wp-content/uploads/2010/04/sintel_trailer_1080.jpg');
+  /* background-image: url('https://durian.blender.org/wp-content/uploads/2010/04/sintel_trailer_1080.jpg'); */
   background-size: cover;
   background-position: center;
   z-index: 0;

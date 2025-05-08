@@ -9,9 +9,11 @@ use App\Models\User;
 use App\Repositories\Interfaces\IRole;
 use App\Repositories\Interfaces\IUser;
 use Exception;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+
 
 class UserRepository implements IUser
 {
@@ -29,19 +31,34 @@ class UserRepository implements IUser
     {
         return User::where('email', $email)->first();
     }
+    
 
     
     public function delete($id)
     {
-        User::delete($id);
+        $user =  User::where('id', '=', $id)->first();
+        $user->delete();
     }
     public function findByName($name)
     {
-        return User::where('name', 'LIKE', "%$name%")->get();
+        return User::where('name', 'LIKE', "%$name%")->first();
     }
-    
+
 
     public function save($data){
          $data->save();
     }
-}
+    public function getUser(){
+        $user = Auth()->user();
+        $useremail = $user->email;
+        $getuser = $this->findByEmail($useremail);
+        return $getuser;
+    }
+    public function update($data){
+        $data->update();
+    }
+    public function getAll(){
+        return User::all();
+    }
+    }
+

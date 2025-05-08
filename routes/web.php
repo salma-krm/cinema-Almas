@@ -1,103 +1,102 @@
 <?php
-
 use App\Http\Controllers\ActeurController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AvisController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SalleController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FilmController;
+use App\Http\Controllers\PaiementController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\SeanceController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::middleware(['auth', 'admin'])->group(function () {
+
+    // Film Routes
+
+    Route::get('/filmcreate', [FilmController::class, 'getActeurGenre'])->name('film.create');
+    Route::post('/create/film', [FilmController::class, 'create']);
+    Route::post('/film/update', [FilmController::class, 'update'])->name('update.film');
+    Route::post('/film/edit/{id}', [FilmController::class, 'edit'])->name('edit.film');
+    Route::get('/film/delete/{id}', [FilmController::class, 'delete'])->name('film.delete');
+    Route::get('/Admin/film', [FilmController::class, 'index'])->name('film.show');
+    Route::get('/salle', [SalleController::class, 'index']);
+    Route::post('/updatedSalle', [SalleController::class, 'update']);
+    Route::post('/update/{id}/salle', [SalleController::class, 'getById']);
+    Route::delete('/delete/{id}/salle', [SalleController::class, 'delete'])->name('salle.delete');
+    Route::post('/Sallecreate', [SalleController::class, 'create'])->name('Salle.create');
+
+    Route::get('Admin/genre', [GenreController::class, 'getAll']);
+    Route::post('/genrecreate', [GenreController::class, 'create'])->name('genre.create');
+    Route::get('/create/genre', function () { return view('admindashbord.genre.genrecreate'); });
+    Route::post('/update/{id}/genre', [GenreController::class, 'getById']);
+    Route::post('/updategenre', [GenreController::class, 'update']);
+    Route::delete('/delete/{id}/genre', [GenreController::class, 'delete'])->name('genre.delete');
+    Route::get('/create/salle', function () { return view('admindashbord.salleCreate'); });
+    Route::get('/acteur', [ActeurController::class, 'getAll']);
+    Route::get('/acteur/create', function () { return view('admindashbord.acteur.acteurcreate'); });
+    Route::post('/acteurcreate', [ActeurController::class, 'create'])->name('acteur.create');
+    Route::post('/update/{id}/acteur', [ActeurController::class, 'getById']);
+    Route::post('/updateacteur', [ActeurController::class, 'update']);
+    Route::delete('/delete/{id}/actor', [ActeurController::class, 'delete'])->name('actor.delete');
+    Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
+    Route::get('/role', [RoleController::class, 'getAll']);
+    Route::get('rolecreate', function () { return view('admindashbord.role.rolecreate'); });
+    Route::post('/rolecreate', [RoleController::class, 'create'])->name('role.create');
+    Route::post('/update/{id}/role', [RoleController::class, 'getById']);
+    Route::post('/updaterole', [RoleController::class, 'update']);
+    Route::delete('/delete/{id}/role', [RoleController::class, 'delete'])->name('role.delete');
+});
 
 
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('/detailsfilm', function () {
-    return view('detailsfilm');
-});
-Route::get('/register', function () {
-    return view('register');
-});
-
-Route::get('/login', function () {
-    return view('login');
-});
-Route::get('/reservation', function () {
-    return view('reservation');
-});
-Route::get('/paiement', function () {
-    return view('paiement');
-});
-Route::get('/dashbord', function () {
-    return view('dashbord');
-});
-Route::get('/Admin/dashbord', function () {
-    return view('admindashbord.reservationdashbord');
-});
-Route::get('/Admin/film', function () {
-    return view('admindashbord.filmdashbord');
-});
-Route::get('/Admin/salle', function () {
-    return view('admindashbord.salledashbord');
-});
-Route::get('/create/salle', function () {
-    return view('admindashbord.salleCreate');
-});
-Route::get('/create/genre', function () {
-    return view('admindashbord.genre.genrecreate');
-});
-
-Route::get('/Admin/users', function () {
-    return view('admindashbord.userdashbord');
-});
-Route::get('/logout', function () {
-    return view('admindashbord.userdashbord');
-});
-Route::get('/acteurcreate', function () {
-    return view('admindashbord.acteur.acteurcreate');
-});
-
-Route::get('/rolecreate', function () {
-    return view('admindashbord.role.rolecreate');
-});
 Route::post('/createuser', [AuthController::class, 'register']);
-Route::post('/userlogin', [AuthController::class, 'login'])->name('login')
-;
+Route::post('/userlogin', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/Admin/salle',[SalleController::class, 'index']);
-Route::post('/updatedSalle',[SalleController::class ,'update']);
-Route::post('/update/{id}/salle',[SalleController::class, 'getById']);
-Route::delete('/delete/{id}/salle', [SalleController::class, 'delete'])->name('salle.delete');
-Route::post('/Sallecreate', [SalleController::class, 'create'])->name('Salle.create');
+Route::post('/update/user', [UserController::class, 'update'])->name('update.user');
+Route::get('/dashbord', [UserController::class, 'getUser'])->name('dashbord');
+Route::get('/users', [UserController::class, 'getAll'])->name('dashbord.users');
+Route::post('/user/updaterole/{id}', [UserController::class, 'updateRole'])->name('user.updateRole');
 
-Route::get('Admin/genre',[GenreController::class,'getAll' ]);
-Route::post('/genrecreate', [GenreController::class, 'create'])->name('genre.create');
-Route::post('/update/{id}/genre',[GenreController::class, 'getById']);
-Route::post('/updategenre',[GenreController::class ,'update']);
-Route::delete('/delete/{id}/genre', [GenreController::class, 'delete'])->name('genre.delete');
+Route::get('/user/inActiveUser/{id}', [UserController::class, 'InActivateAcounte'])->name('inActiveUser');
 
+Route::get('/seance', [SeanceController::class, 'getFilmSalle'])->name('seance');
+Route::post('/create/seance', [SeanceController::class, 'create'])->name('seance.create');
+Route::get('/seance/dashbord', [SeanceController::class, 'getAll'])->name('seance.dashbord');
+Route::post('/update/{id}/seance', [SeanceController::class, 'getSalle'])->name('seance.edit');
+Route::delete('/delete/{id}/seance', [SeanceController::class, 'delete'])->name('seance.delete');
+Route::post('/update/seance', [SeanceController::class, 'update'])->name('seance.update');
+Route::get('/bookTicket/{id}', [SeanceController::class, 'bookTicket'])->name('bookTicket');
+Route::get('/search', [FilmController::class, 'search'])->name('search');
 
-Route:: get('/acteur',[ActeurController::class,'getAll' ]);
-Route::post('/acteurcreate', [ActeurController::class, 'create'])->name('acteur.create');
-Route::post('/update/{id}/acteur',[ActeurController::class, 'getById']);
-Route::post('/updateacteur',[ActeurController::class ,'update']);
-Route::delete('/delete/{id}/actor', [ActeurController::class, 'delete'])->name('genre.delete');
+Route::post('/avis/create', [AvisController::class, 'create'])->name('avis.create');
+Route::post('/avis/update/{id}', [AvisController::class, 'update']);
+Route::get('/avis/delete/{id}', [AvisController::class, 'delete']);
 
+    Route::post('/resrvation/create',[ReservationController::class ,'create'])->name('reservation.create');
+    Route::get('/admin/reservation', [ReservationController::class,'getAll'])->name('reservayion.show');
 
-Route:: get('/role',[RoleController::class,'getAll' ]);
-Route::post('/rolecreate', [RoleController::class, 'create'])->name('role.create');
-Route::post('/update/{id}/role',[RoleController::class, 'getById']);
-Route::post('/updaterole',[RoleController::class ,'update']);
-Route::delete('/delete/{id}/role', [RoleController::class, 'delete'])->name('role.delete');
+    Route::post('/session', 'App\Http\Controllers\PaiementController@session')->name('checkout');
+    Route::get('/success', 'App\Http\Controllers\PaiementController@success')->name('success');
+    Route::get('/Panier/{id}', [PaiementController::class, 'AjouterPanier'])->name('Panier.ajouter');
+    Route::get('/show/panier', [PaiementController::class, 'getPanier'])->name('Panier');
+    Route::get('/delete/{id}/panier', [PaiementController::class, 'deletePanier'])->name('delete.panier');
 
+Route::get('/', [FilmController::class, 'getAll']);
+Route::get('/filmdetail/{id}', [FilmController::class, 'getDetailFilm'])->name('film.show');
+Route::post('/customDetail/{id}', [FilmController::class, 'CustomDtail'])->name('film.custom');
+Route::get('/search', [FilmController::class, 'search'])->name('search');
+Route::post('/avis/create', [AvisController::class, 'create'])->name('avis.create');
+Route::get('/register', function () { return view('register'); });
+Route::get('/login', function () { return view('login'); });
+Route::get('/paiement', function () { return view('paiement'); });
+Route::get('/detail', function () { return view('detailsfilm'); });
+Route::get('/dashbord', [UserController::class, 'getUser'])->name('dashbord');
+Route::post('/update/user', [UserController::class, 'update'])->name('update.user');
 
+Route::post('/createuser', [AuthController::class, 'register']);
+Route::post('/userlogin', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

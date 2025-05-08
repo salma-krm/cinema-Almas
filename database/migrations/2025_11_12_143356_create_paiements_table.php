@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('genres', function (Blueprint $table) {
+        Schema::create('paiements', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->double('montant');
+            $table->enum('status', ['payer', 'en cours', 'traiter'])->default('payer');
+            $table->foreignId('reservation_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
+        
     }
 
     /**
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('genres');
+        Schema::dropIfExists('paiements');
     }
 };

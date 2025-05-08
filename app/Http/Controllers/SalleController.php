@@ -19,19 +19,21 @@ class SalleController extends Controller
 
     public function index()
     {
-        $Salles = $this->salle->show();
-        return view('admindashbord.salledashbord', compact('Salles'));
+        $salles = $this->salle->show();
+       
+        return view('admindashbord.salledashbord', compact('salles'));
     }
 
     public function create(CreateSalleRequest $request)
     {
+       
         $validatedData = $request->validated();
 
         try {
             $this->salle->create($validatedData);
-            return back()->with('message', 'Salle created successfully');
+            return redirect('/salle')->with('message', 'Salle created successfully');
         } catch (Exception $e) {
-            return back()->with('message', $e->getMessage());
+            return redirect('/salle')->with('message', $e->getMessage());
         }
     }
 
@@ -43,9 +45,9 @@ class SalleController extends Controller
 
             $this->salle->update($validatedData);
 
-            return redirect('/Admin/salle')->with('message', 'Salle updated successfully');
+            return redirect('/salle')->with('message', 'Salle updated successfully');
         } catch (Exception $e) {
-            return redirect('/Admin/salle')->with('error', $e->getMessage());
+            return redirect('/salle')->with('error', $e->getMessage());
         }
     }
 
@@ -54,7 +56,7 @@ class SalleController extends Controller
         $Salles = $this->salle->findById($id);
 
         if (!$Salles) {
-            return redirect('/Admin/salle')->with('error', 'Salle not found!');
+            return back()->with('error', 'Salle not found!');
         }
 
         return view('admindashbord.salleUpdate', compact('Salles'));
@@ -63,6 +65,6 @@ class SalleController extends Controller
     public function delete($id)
     {
         $this->salle->delete($id);
-        return redirect('/Admin/salle')->with('message', 'Salle deleted');
+        return back()->with('message', 'Salle deleted');
     }
 }

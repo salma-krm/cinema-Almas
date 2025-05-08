@@ -45,14 +45,17 @@
                   <th class="pb-3 font-medium">Actions</th> <!-- Nouvelle colonne -->
                 </tr>
               </thead>
+              @foreach ($reservations as $reservation)
+                  
+           
               <tbody class="text-gray-300">
                 <tr>
-                  <td class="py-3">Pierre Durand</td>
-                  <td class="py-3">Sintel</td>
-                  <td class="py-3">15 Mars, 15:00</td>
-                  <td class="py-3">4</td>
+                  <td class="py-3">{{$reservation->user->name}}</td>
+                  <td class="py-3">{{$reservation->seance->film->title}}</td>
+                  <td class="py-3">{{$reservation->seance->horaire}}</td>
+                  <td class="py-3">{{$reservation->quantite}}</td>
                   <td class="py-3">
-                    <span id="status-badge-3" class="px-2 py-1 bg-green-900 text-green-200 rounded-full text-xs">Confirmée</span>
+                    <span id="status-badge-3" class="px-2 py-1 bg-green-900 text-green-200 rounded-full text-xs">{{$reservation->status}}</span>
                   </td>
                   <td class="py-3">
                     <select 
@@ -61,12 +64,12 @@
                       onchange="updateStatus(3, this.value)"
                     >
                       <option value="confirmed" selected>Confirmée</option>
-                      <option value="pending">En attente</option>
                       <option value="cancelled">Annulée</option>
                     </select>
                   </td>
                 </tr>
               </tbody>
+              @endforeach
             </table>
             
             <!-- Ajoutez cet élément pour les notifications -->

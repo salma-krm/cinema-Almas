@@ -19,7 +19,7 @@
         </div>
 
         <!-- Liste des Salles -->
-        @foreach ($Salles as $salle)
+        @foreach ($salles as $salle)
         <div class="mt-[5px] mb-[5px]">
           <div class="bg-[#1a1c1e] rounded-xl p-6">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
