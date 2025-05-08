@@ -195,8 +195,6 @@
     </section>
   <!-- Sessions Section -->
 <!-- Sessions Section -->
-<!-- Sessions Section -->
-<!-- Sessions Section -->
 <section id="sessions" class="py-16 bg-cinema-dark">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-2xl font-bold text-cinema-light mb-8">Séances disponibles</h2>

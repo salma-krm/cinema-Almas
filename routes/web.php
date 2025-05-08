@@ -44,6 +44,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/delete/{id}/actor', [ActeurController::class, 'delete'])->name('actor.delete');
     Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
     Route::get('/role', [RoleController::class, 'getAll']);
+    Route::get('rolecreate', function () { return view('admindashbord.role.rolecreate'); });
     Route::post('/rolecreate', [RoleController::class, 'create'])->name('role.create');
     Route::post('/update/{id}/role', [RoleController::class, 'getById']);
     Route::post('/updaterole', [RoleController::class, 'update']);

@@ -56,7 +56,7 @@ class SalleController extends Controller
         $Salles = $this->salle->findById($id);
 
         if (!$Salles) {
-            return redirect('/Admin/salle')->with('error', 'Salle not found!');
+            return back()->with('error', 'Salle not found!');
         }
 
         return view('admindashbord.salleUpdate', compact('Salles'));
@@ -65,6 +65,6 @@ class SalleController extends Controller
     public function delete($id)
     {
         $this->salle->delete($id);
-        return redirect('/Admin/salle')->with('message', 'Salle deleted');
+        return back()->with('message', 'Salle deleted');
     }
 }

@@ -130,11 +130,12 @@
       <!-- Informations utilisateur -->
       <div class="mt-4 px-4 py-3 bg-gray-800/50 rounded-lg flex items-center">
         @if(auth()->user())
-        <div class="w-8 h-8 rounded-full bg-cinema-gold flex items-center justify-center text-black font-bold mr-3">
-          <img src="{{url('storage/' . auth()->user()->photo )}}" 
-          alt="Photo de profil" 
-          class="w-8 h-8 rounded-full border-2 border-cinema-gold object-cover" />
-        </div>
+        <a href="/dashbord" class="flex items-center space-x-3 px-3 py-2 border-t border-gray-700 mt-2 hover:opacity-80 transition duration-200">
+          <img src="{{ Str::startsWith(auth()->user()->photo, 'data:image') ? auth()->user()->photo : asset('storage/' . auth()->user()->photo) }}"
+               alt="Profile" 
+               class="w-8 h-8 rounded-full border-2 border-cinema-gold object-cover" />
+          
+      </a>
      
        
         <div class="overflow-hidden">
