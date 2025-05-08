@@ -10,11 +10,11 @@ class Chaise extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['type', 'price', 'salle_id'];
+    protected $fillable = ['type', 'price'];
 
   
     public function salle()
     {
-        return $this->belongsTo(Salle::class);
+        return $this->belongsTo(Salle::class, 'salle_id');
     }
 }

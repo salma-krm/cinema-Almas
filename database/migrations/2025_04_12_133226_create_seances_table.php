@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('seances', function (Blueprint $table) {
             $table->id();
-            $table->string('horaire');
+            $table->dateTime('horaire');
             $table->foreignId('film_id')->constrained()->onDelete('cascade');
             $table->foreignId('salle_id')->constrained()->onDelete('cascade');
-            $table->integer('rest_ticket');
+            $table->integer('rest_ticket')->nullable();
+            $table->timestamps();
         });
     }
 

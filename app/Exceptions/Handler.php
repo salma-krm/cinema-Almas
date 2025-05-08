@@ -2,8 +2,10 @@
 
 namespace App\Exceptions;
 
+use App\Exceptions\CustomException\InCompleteProcess;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Support\Facades\Redirect;
 
 class Handler extends ExceptionHandler
 {
@@ -35,7 +37,15 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            //
+           
+        });
+
+      
+        $this->renderable(function (InCompleteProcess $e, $request) {
+    
+            return back() 
+                ->with('error', 'Process incomplete: ' . $e->getMessage());
         });
     }
 }
+

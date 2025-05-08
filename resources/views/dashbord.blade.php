@@ -1,252 +1,171 @@
-@extends('layout.nav')
-@section('content')
-<link rel="stylesheet" href="{{asset('css/dashbord.css')}}"> 
-</head>
-<body class="bg-cinema-dark text-cinema-white min-h-screen">
-  <!-- Navigation -->
-  <!-- Mobile Navigation -->
-  <div id="mobile-menu" class="md:hidden bg-cinema-dark border-t border-gray-800 hidden fixed w-full z-10 top-16">
-    <div class="px-2 pt-2 pb-3 space-y-1">
-      <a href="#" class="block px-3 py-2 text-gray-300 hover:text-cinema-gold">Films</a>
-      <a href="#" class="block px-3 py-2 text-gray-300 hover:text-cinema-gold">Horaires</a>
-      <a href="#" class="block px-3 py-2 text-gray-300 hover:text-cinema-gold">Tarifs</a>
-      <a href="#" class="block px-3 py-2 text-gray-300 hover:text-cinema-gold">Contact</a>
-      <div class="flex items-center space-x-2 px-3 py-2">
-        <span class="text-sm text-gray-300">Bienvenue, Jean Dupont</span>
-        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80" 
-             alt="Profile" 
-             class="w-6 h-6 rounded-full border-2 border-cinema-gold"/>
-      </div>
-    </div>
-  </div>
-  <!-- Main Content -->
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-      <!-- Sidebar -->
-      <div class="md:col-span-1">
-        <div class="dashboard-card rounded-xl shadow-lg p-6">
-          <div class="text-center mb-6">
-            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80" 
-                 alt="Photo de profil" 
-                 class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-cinema-gold"/>
-            <h2 class="text-xl font-bold text-white">Jean Dupont</h2>
-            <p class="text-gray-400">Membre depuis 2024</p>
-          </div>
-          <div class="space-y-3">
-            <button class="w-full bg-cinema-gold text-cinema-dark px-4 py-2 rounded-full hover:bg-yellow-400 font-semibold transition-colors">
-              Modifier le profil </button>
-            <button class="w-full border border-cinema-gold text-cinema-gold px-4 py-2 rounded-full hover:bg-cinema-gold/10 transition-colors">
-              Déconnexion
-            </button>
-          </div>
-        </div>
-      </div>
+@extends('layouts.layout')
 
-      <!-- Main Content -->
-      <div class="md:col-span-3 space-y-6">
-        <!-- Profile Section -->
-        <div class="dashboard-card rounded-xl shadow-lg p-6">
-          <h3 class="text-xl font-bold mb-4 text-white">Informations du profil</h3>
-          <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-300 mb-1">Prénom</label>
-              <input type="text" value="Jean" 
-                     class="w-full px-4 py-2 rounded-lg border border-gray-700 bg-gray-800/50 focus:outline-none focus:border-cinema-gold text-white"/>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-300 mb-1">Nom</label>
-              <input type="text" value="Dupont" 
-                     class="w-full px-4 py-2 rounded-lg border border-gray-700 bg-gray-800/50 focus:outline-none focus:border-cinema-gold text-white"/>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-300 mb-1">Email</label>
-              <input type="email" value="jean.dupont@exemple.fr" 
-                     class="w-full px-4 py-2 rounded-lg border border-gray-700 bg-gray-800/50 focus:outline-none focus:border-cinema-gold text-white"/>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-300 mb-1">Téléphone</label>
-              <input type="tel" value="06 12 34 56 78" 
-                     class="w-full px-4 py-2 rounded-lg border border-gray-700 bg-gray-800/50 focus:outline-none focus:border-cinema-gold text-white"/>
-            </div>
-            <div class="md:col-span-2">
-              <button class="bg-cinema-gold text-cinema-dark px-6 py-2 rounded-full hover:bg-yellow-400 font-semibold transition-colors">
-                Enregistrer les modifications
-              </button>
-            </div>
-          </form>
-        </div>
-
-        <!-- Upcoming Reservations -->
-        <div class="dashboard-card rounded-xl shadow-lg p-6">
-          <h3 class="text-xl font-bold mb-4 text-white">Réservations à venir</h3>
-          <div class="space-y-4">
-            <div class="border border-gray-700 rounded-lg p-4 hover:border-cinema-gold transition-colors">
-              <div class="flex flex-col md:flex-row md:items-center justify-between">
-                <div>
-                  <h4 class="font-bold text-white">Dune: Deuxième Partie</h4>
-                  <p class="text-gray-400">15 mars 2024 - 19h30</p>
-                  <p class="text-sm text-gray-400">2 billets • Salle A • Sièges: F12, F13</p>
-                </div>
-                <div class="text-right mt-3 md:mt-0">
-                  <span class="bg-cinema-gold/10 text-cinema-gold px-3 py-1 rounded-full text-sm font-semibold">Confirmé</span>
-                  <button class="block mt-2 text-cinema-gold hover:text-yellow-400">Voir le billet</button>
-                </div>
-              </div>
-            </div>
-            <div class="border border-gray-700 rounded-lg p-4 hover:border-cinema-gold transition-colors">
-              <div class="flex flex-col md:flex-row md:items-center justify-between">
-                <div>
-                  <h4 class="font-bold text-white">Gladiator II</h4>
-                  <p class="text-gray-400">22 mars 2024 - 20h00</p>
-                  <p class="text-sm text-gray-400">3 billets • Salle B • Sièges: D5, D6, D7</p>
-                </div>
-                <div class="text-right mt-3 md:mt-0">
-                  <span class="bg-cinema-gold/10 text-cinema-gold px-3 py-1 rounded-full text-sm font-semibold">Confirmé</span>
-                  <button class="block mt-2 text-cinema-gold hover:text-yellow-400">Voir le billet</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Favorite Films -->
-        <div class="dashboard-card rounded-xl shadow-lg p-6">
-          <h3 class="text-xl font-bold mb-4 text-white">Films favoris</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <!-- Sintel -->
-            <div class="border border-gray-700 rounded-lg overflow-hidden hover:border-cinema-gold transition-colors">
-              <div class="flex">
-                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/p10892939_v_h8_aa.jpg-ft3kbtHiFUqaFeKIzip7SpVt06xgxP.jpeg" 
-                     alt="Sintel" 
-                     class="w-24 h-32 object-cover"/>
-                <div class="p-4 flex-1">
-                  <h4 class="font-bold text-white">Sintel</h4>
-                  <p class="text-sm text-gray-400 mb-2">Animation, Aventure • 15 min</p>
-                  <div class="flex items-center">
-                    <span class="text-cinema-gold">★★★★★</span>
-                    <span class="ml-2 text-sm text-gray-400">5.0/5</span>
-                  </div>
-                  <button class="mt-2 text-cinema-gold hover:text-yellow-400">
-                    Retirer des favoris
-                  </button>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Captain America -->
-            <div class="border border-gray-700 rounded-lg overflow-hidden hover:border-cinema-gold transition-colors">
-              <div class="flex">
-                <img src="https://images.unsplash.com/photo-1635805737707-575885ab0820?w=200&auto=format&fit=crop" 
-                     alt="Captain America" 
-                     class="w-24 h-32 object-cover"/>
-                <div class="p-4 flex-1">
-                  <h4 class="font-bold text-white">Captain America: Brave New World</h4>
-                  <p class="text-sm text-gray-400 mb-2">Action, Aventure • 135 min</p>
-                  <div class="flex items-center">
-                    <span class="text-cinema-gold">★★★★☆</span>
-                    <span class="ml-2 text-sm text-gray-400">4.2/5</span>
-                  </div>
-                  <button class="mt-2 text-cinema-gold hover:text-yellow-400">
-                    Retirer des favoris
-                  </button>
-                </div>
-              </div>
-            </div>
-            
-            <!-- The Insiders -->
-            <div class="border border-gray-700 rounded-lg overflow-hidden hover:border-cinema-gold transition-colors">
-              <div class="flex">
-                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=200&auto=format&fit=crop" 
-                     alt="The Insiders" 
-                     class="w-24 h-32 object-cover"/>
-                <div class="p-4 flex-1">
-                  <h4 class="font-bold text-white">The Insiders</h4>
-                  <p class="text-sm text-gray-400 mb-2">Thriller, Drame • 115 min</p>
-                  <div class="flex items-center">
-                    <span class="text-cinema-gold">★★★★☆</span>
-                    <span class="ml-2 text-sm text-gray-400">4.5/5</span>
-                  </div>
-                  <button class="mt-2 text-cinema-gold hover:text-yellow-400">
-                    Retirer des favoris
-                  </button>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Les Gardiens de la Galaxie -->
-            <div class="border border-gray-700 rounded-lg overflow-hidden hover:border-cinema-gold transition-colors">
-              <div class="flex">
-                <img src="https://images.unsplash.com/photo-1596727147705-61a532a659bd?w=200&auto=format&fit=crop" 
-                     alt="Les Gardiens de la Galaxie" 
-                     class="w-24 h-32 object-cover"/>
-                <div class="p-4 flex-1">
-                  <h4 class="font-bold text-white">Les Gardiens de la Galaxie</h4>
-                  <p class="text-sm text-gray-400 mb-2">Science Fiction, Comédie • 150 min</p>
-                  <div class="flex items-center">
-                    <span class="text-cinema-gold">★★★★★</span>
-                    <span class="ml-2 text-sm text-gray-400">4.8/5</span>
-                  </div>
-                  <button class="mt-2 text-cinema-gold hover:text-yellow-400">
-                    Retirer des favoris
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- History -->
-        <div class="dashboard-card rounded-xl shadow-lg p-6">
-          <h3 class="text-xl font-bold mb-4 text-white">Historique des réservations</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full">
-              <thead>
-                <tr>
-                  <th class="px-4 py-2 text-left text-gray-400">Film</th>
-                  <th class="px-4 py-2 text-left text-gray-400">Date</th>
-                  <th class="px-4 py-2 text-left text-gray-400">Salle</th>
-                  <th class="px-4 py-2 text-left text-gray-400">Billets</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-800">
-                <tr>
-                  <td class="px-4 py-3 text-white">Oppenheimer</td>
-                  <td class="px-4 py-3 text-gray-400">10 février 2024</td>
-                  <td class="px-4 py-3 text-gray-400">Salle C</td>
-                  <td class="px-4 py-3 text-gray-400">2</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-white">Joker</td>
-                  <td class="px-4 py-3 text-gray-400">25 janvier 2024</td>
-                  <td class="px-4 py-3 text-gray-400">Salle A</td>
-                  <td class="px-4 py-3 text-gray-400">1</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-white">Avatar: La Voie de l'Eau</td>
-                  <td class="px-4 py-3 text-gray-400">5 janvier 2024</td>
-                  <td class="px-4 py-3 text-gray-400">Salle IMAX</td>
-                  <td class="px-4 py-3 text-gray-400">3</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Footer -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Mobile menu toggle
-      const mobileMenuButton = document.getElementById('mobile-menu-button');
-      const mobileMenu = document.getElementById('mobile-menu');
-      
-      mobileMenuButton.addEventListener('click', function() {
-        mobileMenu.classList.toggle('hidden');
-      });
-    });
-  </script>
-  <script src= "{{asset('js/app.js')}}"></script>
-</body>
-</html>
+@section('contentcss')
+<link rel="stylesheet" href="{{ asset('css/dashbord.css') }}">
 @endsection
+@section('content')
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    'cinema-gold': '#fbc531',
+                    'cinema-dark': '#121212',
+                }
+            }
+        }
+    }
+</script>
+
+<div class="bg-cinema-dark text-white min-h-screen px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+        <!-- Profil Section -->
+        <div class="w-full bg-[#1a1c1e] rounded-xl shadow-lg p-8 mb-10">
+            <!-- Page Title -->
+            <div class="mb-6 text-center">
+                <h1 class="text-2xl font-bold">Mon Profil</h1>
+                <p class="text-gray-400">Gérez vos informations personnelles</p>
+            </div>
+
+            <!-- User Form -->
+            <form id="user-form" method="POST" action="/update/user" enctype="multipart/form-data">
+              
+                <div class="mb-8 flex flex-col items-center">
+                    <div class="relative mb-4">
+                        <!-- Check if photo is a Data URL or a file URL -->
+                        <img id="profile-preview"
+                             src=" {{url('storage/' . $user->photo )}}"
+                             alt="Photo de profil" 
+                             class="w-32 h-32 rounded-full border-4 border-cinema-gold object-cover" />
+                    </div>
+
+                    <!-- Input + Button visible -->
+                    <label for="photo-upload"
+                           class="cursor-pointer inline-flex items-center bg-cinema-gold text-black px-4 py-2 rounded-lg hover:bg-yellow-400 transition duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M3 7h2l3.6 7.59L5.25 18H19a1 1 0 000-2H6.42l.93-2h7.57a1 1 0 00.96-.73l1.36-4.09A1 1 0 0016.36 8H7.21l-.94-2H3z"/>
+                        </svg>
+                        Choisir une photo
+                    </label>
+                    <input type="file" id="photo-upload" name="photo" accept="image/*" class="hidden">
+
+                    <!-- Nom du fichier sélectionné -->
+                    <p id="file-name" class="text-sm text-gray-400 mt-2"></p>
+                </div>
+
+                @csrf
+                @if (session('message'))
+                <p class="text-sm text-green-500 mt-2 font-semibold">{{ session('message') }}</p>
+                @endif
+                @if (session('error'))
+                <p class="text-l text-red-500 mt-8 font-semibold">{{ session('error') }}</p>
+                @endif
+
+                <!-- Personal Information -->
+                <div class="space-y-6 mb-8">
+                    <div>
+                        <label for="name">Nom complet</label>
+                        <input type="text" id="name" name="name" value="{{ $user->name }}" required
+                               class="w-full rounded bg-gray-800 p-2 text-white">
+                    </div>
+
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" value="{{ $user->email }}" required
+                               class="w-full rounded bg-gray-800 p-2 text-white">
+                    </div>
+
+                    <div>
+                        <label for="new-password">Mot de passe</label>
+                        @error('password')
+                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                      @enderror
+                        <input type="password" id="new-password" name="password"
+                               class="w-full rounded bg-gray-800 p-2 text-white" placeholder="Laissez mot passe actuel">
+                    </div>
+
+                    <div>
+                        <label for="new-password">Nouveau mot de passe</label>
+                        <input type="password" id="new-password" name="new_password"
+                               class="w-full rounded bg-gray-800 p-2 text-white" placeholder="Laissez vide pour ne pas changer">
+                    </div>
+
+                    <div>
+                        <label for="confirm-password">Confirmer le mot de passe</label>
+                        <input type="password" id="confirm-password" name="confirm_password"
+                               class="w-full rounded bg-gray-800 p-2 text-white" placeholder="Laissez vide pour ne pas changer">
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button type="submit" class="bg-cinema-gold hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded-lg flex-1">
+                        Mettre à jour le profil
+                    </button>
+                    <a href="/user/inActiveUser/{{ $user->id }}" 
+                        class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg flex-1 text-center block">
+                        Supprimer le compte
+                     </a>
+                     
+                </div>
+            </form>
+        </div>
+
+        <!-- Historique des Réservations -->
+        <div class="bg-[#1a1c1e] rounded-xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold mb-6 text-cinema-gold text-center">Mes Réservations</h2>
+
+            @if($user->reservations->isEmpty())
+                <p class="text-gray-400 text-center">Aucune réservation trouvée.</p>
+            @else
+                <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    @foreach($user->reservations as $reservation)
+                        <div class="bg-gray-800 p-6 rounded-lg shadow-md border-l-4 border-cinema-gold hover:bg-gray-700 transition duration-300">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-lg font-semibold text-white truncate">{{ $reservation->seance->film->title }}</h3>
+                                <span class="bg-cinema-gold text-black text-xs font-bold px-2 py-1 rounded">
+                                    {{ $reservation->quantite }} place(s)
+                                </span>
+                            </div>
+                            
+                            <div class="space-y-2 text-sm">
+                                <div class="flex items-center text-gray-300">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                    {{ \Carbon\Carbon::parse($reservation->seance->horaire)->format('d/m/Y') }}
+                                </div>
+                                
+                                <div class="flex items-center text-gray-300">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    {{ \Carbon\Carbon::parse($reservation->seance->horaire)->format('H:i') }}
+                                </div>
+                                
+                                <div class="flex items-center text-gray-300">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                    </svg>
+                                    Salle {{ $reservation->seance->salle->name }}
+                                </div>
+                                
+                                <div class="flex items-center text-gray-300">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                    Réservé le {{ \Carbon\Carbon::parse($reservation->created_at)->format('d/m/Y') }}
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+        </div>
+    </div>
+</div>
+
+@endsection
+<script src= "{{asset('js/dashbordsalle.js')}}"></script> 

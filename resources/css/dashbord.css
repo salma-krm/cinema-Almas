@@ -1,9 +1,9 @@
 .bg-cinema-dark {
     position: relative;
     background-color: #121212;
-  }
+}
 
-  .bg-cinema-dark::before {
+.bg-cinema-dark::before {
     content: '';
     position: absolute;
     top: 0;
@@ -15,32 +15,92 @@
     background-attachment: fixed;
     opacity: 0.15;
     pointer-events: none;
-  }
+}
 
-  .bg-cinema-dark > * {
+.bg-cinema-dark > * {
     position: relative;
     z-index: 1;
-  }
+}
 
-  .movie-card {
+.movie-card {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
-  }
+}
 
-  .movie-card:hover {
+.movie-card:hover {
     background: rgba(255, 255, 255, 0.08);
     transform: translateY(-5px);
-  }
+}
 
-  .dashboard-card {
+.dashboard-card {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
-  }
+}
 
-  .dashboard-card:hover {
+.dashboard-card:hover {
     background: rgba(255, 255, 255, 0.08);
-  }
+}
+
+.btn {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s;
+    display: block;
+}
+
+.btn-gold {
+    background-color: #fbc531;
+    color: #121212;
+}
+
+.btn-gold:hover {
+    background-color: #e1b62d;
+}
+
+.btn-outline-gold {
+    border: 2px solid #fbc531;
+    color: #fbc531;
+}
+
+.btn-outline-gold:hover {
+    background-color: rgba(251, 197, 49, 0.1);
+}
+
+.btn-danger {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: rgb(239, 68, 68);
+    border: 1px solid rgb(239, 68, 68);
+}
+
+.btn-danger:hover {
+    background-color: rgba(239, 68, 68, 0.3);
+}
+
+input, select, textarea {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #fbc531;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #d1d5db;
+    font-size: 0.875rem;
+}

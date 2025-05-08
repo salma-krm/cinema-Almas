@@ -10,11 +10,10 @@ class Paiement extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['montant', 'date', 'statut', 'reservation_id'];
+    protected $fillable = ['montant', 'statut'];
 
-   
     public function reservation()
     {
-        return $this->belongsTo(Reservation::class);
+        return $this->belongsTo(Reservation::class, 'reservation_id');
     }
 }

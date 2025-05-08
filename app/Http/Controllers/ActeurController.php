@@ -29,7 +29,7 @@ class ActeurController extends Controller
 
         try {
             $this->acteur->create($validated);
-            return back()->with('message', 'Acteur created successfully.');
+            return redirect('/acteur')->with('message', 'Acteur created successfully.');
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
